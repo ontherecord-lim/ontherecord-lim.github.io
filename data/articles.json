@@ -1,6 +1,15 @@
 {
-  "generatedAt": "2026-09-15T04:45:20.520614+00:00",
+  "generatedAt": "2026-09-15T06:37:55.660122+00:00",
   "articles": [
+    {
+      "id": "10869393",
+      "title": "Orion expands Bichobi overseas as tourist demand grows",
+      "url": "https://www.koreaherald.com/article/10869393",
+      "date": "Sep. 10, 2026",
+      "category": "The Korea Herald · Business",
+      "description": "Orion is taking its chocolate biscuit Bichobi to Costco stores in Japan and the US, betting on its growing popularity among foreign tourists. The company said T",
+      "image": "assets/article-images/10869393.jpg"
+    },
     {
       "id": "10872876",
       "title": "Lotte Biologics steps up global outreach",
@@ -81,15 +90,6 @@
       "category": "The Korea Herald · Business",
       "description": "Lotte Wellfood teamed up with K-pop group Stray Kids on a new digital single as it seeks to turn Pepero Day into a global cultural event. The track, titled “Nov",
       "image": "assets/article-images/10869391.jpg"
-    },
-    {
-      "id": "10869373",
-      "title": "US Navy chief visits Hanwha Philly Shipyard amid $150b shipbuilding push",
-      "url": "https://www.koreaherald.com/article/10869373",
-      "date": "Sep. 10, 2026",
-      "category": "The Korea Herald · Business",
-      "description": "Acting US Secretary of the Navy Hung Cao visited Hanwha Philly Shipyard in Philadelphia as South Korea and the United States move forward with a $150 billion sh",
-      "image": "assets/article-images/10869373.jpg"
     }
   ]
 }
