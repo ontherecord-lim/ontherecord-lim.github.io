@@ -476,4 +476,70 @@
 
   setInterval(loadMarkets, 60 * 60 * 1000);
   setInterval(loadWeather, 10 * 60 * 1000);
-})();
+})();// Memberstack Off the Record signup, checkout and login
+document.addEventListener('click', async (event) => {
+  const subscribeButton = event.target.closest('.paywall-primary');
+  const loginButton = event.target.closest('.paywall-secondary');
+
+  if (!subscribeButton && !loginButton) return;
+
+  event.preventDefault();
+  event.stopImmediatePropagation();
+
+  const memberstack = window.$memberstackDom;
+
+  if (!memberstack) {
+    console.error('Memberstack did not load.');
+    alert('Membership is temporarily unavailable. Please refresh the page and try again.');
+    return;
+  }
+
+  // Existing member login
+  if (loginButton) {
+    try {
+      const result = await memberstack.openModal('LOGIN');
+
+      if (result && result.data) {
+        memberstack.hideModal();
+        window.location.reload();
+      }
+    } catch (error) {
+      console.error('Memberstack login error:', error);
+    }
+
+    return;
+  }
+
+  // Paid subscription
+  if (subscribeButton) {
+    try {
+      const currentMember = await memberstack.getCurrentMember();
+
+      // Already logged in: go directly to Stripe checkout
+      if (currentMember && currentMember.data) {
+        await memberstack.purchasePlansWithCheckout({
+          priceId: 'prc_off-the-record-full-access-t7da0shc',
+          successUrl: window.location.origin + window.location.pathname + '#off-the-record',
+          cancelUrl: window.location.origin + window.location.pathname + '#off-the-record'
+        });
+
+        return;
+      }
+
+      // Logged out: create account first
+      const signupResult = await memberstack.openModal('SIGNUP');
+
+      if (signupResult && signupResult.data) {
+        memberstack.hideModal();
+
+        await memberstack.purchasePlansWithCheckout({
+          priceId: 'prc_off-the-record-full-access-t7da0shc',
+          successUrl: window.location.origin + window.location.pathname + '#off-the-record',
+          cancelUrl: window.location.origin + window.location.pathname + '#off-the-record'
+        });
+      }
+    } catch (error) {
+      console.error('Memberstack subscription error:', error);
+    }
+  }
+}, true);
