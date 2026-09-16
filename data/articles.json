@@ -1,6 +1,33 @@
 {
-  "generatedAt": "2026-09-16T07:17:18.041719+00:00",
+  "generatedAt": "2026-09-16T12:36:41.730712+00:00",
   "articles": [
+    {
+      "id": "10854335",
+      "title": "Hyundai Mobis presents 40 smart manufacturing technologies at M-Sphere 2026",
+      "url": "https://www.koreaherald.com/article/10854335",
+      "date": "Aug. 27, 2026",
+      "category": "The Korea Herald · Business",
+      "description": "Hyundai Mobis showcased around 40 smart manufacturing technologies at its M-Sphere 2026 exhibition, demonstrating how artificial intelligence, robotics and digi",
+      "image": "assets/article-images/10854335.jpg"
+    },
+    {
+      "id": "10854339",
+      "title": "Krafton unveils five titles, outlines global franchise strategy at Gamescom 2026",
+      "url": "https://www.koreaherald.com/article/10854339",
+      "date": "Aug. 27, 2026",
+      "category": "The Korea Herald · Business",
+      "description": "Krafton unveiled five upcoming games at Gamescom 2026 in Cologne, Germany, on Wednesday, as the Korean game developer seeks to build its next generation of long",
+      "image": "assets/article-images/10854339.jpg"
+    },
+    {
+      "id": "10873920",
+      "title": "Cho Hyun-joon bets on AI power boom with W386.5b US orders",
+      "url": "https://www.koreaherald.com/article/10873920",
+      "date": "Sep. 15, 2026",
+      "category": "The Korea Herald · Business",
+      "description": "Hyosung Heavy Industries has won 386.5 billion won ($286 million) in extra-high-voltage transformer orders from two major US technology companies this month, re",
+      "image": "assets/article-images/10873920.jpg"
+    },
     {
       "id": "10870620",
       "title": "Amorepacific's Sulwhasoo deepens Japan push with Isetan pop-up",
@@ -63,33 +90,6 @@
       "category": "The Korea Herald · Business",
       "description": "Lotte Biologics will attend three major biopharmaceutical conferences in October, seeking new contract manufacturing deals and broader global partnerships. The",
       "image": "assets/article-images/10872876.png"
-    },
-    {
-      "id": "10875635",
-      "title": "HD Construction Equipment wins 45-excavator order in Hong Kong",
-      "url": "https://www.koreaherald.com/article/10875635",
-      "date": "Sep. 16, 2026",
-      "category": "The Korea Herald · Business",
-      "description": "HD Construction Equipment has secured an order for 45 Develon excavators for a major railway expansion project in Hong Kong, the company said Wednesday. The ord",
-      "image": "assets/article-images/10875635.jpg"
-    },
-    {
-      "id": "10875607",
-      "title": "Korea Eximbank seeks deeper economic ties with Uzbekistan",
-      "url": "https://www.koreaherald.com/article/10875607",
-      "date": "Sep. 16, 2026",
-      "category": "The Korea Herald · Business",
-      "description": "The Export-Import Bank of Korea said Wednesday it discussed expanding economic cooperation with Uzbek President Shavkat Mirziyoyev during his visit to Seoul for",
-      "image": "assets/article-images/10875607.jpg"
-    },
-    {
-      "id": "10874100",
-      "title": "Samsung, Verizon turn mobile network into AI crowd sensor",
-      "url": "https://www.koreaherald.com/article/10874100",
-      "date": "Sep. 15, 2026",
-      "category": "The Korea Herald · Business",
-      "description": "Samsung Electronics and Verizon have tested technology that turns mobile networks into real-time crowd sensors, demonstrating a potential 6G application in a li",
-      "image": "assets/article-images/10874100.jpg"
     }
   ]
 }
