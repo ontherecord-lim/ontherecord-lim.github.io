@@ -1,6 +1,51 @@
 {
-  "generatedAt": "2026-09-16T04:57:23.384650+00:00",
+  "generatedAt": "2026-09-16T05:44:25.876428+00:00",
   "articles": [
+    {
+      "id": "10872876",
+      "title": "Lotte Biologics steps up global outreach",
+      "url": "https://www.koreaherald.com/article/10872876",
+      "date": "Sep. 14, 2026",
+      "category": "The Korea Herald · Business",
+      "description": "Lotte Biologics will attend three major biopharmaceutical conferences in October, seeking new contract manufacturing deals and broader global partnerships. The",
+      "image": "assets/article-images/10872876.png"
+    },
+    {
+      "id": "10875635",
+      "title": "HD Construction Equipment wins 45-excavator order in Hong Kong",
+      "url": "https://www.koreaherald.com/article/10875635",
+      "date": "Sep. 16, 2026",
+      "category": "The Korea Herald · Business",
+      "description": "HD Construction Equipment has secured an order for 45 Develon excavators for a major railway expansion project in Hong Kong, the company said Wednesday. The ord",
+      "image": "assets/article-images/10875635.jpg"
+    },
+    {
+      "id": "10875607",
+      "title": "Korea Eximbank seeks deeper economic ties with Uzbekistan",
+      "url": "https://www.koreaherald.com/article/10875607",
+      "date": "Sep. 16, 2026",
+      "category": "The Korea Herald · Business",
+      "description": "The Export-Import Bank of Korea said Wednesday it discussed expanding economic cooperation with Uzbek President Shavkat Mirziyoyev during his visit to Seoul for",
+      "image": "assets/article-images/10875607.jpg"
+    },
+    {
+      "id": "10874100",
+      "title": "Samsung, Verizon turn mobile network into AI crowd sensor",
+      "url": "https://www.koreaherald.com/article/10874100",
+      "date": "Sep. 15, 2026",
+      "category": "The Korea Herald · Business",
+      "description": "Samsung Electronics and Verizon have tested technology that turns mobile networks into real-time crowd sensors, demonstrating a potential 6G application in a li",
+      "image": "assets/article-images/10874100.jpg"
+    },
+    {
+      "id": "10873920",
+      "title": "Cho Hyun-joon bets on AI power boom with W386.5b US orders",
+      "url": "https://www.koreaherald.com/article/10873920",
+      "date": "Sep. 15, 2026",
+      "category": "The Korea Herald · Business",
+      "description": "Hyosung Heavy Industries has won 386.5 billion won ($286 million) in extra-high-voltage transformer orders from two major US technology companies this month, re",
+      "image": "assets/article-images/10873920.jpg"
+    },
     {
       "id": "10854335",
       "title": "Hyundai Mobis presents 40 smart manufacturing technologies at M-Sphere 2026",
@@ -45,51 +90,6 @@
       "category": "The Korea Herald · Business",
       "description": "Acting US Secretary of the Navy Hung Cao visited Hanwha Philly Shipyard in Philadelphia as South Korea and the United States move forward with a $150 billion sh",
       "image": "assets/article-images/10869373.jpg"
-    },
-    {
-      "id": "10870604",
-      "title": "PM Han, AmCham push for stronger Korea investment climate",
-      "url": "https://www.koreaherald.com/article/10870604",
-      "date": "Sept. 11, 2026",
-      "category": "Business · Policy",
-      "description": "Prime Minister Han Seong-sook and the American Chamber of Commerce in Korea discussed foreign investment, regulatory reform and broader Korea-US economic cooperation.",
-      "image": "assets/article-images/10870604.jpg"
-    },
-    {
-      "id": "10867926",
-      "title": "US Navy chief visits Hanwha Philly Shipyard amid $150b shipbuilding push",
-      "url": "https://www.koreaherald.com/article/10867926",
-      "date": "Sept. 10, 2026",
-      "category": "Business · Shipbuilding",
-      "description": "A US Navy leadership visit put Hanwha Philly Shipyard's manufacturing capacity, expansion plans and workforce development in focus as Korea and the US deepen shipbuilding cooperation.",
-      "image": "assets/article-images/10867926.jpg"
-    },
-    {
-      "id": "10867826",
-      "title": "Orion eyes global growth for Bichobi after tourist-driven sales surge",
-      "url": "https://www.koreaherald.com/article/10867826",
-      "date": "Sept. 10, 2026",
-      "category": "Business · Consumer",
-      "description": "Orion is expanding Bichobi overseas after the snack gained traction among international visitors to Korea.",
-      "image": "assets/article-images/10867826.jpg"
-    },
-    {
-      "id": "10867554",
-      "title": "LX Pantos flies in 11.2m eggs to ease Korea supply crunch",
-      "url": "https://www.koreaherald.com/article/10867554",
-      "date": "Sept. 9, 2026",
-      "category": "Business · Logistics",
-      "description": "The story looks at the freight network, specialized packaging and temperature-controlled logistics behind Korea's imported egg shipments.",
-      "image": "assets/article-images/10867554.jpg"
-    },
-    {
-      "id": "10863945",
-      "title": "Samsung DX union escalates pay dispute with protest near Lee Jae-yong’s home, Times Square ad",
-      "url": "https://www.koreaherald.com/article/10863945",
-      "date": "Sept. 7, 2026",
-      "category": "Business · Labor",
-      "description": "Samsung Electronics' DX-focused union escalated its compensation and workforce dispute with public demonstrations and a Times Square campaign.",
-      "image": "assets/article-images/10863945.jpg"
     }
   ]
 }
