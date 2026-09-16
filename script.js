@@ -477,69 +477,129 @@
   setInterval(loadMarkets, 60 * 60 * 1000);
   setInterval(loadWeather, 10 * 60 * 1000);
 })();// Memberstack Off the Record signup, checkout and login
-document.addEventListener('click', async (event) => {
-  const subscribeButton = event.target.closest('.paywall-primary');
-  const loginButton = event.target.closest('.paywall-secondary');
+(() => {
+  const PRICE_ID = 'prc_off-the-record-full-access-t7da0shc';
+  const PENDING_CHECKOUT = 'offRecordPendingCheckout';
 
-  if (!subscribeButton && !loginButton) return;
-
-  event.preventDefault();
-  event.stopImmediatePropagation();
-
-  const memberstack = window.$memberstackDom;
-
-  if (!memberstack) {
-    console.error('Memberstack did not load.');
-    alert('Membership is temporarily unavailable. Please refresh the page and try again.');
-    return;
+  function whenMemberstackReady(callback) {
+    if (window.$memberstackReady && window.$memberstackDom) {
+      callback();
+    } else {
+      document.addEventListener('memberstack.ready', callback, { once: true });
+    }
   }
 
-  // Existing member login
-  if (loginButton) {
+  async function beginCheckout() {
+    const memberstack = window.$memberstackDom;
+
     try {
-      const result = await memberstack.openModal('LOGIN');
+      const { data: member } = await memberstack.getCurrentMember();
 
-      if (result && result.data) {
-        memberstack.hideModal();
-        window.location.reload();
-      }
+      if (!member) return false;
+
+      // Prevent a checkout loop after Stripe sends the reader back.
+      sessionStorage.removeItem(PENDING_CHECKOUT);
+
+      await memberstack.purchasePlansWithCheckout({
+        priceId: PRICE_ID,
+        successUrl:
+          window.location.origin +
+          window.location.pathname +
+          '#off-the-record',
+        cancelUrl:
+          window.location.origin +
+          window.location.pathname +
+          '#off-the-record'
+      });
+
+      return true;
     } catch (error) {
-      console.error('Memberstack login error:', error);
+      console.error('Memberstack checkout error:', error);
+      return false;
     }
-
-    return;
   }
 
-  // Paid subscription
-  if (subscribeButton) {
-    try {
-      const currentMember = await memberstack.getCurrentMember();
-
-      // Already logged in: go directly to Stripe checkout
-      if (currentMember && currentMember.data) {
-        await memberstack.purchasePlansWithCheckout({
-          priceId: 'prc_off-the-record-full-access-t7da0shc',
-          successUrl: window.location.origin + window.location.pathname + '#off-the-record',
-          cancelUrl: window.location.origin + window.location.pathname + '#off-the-record'
-        });
-
-        return;
-      }
-
-      // Logged out: create account first
-      const signupResult = await memberstack.openModal('SIGNUP');
-
-      if (signupResult && signupResult.data) {
-        memberstack.hideModal();
-
-        await memberstack.purchasePlansWithCheckout({
-          priceId: 'prc_off-the-record-full-access-t7da0shc',
-          successUrl: window.location.origin + window.location.pathname + '#off-the-record',
-          cancelUrl: window.location.origin + window.location.pathname + '#off-the-record'
-        });
-      }
-    } catch (error) {
-      console.error('Memberstack subscription error:', error);
+  // If signup caused a page redirect/reload, continue to Stripe
+  // automatically once Memberstack confirms the reader is logged in.
+  whenMemberstackReady(async () => {
+    if (sessionStorage.getItem(PENDING_CHECKOUT) === '1') {
+      await beginCheckout();
     }
+  });
+
+  document.addEventListener(
+    'click',
+    (event) => {
+      const subscribeButton = event.target.closest('.paywall-primary');
+      const loginButton = event.target.closest('.paywall-secondary');
+
+      if (!subscribeButton && !loginButton) return;
+
+      event.preventDefault();
+      event.stopImmediatePropagation();
+
+      whenMemberstackReady(async () => {
+        const memberstack = window.$memberstackDom;
+
+        // SUBSCRIBE
+        if (subscribeButton) {
+          try {
+            // Remember that this reader still needs to reach Stripe.
+            sessionStorage.setItem(PENDING_CHECKOUT, '1');
+
+            // Keep the reader at the Off the Record section.
+            history.replaceState(
+              null,
+              '',
+              window.location.pathname +
+                window.location.search +
+                '#off-the-record'
+            );
+
+            const { data: member } =
+              await memberstack.getCurrentMember();
+
+            // Already has a Memberstack account/login:
+            // go directly to Stripe.
+            if (member) {
+              await beginCheckout();
+              return;
+            }
+
+            // New reader: create account first.
+            await memberstack.openModal('SIGNUP');
+
+            memberstack.hideModal();
+
+            // If Memberstack did not reload the page,
+            // continue to Stripe immediately.
+            await beginCheckout();
+          } catch (error) {
+            console.error('Memberstack signup error:', error);
+          }
+
+          return;
+        }
+
+        // LOGIN
+        if (loginButton) {
+          try {
+            sessionStorage.removeItem(PENDING_CHECKOUT);
+
+            await memberstack.openModal('LOGIN');
+
+            memberstack.hideModal();
+
+            window.location.hash = 'off-the-record';
+            window.location.reload();
+          } catch (error) {
+            console.error('Memberstack login error:', error);
+          }
+        }
+      });
+    },
+    true
+  );
+})();
   }
 }, true);
