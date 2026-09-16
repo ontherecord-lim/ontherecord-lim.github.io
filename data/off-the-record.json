@@ -1,0 +1,15 @@
+{
+  "posts": [
+    {
+      "id": "decision-to-leave-001",
+      "title": "나는 붕괴되었다 마침내",
+      "date": "July 13, 2022",
+      "category": "Film Journal",
+      "excerpt": "박찬욱 감독의 ‘헤어질 결심’을 보고 영화관을 나왔을 때, 내 눈에는 여전히 서래가 파놓은 흙더미가 선했다. 내가 해준과 함께 그 모래사장을 걷고 있는 듯했다.",
+      "image": "assets/off-the-record/decision-to-leave-poster.jpg",
+      "imageAlt": "Decision to Leave film poster",
+      "gatedContentId": "off-the-record-full-access",
+      "hostedContentId": "cmu2cjk4g0z99rs0sjl39aq6n"
+    }
+  ]
+}
