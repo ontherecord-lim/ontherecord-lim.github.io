@@ -1,6 +1,51 @@
 {
-  "generatedAt": "2026-09-18T00:35:57.603659+00:00",
+  "generatedAt": "2026-09-18T06:35:14.300817+00:00",
   "articles": [
+    {
+      "id": "10869373",
+      "title": "US Navy chief visits Hanwha Philly Shipyard amid $150b shipbuilding push",
+      "url": "https://www.koreaherald.com/article/10869373",
+      "date": "Sep. 10, 2026",
+      "category": "The Korea Herald · Business",
+      "description": "Acting US Secretary of the Navy Hung Cao visited Hanwha Philly Shipyard in Philadelphia as South Korea and the United States move forward with a $150 billion sh",
+      "image": "assets/article-images/10869373.jpg"
+    },
+    {
+      "id": "10878599",
+      "title": "CI Guarantee attends GICC 2026 as overseas guarantees top W4tr",
+      "url": "https://www.koreaherald.com/article/10878599",
+      "date": "Sep. 18, 2026",
+      "category": "The Korea Herald · Business",
+      "description": "CI Guarantee showcased its overseas construction guarantee services at the Global Infrastructure Cooperation Conference 2026, marking its fourth consecutive app",
+      "image": "assets/article-images/10878599.jpg"
+    },
+    {
+      "id": "10878598",
+      "title": "Hanwha Finance expands Abu Dhabi ties in digital finance",
+      "url": "https://www.koreaherald.com/article/10878598",
+      "date": "Sep. 18, 2026",
+      "category": "The Korea Herald · Business",
+      "description": "Hanwha Group’s financial affiliates have signed a series of partnerships with Abu Dhabi institutions to expand cooperation in digital finance, stablecoins and c",
+      "image": "assets/article-images/10878598.jpg"
+    },
+    {
+      "id": "10878597",
+      "title": "Hyundai Steel secures ISO 37301 compliance certification",
+      "url": "https://www.koreaherald.com/article/10878597",
+      "date": "Sep. 18, 2026",
+      "category": "The Korea Herald · Business",
+      "description": "Hyundai Steel has obtained ISO 37301 certification, an international standard for compliance management systems, as the steelmaker strengthens its companywide f",
+      "image": "assets/article-images/10878597.jpg"
+    },
+    {
+      "id": "10877245",
+      "title": "Coway unveils slimmer 3-in-1 chair for work, rest and massage",
+      "url": "https://www.koreaherald.com/article/10877245",
+      "date": "Sep. 17, 2026",
+      "category": "The Korea Herald · Business",
+      "description": "Coway has launched the Berex Triple Chair 2 Slim, a compact offering that combines the functions of an office chair, recliner and massage chair for homes with l",
+      "image": "assets/article-images/10877245.jpg"
+    },
     {
       "id": "10872876",
       "title": "Lotte Biologics steps up global outreach",
@@ -45,51 +90,6 @@
       "category": "The Korea Herald · Business",
       "description": "HD Construction Equipment has secured an order for 45 Develon excavators for a major railway expansion project in Hong Kong, the company said Wednesday. The ord",
       "image": "assets/article-images/10875635.jpg"
-    },
-    {
-      "id": "10875607",
-      "title": "Korea Eximbank seeks deeper economic ties with Uzbekistan",
-      "url": "https://www.koreaherald.com/article/10875607",
-      "date": "Sep. 16, 2026",
-      "category": "The Korea Herald · Business",
-      "description": "The Export-Import Bank of Korea said Wednesday it discussed expanding economic cooperation with Uzbek President Shavkat Mirziyoyev during his visit to Seoul for",
-      "image": "assets/article-images/10875607.jpg"
-    },
-    {
-      "id": "10854335",
-      "title": "Hyundai Mobis presents 40 smart manufacturing technologies at M-Sphere 2026",
-      "url": "https://www.koreaherald.com/article/10854335",
-      "date": "Aug. 27, 2026",
-      "category": "The Korea Herald · Business",
-      "description": "Hyundai Mobis showcased around 40 smart manufacturing technologies at its M-Sphere 2026 exhibition, demonstrating how artificial intelligence, robotics and digi",
-      "image": "assets/article-images/10854335.jpg"
-    },
-    {
-      "id": "10854339",
-      "title": "Krafton unveils five titles, outlines global franchise strategy at Gamescom 2026",
-      "url": "https://www.koreaherald.com/article/10854339",
-      "date": "Aug. 27, 2026",
-      "category": "The Korea Herald · Business",
-      "description": "Krafton unveiled five upcoming games at Gamescom 2026 in Cologne, Germany, on Wednesday, as the Korean game developer seeks to build its next generation of long",
-      "image": "assets/article-images/10854339.jpg"
-    },
-    {
-      "id": "10870620",
-      "title": "Amorepacific's Sulwhasoo deepens Japan push with Isetan pop-up",
-      "url": "https://www.koreaherald.com/article/10870620",
-      "date": "Sep. 11, 2026",
-      "category": "The Korea Herald · Business",
-      "description": "Amorepacific’s luxury beauty brand Sulwhasoo is stepping up its expansion in Japan with its first official department store pop-up in the country, opening at Is",
-      "image": "assets/article-images/10870620.jpg"
-    },
-    {
-      "id": "10873920",
-      "title": "Cho Hyun-joon bets on AI power boom with W386.5b US orders",
-      "url": "https://www.koreaherald.com/article/10873920",
-      "date": "Sep. 15, 2026",
-      "category": "The Korea Herald · Business",
-      "description": "Hyosung Heavy Industries has won 386.5 billion won ($286 million) in extra-high-voltage transformer orders from two major US technology companies this month, re",
-      "image": "assets/article-images/10873920.jpg"
     }
   ]
 }
