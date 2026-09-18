@@ -1,6 +1,33 @@
 {
-  "generatedAt": "2026-09-17T18:33:36.505874+00:00",
+  "generatedAt": "2026-09-18T00:35:57.603659+00:00",
   "articles": [
+    {
+      "id": "10872876",
+      "title": "Lotte Biologics steps up global outreach",
+      "url": "https://www.koreaherald.com/article/10872876",
+      "date": "Sep. 14, 2026",
+      "category": "The Korea Herald · Business",
+      "description": "Lotte Biologics will attend three major biopharmaceutical conferences in October, seeking new contract manufacturing deals and broader global partnerships. The",
+      "image": "assets/article-images/10872876.png"
+    },
+    {
+      "id": "10872681",
+      "title": "HD Hyundai E&F completes W435b LNG cogeneration plant",
+      "url": "https://www.koreaherald.com/article/10872681",
+      "date": "Sep. 14, 2026",
+      "category": "The Korea Herald · Business",
+      "description": "HD Hyundai E&F has completed a 435 billion won ($323 million) liquefied natural gas cogeneration plant at the Daesan petrochemical complex in Seosan, South Chun",
+      "image": "assets/article-images/10872681.jpg"
+    },
+    {
+      "id": "10873900",
+      "title": "SC Bank Korea offers up to 4% on Hi Account",
+      "url": "https://www.koreaherald.com/article/10873900",
+      "date": "Sep. 15, 2026",
+      "category": "The Korea Herald · Business",
+      "description": "Standard Chartered Bank Korea is offering first-time customers an annual interest rate of up to 4.0 percent on its Hi Account as part of a promotional campaign",
+      "image": "assets/article-images/10873900.jpg"
+    },
     {
       "id": "10874100",
       "title": "Samsung, Verizon turn mobile network into AI crowd sensor",
@@ -63,33 +90,6 @@
       "category": "The Korea Herald · Business",
       "description": "Hyosung Heavy Industries has won 386.5 billion won ($286 million) in extra-high-voltage transformer orders from two major US technology companies this month, re",
       "image": "assets/article-images/10873920.jpg"
-    },
-    {
-      "id": "10869391",
-      "title": "Pepero Day gets a Stray Kids soundtrack",
-      "url": "https://www.koreaherald.com/article/10869391",
-      "date": "Sep. 10, 2026",
-      "category": "The Korea Herald · Business",
-      "description": "Lotte Wellfood teamed up with K-pop group Stray Kids on a new digital single as it seeks to turn Pepero Day into a global cultural event. The track, titled “Nov",
-      "image": "assets/article-images/10869391.jpg"
-    },
-    {
-      "id": "10869373",
-      "title": "US Navy chief visits Hanwha Philly Shipyard amid $150b shipbuilding push",
-      "url": "https://www.koreaherald.com/article/10869373",
-      "date": "Sep. 10, 2026",
-      "category": "The Korea Herald · Business",
-      "description": "Acting US Secretary of the Navy Hung Cao visited Hanwha Philly Shipyard in Philadelphia as South Korea and the United States move forward with a $150 billion sh",
-      "image": "assets/article-images/10869373.jpg"
-    },
-    {
-      "id": "10877245",
-      "title": "Coway unveils slimmer 3-in-1 chair for work, rest and massage",
-      "url": "https://www.koreaherald.com/article/10877245",
-      "date": "Sep. 17, 2026",
-      "category": "The Korea Herald · Business",
-      "description": "Coway has launched the Berex Triple Chair 2 Slim, a compact offering that combines the functions of an office chair, recliner and massage chair for homes with l",
-      "image": "assets/article-images/10877245.jpg"
     }
   ]
 }
