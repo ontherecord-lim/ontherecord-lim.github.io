@@ -1,6 +1,24 @@
 {
-  "generatedAt": "2026-09-21T12:33:24.389734+00:00",
+  "generatedAt": "2026-09-21T18:33:02.580846+00:00",
   "articles": [
+    {
+      "id": "10878599",
+      "title": "CI Guarantee attends GICC 2026 as overseas guarantees top W4tr",
+      "url": "https://www.koreaherald.com/article/10878599",
+      "date": "Sep. 18, 2026",
+      "category": "The Korea Herald · Business",
+      "description": "CI Guarantee showcased its overseas construction guarantee services at the Global Infrastructure Cooperation Conference 2026, marking its fourth consecutive app",
+      "image": "assets/article-images/10878599.jpg"
+    },
+    {
+      "id": "10878597",
+      "title": "Hyundai Steel secures ISO 37301 compliance certification",
+      "url": "https://www.koreaherald.com/article/10878597",
+      "date": "Sep. 18, 2026",
+      "category": "The Korea Herald · Business",
+      "description": "Hyundai Steel has obtained ISO 37301 certification, an international standard for compliance management systems, as the steelmaker strengthens its companywide f",
+      "image": "assets/article-images/10878597.jpg"
+    },
     {
       "id": "10854335",
       "title": "Hyundai Mobis presents 40 smart manufacturing technologies at M-Sphere 2026",
@@ -72,24 +90,6 @@
       "category": "The Korea Herald · Business",
       "description": "Hanwha Group’s financial affiliates have signed a series of partnerships with Abu Dhabi institutions to expand cooperation in digital finance, stablecoins and c",
       "image": "assets/article-images/10878598.jpg"
-    },
-    {
-      "id": "10875607",
-      "title": "Korea Eximbank seeks deeper economic ties with Uzbekistan",
-      "url": "https://www.koreaherald.com/article/10875607",
-      "date": "Sep. 16, 2026",
-      "category": "The Korea Herald · Business",
-      "description": "The Export-Import Bank of Korea said Wednesday it discussed expanding economic cooperation with Uzbek President Shavkat Mirziyoyev during his visit to Seoul for",
-      "image": "assets/article-images/10875607.jpg"
-    },
-    {
-      "id": "10880639",
-      "title": "Posco renovates special-ed classrooms at 8 schools across cities",
-      "url": "https://www.koreaherald.com/article/10880639",
-      "date": "Sep. 21, 2026",
-      "category": "The Korea Herald · Business",
-      "description": "Posco has renovated special education classrooms at eight elementary schools across Pohang in North Gyeongsang Province, Gwangyang in Jeonnam-Gwangju and Seoul.",
-      "image": "assets/article-images/10880639.jpg"
     }
   ]
 }
