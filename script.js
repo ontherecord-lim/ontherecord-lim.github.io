@@ -69,32 +69,28 @@
         leadImageLink.hidden = true;
       };
 
-      $('#selectedGrid').innerHTML = articles.map((article, index) => `
-        <article class="photo-story">
-          ${articleImage(article, 'photo-story-image')}
+   $('#selectedGrid').innerHTML = articles.map((article) => `
+  <article class="photo-story">
+    ${articleImage(article, 'photo-story-image')}
 
-          <p class="story-index">
-            ${String(index + 1).padStart(2, '0')} ·
-            ${esc((article.category || 'Business').replace(/^Business\s*·\s*/i, ''))}
-          </p>
+    <h3>
+      <a href="${esc(article.url)}" target="_blank" rel="noopener noreferrer">
+        ${esc(cleanTitle(article.title))}
+      </a>
+    </h3>
 
-          <p class="rubric">
-            ${esc(article.category || 'The Korea Herald · Business')}
-          </p>
+    <div class="story-card-footer">
+      <p class="story-meta">${esc(article.date || 'Latest')}</p>
 
-          <h3>
-            <a href="${esc(article.url)}" target="_blank" rel="noopener noreferrer">
-              ${esc(cleanTitle(article.title))}
-            </a>
-          </h3>
-
-          <p>${esc(cleanText(article.description, 200))}</p>
-
-          <p class="story-meta">
-            ${esc(article.date || 'Latest')} · The Korea Herald
-          </p>
-        </article>
-      `).join('');
+      <a class="read-full-story"
+         href="${esc(article.url)}"
+         target="_blank"
+         rel="noopener noreferrer">
+        Read full story ↗
+      </a>
+    </div>
+  </article>
+`).join('');
 
       const tickerItems = articles
         .map((article) => `<span>${esc(cleanTitle(article.title))}</span><i>◆</i>`)
