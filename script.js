@@ -47,25 +47,6 @@
         : [];
 
       if (!articles.length) throw new Error('No article data');
-
-      const lead = articles[0];
-      const leadTitle = $('#leadTitle');
-      const leadImage = $('#leadImage');
-      const leadImageLink = $('#leadImageLink');
-
-      leadTitle.textContent = cleanTitle(lead.title);
-      leadTitle.href = lead.url;
-
-      $('#leadDeck').textContent = cleanText(lead.description, 300);
-      $('#leadMeta').textContent = `By Lim Ye-jin · ${lead.date || 'Latest'} · The Korea Herald`;
-      $('#leadRubric').textContent = lead.category || 'The Korea Herald · Business';
-
-      leadImage.src = lead.image;
-      leadImage.alt = cleanTitle(lead.title);
-      leadImageLink.href = lead.url;
-      leadImageLink.hidden = false;
-
-      leadImage.onerror = () => {
         leadImageLink.hidden = true;
       };
 
