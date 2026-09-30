@@ -1,6 +1,15 @@
 {
-  "generatedAt": "2026-09-30T15:34:13+09:00",
+  "generatedAt": "2026-09-30T21:37:59+09:00",
   "articles": [
+    {
+      "id": "10889415",
+      "title": "IPark Hyundai Development expands AI-powered residential services",
+      "url": "https://www.koreaherald.com/article/10889415",
+      "date": "Sept. 30, 2026",
+      "dateKo": "2026. 9. 30.",
+      "isoDate": "2026-09-30",
+      "image": "https://wimg.heraldcorp.com/news/cms/2026/09/30/news-p.v1.20260930.23ea9fa2e2784e04865f5a9bbee08e67_P1.jpg"
+    },
     {
       "id": "10889225",
       "title": "SK Chemicals earns top AAA rating in MSCI ESG assessment",
@@ -81,25 +90,6 @@
       "dateKo": "2026. 9. 28.",
       "isoDate": "2026-09-28",
       "image": "https://wimg.heraldcorp.com/news/cms/2026/09/28/news-p.v1.20260928.31256832fa114be6a2ec80d2d4a4d504_P1.png"
-    },
-    {
-      "id": "10886303",
-      "title": "LG rolls out ‘Smile Project’ for life’s big moments",
-      "url": "https://www.koreaherald.com/article/10886303",
-      "date": "Sept. 28, 2026",
-      "dateKo": "2026. 9. 28.",
-      "isoDate": "2026-09-28",
-      "image": "https://wimg.heraldcorp.com/news/cms/2026/09/28/news-p.v1.20260928.6061c0332cca43fcbc9efbc7f4c931f6_P1.jpg"
-    },
-    {
-      "id": "10880746",
-      "title": "[Photo News] Starbucks to share up to 1 million cups of coffee",
-      "url": "https://www.koreaherald.com/article/10880746",
-      "date": "Sept. 21, 2026",
-      "dateKo": "2026. 9. 21.",
-      "isoDate": "2026-09-21",
-      "image": "https://wimg.heraldcorp.com/news/cms/2026/09/21/news-p.v1.20260921.e9640c88f6764a1db0d31a49264d13ef_P1.jpg",
-      "titleKo": "스타벅스, 지역사회 기여자에 최대 100만 잔 커피 나눔"
     },
     {
       "id": "10854339",
