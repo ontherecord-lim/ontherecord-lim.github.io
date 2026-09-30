@@ -1,6 +1,24 @@
 {
-  "generatedAt": "2026-09-30T14:35:31+09:00",
+  "generatedAt": "2026-09-30T15:34:13+09:00",
   "articles": [
+    {
+      "id": "10889225",
+      "title": "SK Chemicals earns top AAA rating in MSCI ESG assessment",
+      "url": "https://www.koreaherald.com/article/10889225",
+      "date": "Sept. 30, 2026",
+      "dateKo": "2026. 9. 30.",
+      "isoDate": "2026-09-30",
+      "image": "https://wimg.heraldcorp.com/news/cms/2026/09/30/news-p.v1.20260930.b6bc70837e804d61be8fb9f2c1797e7b_P1.jpg"
+    },
+    {
+      "id": "10889127",
+      "title": "Hana, SEMAS team up to boost local business districts",
+      "url": "https://www.koreaherald.com/article/10889127",
+      "date": "Sept. 30, 2026",
+      "dateKo": "2026. 9. 30.",
+      "isoDate": "2026-09-30",
+      "image": "https://wimg.heraldcorp.com/news/cms/2026/09/30/news-p.v1.20260930.7b3c80a3f7994c3ca02a4ef64309d350_P1.jpg"
+    },
     {
       "id": "10888990",
       "title": "LG-GM venture upgrades US plant for EV batteries",
@@ -72,26 +90,6 @@
       "dateKo": "2026. 9. 28.",
       "isoDate": "2026-09-28",
       "image": "https://wimg.heraldcorp.com/news/cms/2026/09/28/news-p.v1.20260928.6061c0332cca43fcbc9efbc7f4c931f6_P1.jpg"
-    },
-    {
-      "id": "10882084",
-      "title": "NC pushes global expansion with Astrae Oratio in Japan, Aion 2 worldwide",
-      "url": "https://www.koreaherald.com/article/10882084",
-      "date": "Sept. 22, 2026",
-      "dateKo": "2026. 9. 22.",
-      "isoDate": "2026-09-22",
-      "image": "https://wimg.heraldcorp.com/news/cms/2026/09/23/news-p.v1.20260922.ec2314d1720d4ed2b60b50a525ad1a1a_P1.jpg",
-      "titleKo": "엔씨, 일본 '아스트라에 오라티오'·글로벌 '아이온2'로 해외 공략"
-    },
-    {
-      "id": "10882083",
-      "title": "Daewoo E&C expands global nuclear, energy push",
-      "url": "https://www.koreaherald.com/article/10882083",
-      "date": "Sept. 22, 2026",
-      "dateKo": "2026. 9. 22.",
-      "isoDate": "2026-09-22",
-      "image": "https://wimg.heraldcorp.com/news/cms/2026/09/22/news-p.v1.20260922.6d07d449d4b54bb5b4eba38ba1bc2dd8_P1.jpg",
-      "titleKo": "대우건설, 글로벌 원전·에너지 사업 확대"
     },
     {
       "id": "10880746",
