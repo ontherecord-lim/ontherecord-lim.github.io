@@ -1,6 +1,42 @@
 {
-  "generatedAt": "2026-10-07T09:40:09+09:00",
+  "generatedAt": "2026-10-07T15:34:42+09:00",
   "articles": [
+    {
+      "id": "10895842",
+      "title": "GI Innovation starts Japan phase 2 trial of allergy drug",
+      "url": "https://www.koreaherald.com/article/10895842",
+      "date": "Oct. 7, 2026",
+      "dateKo": "2026. 10. 7.",
+      "isoDate": "2026-10-07",
+      "image": "https://wimg.heraldcorp.com/news/cms/2026/10/07/news-p.v1.20261007.f993f4dcafae4abd86b380ce4e18f8d0_P1.jpg"
+    },
+    {
+      "id": "10895737",
+      "title": "Paris Baguette eyes US expansion after Paran Label’s Singapore debut",
+      "url": "https://www.koreaherald.com/article/10895737",
+      "date": "Oct. 7, 2026",
+      "dateKo": "2026. 10. 7.",
+      "isoDate": "2026-10-07",
+      "image": "https://wimg.heraldcorp.com/news/cms/2026/10/07/news-p.v1.20261007.5f235bd124f3446091bc80dec269492d_P1.jpg"
+    },
+    {
+      "id": "10895372",
+      "title": "Medicube enters Mexico’s luxury department store market",
+      "url": "https://www.koreaherald.com/article/10895372",
+      "date": "Oct. 7, 2026",
+      "dateKo": "2026. 10. 7.",
+      "isoDate": "2026-10-07",
+      "image": "https://wimg.heraldcorp.com/news/cms/2026/10/07/news-p.v1.20261007.bad1fa018ac7432b8600989498ff564f_P1.jpg"
+    },
+    {
+      "id": "10895341",
+      "title": "SK On’s Hungary plant earns Ford’s top Q1 quality certification",
+      "url": "https://www.koreaherald.com/article/10895341",
+      "date": "Oct. 7, 2026",
+      "dateKo": "2026. 10. 7.",
+      "isoDate": "2026-10-07",
+      "image": "https://wimg.heraldcorp.com/news/cms/2026/10/07/news-p.v1.20261007.693b790d162840d88a4c9d08064c59bf_P1.png"
+    },
     {
       "id": "10893205",
       "title": "Korean Air chief wins CAPA leadership award",
@@ -63,33 +99,6 @@
       "dateKo": "2026. 9. 30.",
       "isoDate": "2026-09-30",
       "image": "https://wimg.heraldcorp.com/news/cms/2026/09/30/news-p.v1.20260930.79226d36beff47babcfe45b42b72af1c_P1.png"
-    },
-    {
-      "id": "10888595",
-      "title": "Hyundai E&C brings 1,779-home Hillstate complex to Pyeongtaek’s Godeok",
-      "url": "https://www.koreaherald.com/article/10888595",
-      "date": "Sept. 30, 2026",
-      "dateKo": "2026. 9. 30.",
-      "isoDate": "2026-09-30",
-      "image": "https://wimg.heraldcorp.com/news/cms/2026/09/30/news-p.v1.20260929.6151b8ae700840428176c1563db56f7e_P1.jpg"
-    },
-    {
-      "id": "10887624",
-      "title": "Shinhan eyes Korea-Japan ties in climate, digital finance",
-      "url": "https://www.koreaherald.com/article/10887624",
-      "date": "Sept. 29, 2026",
-      "dateKo": "2026. 9. 29.",
-      "isoDate": "2026-09-29",
-      "image": "https://wimg.heraldcorp.com/news/cms/2026/09/29/news-p.v1.20260929.2da03fee18a248c7b150f10b4b860261_P1.jpg"
-    },
-    {
-      "id": "10887542",
-      "title": "LG Innotek, Applied Intuition begin gathering Korean road data",
-      "url": "https://www.koreaherald.com/article/10887542",
-      "date": "Sept. 29, 2026",
-      "dateKo": "2026. 9. 29.",
-      "isoDate": "2026-09-29",
-      "image": "https://wimg.heraldcorp.com/news/cms/2026/09/29/news-p.v1.20260929.944e2d9f98e14a848bc46e3da78dea6a_P1.jpg"
     },
     {
       "id": "10854339",
