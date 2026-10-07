@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-07T15:34:42+09:00",
+  "generatedAt": "2026-10-07T21:37:09+09:00",
   "articles": [
     {
       "id": "10895842",
@@ -99,6 +99,15 @@
       "dateKo": "2026. 9. 30.",
       "isoDate": "2026-09-30",
       "image": "https://wimg.heraldcorp.com/news/cms/2026/09/30/news-p.v1.20260930.79226d36beff47babcfe45b42b72af1c_P1.png"
+    },
+    {
+      "id": "10886431",
+      "title": "Bibigo taps K-pop appeal to woo Mexican consumers",
+      "url": "https://www.koreaherald.com/article/10886431",
+      "date": "Sept. 28, 2026",
+      "dateKo": "2026. 9. 28.",
+      "isoDate": "2026-09-28",
+      "image": "https://wimg.heraldcorp.com/news/cms/2026/09/28/news-p.v1.20260928.83ff6d5fad554f3cb47b6ed2b18ca851_P1.jpg"
     },
     {
       "id": "10854339",
