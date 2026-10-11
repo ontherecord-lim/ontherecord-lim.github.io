@@ -1,6 +1,24 @@
 {
-  "generatedAt": "2026-10-11T06:42:58+09:00",
+  "generatedAt": "2026-10-11T12:04:00+09:00",
   "articles": [
+    {
+      "id": "10898517",
+      "title": "LG Electronics expands US premium appliance push as Signature marks 10 years",
+      "url": "https://www.koreaherald.com/article/10898517",
+      "date": "Oct. 11, 2026",
+      "dateKo": "2026. 10. 11.",
+      "isoDate": "2026-10-11",
+      "image": "https://wimg.heraldcorp.com/news/cms/2026/10/11/news-p.v1.20261011.e365f584172e4baeadda9b6817144152_P1.jpg"
+    },
+    {
+      "id": "10898516",
+      "title": "Starbucks regains coffee chain lead five months after 'Tank Day' controversy",
+      "url": "https://www.koreaherald.com/article/10898516",
+      "date": "Oct. 11, 2026",
+      "dateKo": "2026. 10. 11.",
+      "isoDate": "2026-10-11",
+      "image": "https://wimg.heraldcorp.com/news/cms/2026/10/11/news-p.v1.20261011.54e67d600c894116a2aae03d0716769d_P1.jpg"
+    },
     {
       "id": "10895842",
       "title": "GI Innovation starts Japan phase 2 trial of allergy drug",
@@ -72,24 +90,6 @@
       "dateKo": "2026. 9. 30.",
       "isoDate": "2026-09-30",
       "image": "https://wimg.heraldcorp.com/news/cms/2026/10/01/news-p.v1.20260930.23ea9fa2e2784e04865f5a9bbee08e67_P1.jpg"
-    },
-    {
-      "id": "10889225",
-      "title": "SK Chemicals earns top AAA rating in MSCI ESG assessment",
-      "url": "https://www.koreaherald.com/article/10889225",
-      "date": "Sept. 30, 2026",
-      "dateKo": "2026. 9. 30.",
-      "isoDate": "2026-09-30",
-      "image": "https://wimg.heraldcorp.com/news/cms/2026/09/30/news-p.v1.20260930.b6bc70837e804d61be8fb9f2c1797e7b_P1.jpg"
-    },
-    {
-      "id": "10889127",
-      "title": "Hana, SEMAS team up to boost local business districts",
-      "url": "https://www.koreaherald.com/article/10889127",
-      "date": "Sept. 30, 2026",
-      "dateKo": "2026. 9. 30.",
-      "isoDate": "2026-09-30",
-      "image": "https://wimg.heraldcorp.com/news/cms/2026/09/30/news-p.v1.20260930.7b3c80a3f7994c3ca02a4ef64309d350_P1.jpg"
     },
     {
       "id": "10854339",
