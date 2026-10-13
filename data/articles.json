@@ -1,6 +1,24 @@
 {
-  "generatedAt": "2026-10-13T09:38:38+09:00",
+  "generatedAt": "2026-10-13T14:03:10+09:00",
   "articles": [
+    {
+      "id": "10900938",
+      "title": "SK Earthon begins oil production in Vietnam, makes new discovery",
+      "url": "https://www.koreaherald.com/article/10900938",
+      "date": "Oct. 13, 2026",
+      "dateKo": "2026. 10. 13.",
+      "isoDate": "2026-10-13",
+      "image": "https://wimg.heraldcorp.com/news/cms/2026/10/13/news-p.v1.20261013.a4c32d57f90c413c8e86e7c0be437bd8_P1.jpg"
+    },
+    {
+      "id": "10900808",
+      "title": "LS Electric lands $138.5m US power equipment deal",
+      "url": "https://www.koreaherald.com/article/10900808",
+      "date": "Oct. 13, 2026",
+      "dateKo": "2026. 10. 13.",
+      "isoDate": "2026-10-13",
+      "image": "https://wimg.heraldcorp.com/news/cms/2026/10/13/news-p.v1.20261013.af2899566fbe41f09a69b174403c1335_P1.jpg"
+    },
     {
       "id": "10899434",
       "title": "Gaon Cable targets US nuclear, SMR markets with North Carolina production line",
