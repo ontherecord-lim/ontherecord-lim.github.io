@@ -1,6 +1,33 @@
 {
-  "generatedAt": "2026-10-14T07:44:11+09:00",
+  "generatedAt": "2026-10-14T13:52:09+09:00",
   "articles": [
+    {
+      "id": "10902254",
+      "title": "Korean Air wins eight honors at 2026 Magellan Awards",
+      "url": "https://www.koreaherald.com/article/10902254",
+      "date": "Oct. 14, 2026",
+      "dateKo": "2026. 10. 14.",
+      "isoDate": "2026-10-14",
+      "image": "https://wimg.heraldcorp.com/news/cms/2026/10/14/news-p.v1.20261014.dc00e2edd6044259bb9efe163f91e46e_P1.jpg"
+    },
+    {
+      "id": "10902251",
+      "title": "LG CNS teams up with Japan's KDDI to expand AI business in Asia",
+      "url": "https://www.koreaherald.com/article/10902251",
+      "date": "Oct. 14, 2026",
+      "dateKo": "2026. 10. 14.",
+      "isoDate": "2026-10-14",
+      "image": "https://wimg.heraldcorp.com/news/cms/2026/10/14/news-p.v1.20261014.688593fedda544c08e92c9ac10c7834b_P1.jpg"
+    },
+    {
+      "id": "10902056",
+      "title": "APR's Medicube sets sales records across US, Europe",
+      "url": "https://www.koreaherald.com/article/10902056",
+      "date": "Oct. 14, 2026",
+      "dateKo": "2026. 10. 14.",
+      "isoDate": "2026-10-14",
+      "image": "https://wimg.heraldcorp.com/news/cms/2026/10/14/news-p.v1.20261014.8dd7c8ee989c469cb2d914707ea075f2_P1.jpg"
+    },
     {
       "id": "10901008",
       "title": "LG Innotek executive wins industrial merit honor",
@@ -72,15 +99,6 @@
       "dateKo": "2026. 10. 11.",
       "isoDate": "2026-10-11",
       "image": "https://wimg.heraldcorp.com/news/cms/2026/10/11/news-p.v1.20261011.54e67d600c894116a2aae03d0716769d_P1.jpg"
-    },
-    {
-      "id": "10895842",
-      "title": "GI Innovation starts Japan phase 2 trial of allergy drug",
-      "url": "https://www.koreaherald.com/article/10895842",
-      "date": "Oct. 7, 2026",
-      "dateKo": "2026. 10. 7.",
-      "isoDate": "2026-10-07",
-      "image": "https://wimg.heraldcorp.com/news/cms/2026/10/07/news-p.v1.20261007.f993f4dcafae4abd86b380ce4e18f8d0_P1.jpg"
     },
     {
       "id": "10895737",
