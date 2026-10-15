@@ -1,6 +1,15 @@
 {
-  "generatedAt": "2026-10-15T13:37:19+09:00",
+  "generatedAt": "2026-10-15T14:19:21+09:00",
   "articles": [
+    {
+      "id": "10903828",
+      "title": "Posco targets LNG cargo tank market with Hanwha Ocean",
+      "url": "https://www.koreaherald.com/article/10903828",
+      "date": "Oct. 15, 2026",
+      "dateKo": "2026. 10. 15.",
+      "isoDate": "2026-10-15",
+      "image": "https://wimg.heraldcorp.com/news/cms/2026/10/15/news-p.v1.20261015.58bcc8e6896e45a3b876e5234a387f56_P1.jpg"
+    },
     {
       "id": "10903581",
       "title": "Celltrion to highlight Remsima SC clinical data at UEG Week 2026",
@@ -153,15 +162,6 @@
       "dateKo": "2026. 8. 27.",
       "isoDate": "2026-08-27",
       "image": "https://wimg.heraldcorp.com/news/cms/2026/08/27/news-p.v1.20260827.0990d856d2ca40418d3d6989520602c4_P1.jpg"
-    },
-    {
-      "id": "10854335",
-      "title": "Hyundai Mobis presents 40 smart manufacturing technologies at M-Sphere 2026",
-      "url": "https://www.koreaherald.com/article/10854335",
-      "date": "Aug. 27, 2026",
-      "dateKo": "2026. 8. 27.",
-      "isoDate": "2026-08-27",
-      "image": "https://wimg.heraldcorp.com/news/cms/2026/08/27/news-p.v1.20260827.ace83916def04494a7f733caa6e276a7_P1.jpg"
     }
   ]
 }
