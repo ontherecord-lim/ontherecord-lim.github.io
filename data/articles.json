@@ -1,6 +1,24 @@
 {
-  "generatedAt": "2026-10-15T06:40:17+09:00",
+  "generatedAt": "2026-10-15T13:37:19+09:00",
   "articles": [
+    {
+      "id": "10903581",
+      "title": "Celltrion to highlight Remsima SC clinical data at UEG Week 2026",
+      "url": "https://www.koreaherald.com/article/10903581",
+      "date": "Oct. 15, 2026",
+      "dateKo": "2026. 10. 15.",
+      "isoDate": "2026-10-15",
+      "image": "https://wimg.heraldcorp.com/news/cms/2026/10/15/news-p.v1.20261015.250cb6a6ac674a148a7cebea4edf63b6_P1.jpg"
+    },
+    {
+      "id": "10903528",
+      "title": "Macrogen adopts Roche's next-gen platform to speed up genome sequencing",
+      "url": "https://www.koreaherald.com/article/10903528",
+      "date": "Oct. 15, 2026",
+      "dateKo": "2026. 10. 15.",
+      "isoDate": "2026-10-15",
+      "image": "https://wimg.heraldcorp.com/news/cms/2026/10/15/news-p.v1.20261015.1eb4a6ac21434a40b3eb0f6179b2a449_P1.jpg"
+    },
     {
       "id": "10902776",
       "title": "Miracell's cell technology shows promise in nonsurgical ACL treatment",
@@ -71,7 +89,7 @@
       "date": "Oct. 12, 2026",
       "dateKo": "2026. 10. 12.",
       "isoDate": "2026-10-12",
-      "image": "https://wimg.heraldcorp.com/news/cms/2026/10/12/news-p.v1.20261012.a0f8d4cd01ce4d0cbf382c581d463a32_P1.jpg"
+      "image": "https://wimg.heraldcorp.com/news/cms/2026/10/15/news-p.v1.20261012.a0f8d4cd01ce4d0cbf382c581d463a32_P1.jpg"
     },
     {
       "id": "10899357",
@@ -99,15 +117,6 @@
       "dateKo": "2026. 10. 11.",
       "isoDate": "2026-10-11",
       "image": "https://wimg.heraldcorp.com/news/cms/2026/10/11/news-p.v1.20261011.54e67d600c894116a2aae03d0716769d_P1.jpg"
-    },
-    {
-      "id": "10895737",
-      "title": "Paris Baguette eyes US expansion after Paran Label’s Singapore debut",
-      "url": "https://www.koreaherald.com/article/10895737",
-      "date": "Oct. 7, 2026",
-      "dateKo": "2026. 10. 7.",
-      "isoDate": "2026-10-07",
-      "image": "https://wimg.heraldcorp.com/news/cms/2026/10/07/news-p.v1.20261007.5f235bd124f3446091bc80dec269492d_P1.jpg"
     },
     {
       "id": "10893205",
