@@ -1,6 +1,15 @@
 {
-  "generatedAt": "2026-10-19T13:39:23+09:00",
+  "generatedAt": "2026-10-19T22:12:34+09:00",
   "articles": [
+    {
+      "id": "10907198",
+      "title": "Coway brings sleep-tracking technology to BEREX mattresses",
+      "url": "https://www.koreaherald.com/article/10907198",
+      "date": "Oct. 19, 2026",
+      "dateKo": "2026. 10. 19.",
+      "isoDate": "2026-10-19",
+      "image": "https://wimg.heraldcorp.com/news/cms/2026/10/19/news-p.v1.20261019.57c8b0ab5be1452dbdb11cdb3e7c5ee9_P1.jpg"
+    },
     {
       "id": "10907184",
       "title": "Cosmax deepens US push with K-beauty creator awards",
@@ -81,24 +90,6 @@
       "dateKo": "2026. 10. 14.",
       "isoDate": "2026-10-14",
       "image": "https://wimg.heraldcorp.com/news/cms/2026/10/14/news-p.v1.20261014.dc00e2edd6044259bb9efe163f91e46e_P1.jpg"
-    },
-    {
-      "id": "10902251",
-      "title": "LG CNS teams up with Japan's KDDI to expand AI business in Asia",
-      "url": "https://www.koreaherald.com/article/10902251",
-      "date": "Oct. 14, 2026",
-      "dateKo": "2026. 10. 14.",
-      "isoDate": "2026-10-14",
-      "image": "https://wimg.heraldcorp.com/news/cms/2026/10/14/news-p.v1.20261014.688593fedda544c08e92c9ac10c7834b_P1.jpg"
-    },
-    {
-      "id": "10900808",
-      "title": "LS Electric lands $138.5m US power equipment deal",
-      "url": "https://www.koreaherald.com/article/10900808",
-      "date": "Oct. 13, 2026",
-      "dateKo": "2026. 10. 13.",
-      "isoDate": "2026-10-13",
-      "image": "https://wimg.heraldcorp.com/news/cms/2026/10/13/news-p.v1.20261013.af2899566fbe41f09a69b174403c1335_P1.jpg"
     },
     {
       "id": "10898516",
