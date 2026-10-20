@@ -1,6 +1,24 @@
 {
-  "generatedAt": "2026-10-20T07:20:37+09:00",
+  "generatedAt": "2026-10-20T13:49:03+09:00",
   "articles": [
+    {
+      "id": "10908635",
+      "title": "Samsung-backed Element showcases next-gen DNA sequencing tech in Seoul",
+      "url": "https://www.koreaherald.com/article/10908635",
+      "date": "Oct. 20, 2026",
+      "dateKo": "2026. 10. 20.",
+      "isoDate": "2026-10-20",
+      "image": "https://wimg.heraldcorp.com/news/cms/2026/10/20/news-p.v1.20260311.6951ff2f4c834208893bb8d396bcc052_P1.jpg"
+    },
+    {
+      "id": "10908631",
+      "title": "Samsung Bioepis secures 10-year biosimilar supply deal in Brazil",
+      "url": "https://www.koreaherald.com/article/10908631",
+      "date": "Oct. 20, 2026",
+      "dateKo": "2026. 10. 20.",
+      "isoDate": "2026-10-20",
+      "image": "https://wimg.heraldcorp.com/news/cms/2026/10/20/news-p.v1.20261020.2aebaac504fc47e98272e7eaad3b9a1a_P1.jpg"
+    },
     {
       "id": "10907198",
       "title": "Coway brings sleep-tracking technology to BEREX mattresses",
@@ -81,15 +99,6 @@
       "dateKo": "2026. 10. 14.",
       "isoDate": "2026-10-14",
       "image": "https://wimg.heraldcorp.com/news/cms/2026/10/14/news-p.v1.20261014.9d5b1f90aea44d9eb88d7d74744b538f_P1.png"
-    },
-    {
-      "id": "10902254",
-      "title": "Korean Air wins eight honors at 2026 Magellan Awards",
-      "url": "https://www.koreaherald.com/article/10902254",
-      "date": "Oct. 14, 2026",
-      "dateKo": "2026. 10. 14.",
-      "isoDate": "2026-10-14",
-      "image": "https://wimg.heraldcorp.com/news/cms/2026/10/14/news-p.v1.20261014.dc00e2edd6044259bb9efe163f91e46e_P1.jpg"
     },
     {
       "id": "10898516",
