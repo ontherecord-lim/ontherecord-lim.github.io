@@ -1,6 +1,24 @@
 {
-  "generatedAt": "2026-10-21T13:44:36+09:00",
+  "generatedAt": "2026-10-21T20:47:24+09:00",
   "articles": [
+    {
+      "id": "10910208",
+      "title": "AmCham hosts US envoy, military chief for security, economic talks",
+      "url": "https://www.koreaherald.com/article/10910208",
+      "date": "Oct. 21, 2026",
+      "dateKo": "2026. 10. 21.",
+      "isoDate": "2026-10-21",
+      "image": "https://wimg.heraldcorp.com/news/cms/2026/10/21/news-p.v1.20261021.950a2eed9c0a488bb0721768dd0ada9b_P1.jpg"
+    },
+    {
+      "id": "10910098",
+      "title": "LG Chem eyes 2029 trials for personalized cancer vaccine",
+      "url": "https://www.koreaherald.com/article/10910098",
+      "date": "Oct. 21, 2026",
+      "dateKo": "2026. 10. 21.",
+      "isoDate": "2026-10-21",
+      "image": "https://wimg.heraldcorp.com/news/cms/2026/10/21/news-p.v1.20261021.b03f79d56e7e4102aa1db131216c4a71_P1.jpeg"
+    },
     {
       "id": "10909824",
       "title": "TheBorn Korea's Texas BBQ outlet sees 70% sales growth since opening",
@@ -83,15 +101,6 @@
       "image": "https://wimg.heraldcorp.com/news/cms/2026/10/18/news-p.v1.20261018.8bee43f1bfa84a57be5c781b2788c9ae_P1.jpg"
     },
     {
-      "id": "10903828",
-      "title": "Posco targets LNG cargo tank market with Hanwha Ocean",
-      "url": "https://www.koreaherald.com/article/10903828",
-      "date": "Oct. 15, 2026",
-      "dateKo": "2026. 10. 15.",
-      "isoDate": "2026-10-15",
-      "image": "https://wimg.heraldcorp.com/news/cms/2026/10/15/news-p.v1.20261015.58bcc8e6896e45a3b876e5234a387f56_P1.jpg"
-    },
-    {
       "id": "10903528",
       "title": "Macrogen adopts Roche's next-gen platform to speed up genome sequencing",
       "url": "https://www.koreaherald.com/article/10903528",
@@ -146,22 +155,13 @@
       "image": "https://wimg.heraldcorp.com/news/cms/2026/10/05/news-p.v1.20261005.f173d8b3dce842c18485e522227f53c6_P1.jpg"
     },
     {
-      "id": "10854339",
-      "title": "Krafton unveils five titles, outlines global franchise strategy at Gamescom 2026",
-      "url": "https://www.koreaherald.com/article/10854339",
-      "date": "Aug. 27, 2026",
-      "dateKo": "2026. 8. 27.",
-      "isoDate": "2026-08-27",
-      "image": "https://wimg.heraldcorp.com/news/cms/2026/08/27/news-p.v1.20260827.0990d856d2ca40418d3d6989520602c4_P1.jpg"
-    },
-    {
-      "id": "10854335",
-      "title": "Hyundai Mobis presents 40 smart manufacturing technologies at M-Sphere 2026",
-      "url": "https://www.koreaherald.com/article/10854335",
-      "date": "Aug. 27, 2026",
-      "dateKo": "2026. 8. 27.",
-      "isoDate": "2026-08-27",
-      "image": "https://wimg.heraldcorp.com/news/cms/2026/08/27/news-p.v1.20260827.ace83916def04494a7f733caa6e276a7_P1.jpg"
+      "id": "10889415",
+      "title": "IPARK Hyundai Development expands AI-powered residential services",
+      "url": "https://www.koreaherald.com/article/10889415",
+      "date": "Sept. 30, 2026",
+      "dateKo": "2026. 9. 30.",
+      "isoDate": "2026-09-30",
+      "image": "https://wimg.heraldcorp.com/news/cms/2026/10/01/news-p.v1.20260930.23ea9fa2e2784e04865f5a9bbee08e67_P1.jpg"
     }
   ]
 }
