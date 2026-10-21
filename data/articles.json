@@ -1,6 +1,15 @@
 {
-  "generatedAt": "2026-10-21T06:36:23+09:00",
+  "generatedAt": "2026-10-21T13:44:36+09:00",
   "articles": [
+    {
+      "id": "10909824",
+      "title": "TheBorn Korea's Texas BBQ outlet sees 70% sales growth since opening",
+      "url": "https://www.koreaherald.com/article/10909824",
+      "date": "Oct. 21, 2026",
+      "dateKo": "2026. 10. 21.",
+      "isoDate": "2026-10-21",
+      "image": "https://wimg.heraldcorp.com/news/cms/2026/10/21/news-p.v1.20261021.ba0998e5617a44aeb519f26275d36f77_P1.jpg"
+    },
     {
       "id": "10909017",
       "title": "Lee Moon Won Bio secures patent for hair-loss care platform",
@@ -81,15 +90,6 @@
       "dateKo": "2026. 10. 15.",
       "isoDate": "2026-10-15",
       "image": "https://wimg.heraldcorp.com/news/cms/2026/10/15/news-p.v1.20261015.58bcc8e6896e45a3b876e5234a387f56_P1.jpg"
-    },
-    {
-      "id": "10903581",
-      "title": "Celltrion to highlight Remsima SC clinical data at UEG Week 2026",
-      "url": "https://www.koreaherald.com/article/10903581",
-      "date": "Oct. 15, 2026",
-      "dateKo": "2026. 10. 15.",
-      "isoDate": "2026-10-15",
-      "image": "https://wimg.heraldcorp.com/news/cms/2026/10/15/news-p.v1.20261015.250cb6a6ac674a148a7cebea4edf63b6_P1.jpg"
     },
     {
       "id": "10903528",
