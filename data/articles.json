@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-22T06:41:57+09:00",
+  "generatedAt": "2026-10-22T13:43:00+09:00",
   "articles": [
     {
       "id": "10910208",
@@ -101,15 +101,6 @@
       "image": "https://wimg.heraldcorp.com/news/cms/2026/10/18/news-p.v1.20261018.8bee43f1bfa84a57be5c781b2788c9ae_P1.jpg"
     },
     {
-      "id": "10903528",
-      "title": "Macrogen adopts Roche's next-gen platform to speed up genome sequencing",
-      "url": "https://www.koreaherald.com/article/10903528",
-      "date": "Oct. 15, 2026",
-      "dateKo": "2026. 10. 15.",
-      "isoDate": "2026-10-15",
-      "image": "https://wimg.heraldcorp.com/news/cms/2026/10/15/news-p.v1.20261015.1eb4a6ac21434a40b3eb0f6179b2a449_P1.jpg"
-    },
-    {
       "id": "10902776",
       "title": "Miracell's cell technology shows promise in nonsurgical ACL treatment",
       "url": "https://www.koreaherald.com/article/10902776",
@@ -162,6 +153,15 @@
       "dateKo": "2026. 9. 30.",
       "isoDate": "2026-09-30",
       "image": "https://wimg.heraldcorp.com/news/cms/2026/10/01/news-p.v1.20260930.23ea9fa2e2784e04865f5a9bbee08e67_P1.jpg"
+    },
+    {
+      "id": "10869373",
+      "title": "US Navy chief visits Hanwha Philly Shipyard amid $150b shipbuilding push",
+      "url": "https://www.koreaherald.com/article/10869373",
+      "date": "Sept. 10, 2026",
+      "dateKo": "2026. 9. 10.",
+      "isoDate": "2026-09-10",
+      "image": "https://wimg.heraldcorp.com/news/cms/2026/09/10/news-p.v1.20260910.26ebb6103f6842518feffa103598b3ac_P1.jpg"
     }
   ]
 }
