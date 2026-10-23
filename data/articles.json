@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-23T06:34:45+09:00",
+  "generatedAt": "2026-10-23T13:47:40+09:00",
   "articles": [
     {
       "id": "10910208",
@@ -101,15 +101,6 @@
       "image": "https://wimg.heraldcorp.com/news/cms/2026/10/18/news-p.v1.20261018.8bee43f1bfa84a57be5c781b2788c9ae_P1.jpg"
     },
     {
-      "id": "10902776",
-      "title": "Miracell's cell technology shows promise in nonsurgical ACL treatment",
-      "url": "https://www.koreaherald.com/article/10902776",
-      "date": "Oct. 14, 2026",
-      "dateKo": "2026. 10. 14.",
-      "isoDate": "2026-10-14",
-      "image": "https://wimg.heraldcorp.com/news/cms/2026/10/14/news-p.v1.20261014.9d5b1f90aea44d9eb88d7d74744b538f_P1.png"
-    },
-    {
       "id": "10898516",
       "title": "Starbucks regains coffee chain lead five months after 'Tank Day' controversy",
       "url": "https://www.koreaherald.com/article/10898516",
@@ -162,6 +153,15 @@
       "dateKo": "2026. 9. 10.",
       "isoDate": "2026-09-10",
       "image": "https://wimg.heraldcorp.com/news/cms/2026/09/10/news-p.v1.20260910.26ebb6103f6842518feffa103598b3ac_P1.jpg"
+    },
+    {
+      "id": "10854339",
+      "title": "Krafton unveils five titles, outlines global franchise strategy at Gamescom 2026",
+      "url": "https://www.koreaherald.com/article/10854339",
+      "date": "Aug. 27, 2026",
+      "dateKo": "2026. 8. 27.",
+      "isoDate": "2026-08-27",
+      "image": "https://wimg.heraldcorp.com/news/cms/2026/08/27/news-p.v1.20260827.0990d856d2ca40418d3d6989520602c4_P1.jpg"
     }
   ]
 }
