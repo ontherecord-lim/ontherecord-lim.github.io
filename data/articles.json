@@ -1,6 +1,24 @@
 {
-  "generatedAt": "2026-10-25T05:48:05+09:00",
+  "generatedAt": "2026-10-25T13:39:47+09:00",
   "articles": [
+    {
+      "id": "10913827",
+      "title": "AIA Life Korea draws 7,000 to K-pop concert in Goyang",
+      "url": "https://www.koreaherald.com/article/10913827",
+      "date": "Oct. 25, 2026",
+      "dateKo": "2026. 10. 25.",
+      "isoDate": "2026-10-25",
+      "image": "https://wimg.heraldcorp.com/news/cms/2026/10/25/news-p.v1.20261025.eda8ed05348b4caea80b9e67311001ee_P1.jpg"
+    },
+    {
+      "id": "10913792",
+      "title": "Nearly half of Koreans experience fatigue, sleep average of 6.3 hours: report",
+      "url": "https://www.koreaherald.com/article/10913792",
+      "date": "Oct. 25, 2026",
+      "dateKo": "2026. 10. 25.",
+      "isoDate": "2026-10-25",
+      "image": "https://wimg.heraldcorp.com/news/cms/2026/10/25/news-p.v1.20261025.b8d27a05e6b0423391756c17996f5407_P1.jpg"
+    },
     {
       "id": "10910208",
       "title": "AmCham hosts US envoy, military chief for security, economic talks",
@@ -74,15 +92,6 @@
       "image": "https://wimg.heraldcorp.com/news/cms/2026/10/19/news-p.v1.20261019.d0cdd03195924d0a94e68b39807e44a1_P1.jpg"
     },
     {
-      "id": "10907183",
-      "title": "LG CNS named IDC ‘Major Player’ for agentic AI workplace solutions",
-      "url": "https://www.koreaherald.com/article/10907183",
-      "date": "Oct. 19, 2026",
-      "dateKo": "2026. 10. 19.",
-      "isoDate": "2026-10-19",
-      "image": "https://wimg.heraldcorp.com/news/cms/2026/10/19/news-p.v1.20261019.c2c6dc5801b64f0da89888147ee8031d_P1.jpg"
-    },
-    {
       "id": "10906187",
       "title": "SME minister visits Kolmar plant amid K-beauty boom",
       "url": "https://www.koreaherald.com/article/10906187",
@@ -153,15 +162,6 @@
       "dateKo": "2026. 9. 10.",
       "isoDate": "2026-09-10",
       "image": "https://wimg.heraldcorp.com/news/cms/2026/09/10/news-p.v1.20260910.26ebb6103f6842518feffa103598b3ac_P1.jpg"
-    },
-    {
-      "id": "10854339",
-      "title": "Krafton unveils five titles, outlines global franchise strategy at Gamescom 2026",
-      "url": "https://www.koreaherald.com/article/10854339",
-      "date": "Aug. 27, 2026",
-      "dateKo": "2026. 8. 27.",
-      "isoDate": "2026-08-27",
-      "image": "https://wimg.heraldcorp.com/news/cms/2026/08/27/news-p.v1.20260827.0990d856d2ca40418d3d6989520602c4_P1.jpg"
     }
   ]
 }
