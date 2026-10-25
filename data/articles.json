@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-25T13:39:47+09:00",
+  "generatedAt": "2026-10-25T20:26:29+09:00",
   "articles": [
     {
       "id": "10913827",
@@ -92,15 +92,6 @@
       "image": "https://wimg.heraldcorp.com/news/cms/2026/10/19/news-p.v1.20261019.d0cdd03195924d0a94e68b39807e44a1_P1.jpg"
     },
     {
-      "id": "10906187",
-      "title": "SME minister visits Kolmar plant amid K-beauty boom",
-      "url": "https://www.koreaherald.com/article/10906187",
-      "date": "Oct. 18, 2026",
-      "dateKo": "2026. 10. 18.",
-      "isoDate": "2026-10-18",
-      "image": "https://wimg.heraldcorp.com/news/cms/2026/10/18/news-p.v1.20261018.0adf4547798a4a189b8c545cec0ec1ec_P1.jpg"
-    },
-    {
       "id": "10906064",
       "title": "Musinsa brings Japanese fashion to Seoul with Zozotown",
       "url": "https://www.koreaherald.com/article/10906064",
@@ -162,6 +153,15 @@
       "dateKo": "2026. 9. 10.",
       "isoDate": "2026-09-10",
       "image": "https://wimg.heraldcorp.com/news/cms/2026/09/10/news-p.v1.20260910.26ebb6103f6842518feffa103598b3ac_P1.jpg"
+    },
+    {
+      "id": "10854339",
+      "title": "Krafton unveils five titles, outlines global franchise strategy at Gamescom 2026",
+      "url": "https://www.koreaherald.com/article/10854339",
+      "date": "Aug. 27, 2026",
+      "dateKo": "2026. 8. 27.",
+      "isoDate": "2026-08-27",
+      "image": "https://wimg.heraldcorp.com/news/cms/2026/08/27/news-p.v1.20260827.0990d856d2ca40418d3d6989520602c4_P1.jpg"
     }
   ]
 }
