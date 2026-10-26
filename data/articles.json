@@ -1,6 +1,24 @@
 {
-  "generatedAt": "2026-10-26T05:49:41+09:00",
+  "generatedAt": "2026-10-26T13:45:23+09:00",
   "articles": [
+    {
+      "id": "10914731",
+      "title": "From translation to hazard detection, Daewoo E&C puts AI to work",
+      "url": "https://www.koreaherald.com/article/10914731",
+      "date": "Oct. 26, 2026",
+      "dateKo": "2026. 10. 26.",
+      "isoDate": "2026-10-26",
+      "image": "https://wimg.heraldcorp.com/news/cms/2026/10/26/news-p.v1.20261026.75fe16329fc14f718278cdd1d163d747_P1.jpg"
+    },
+    {
+      "id": "10914729",
+      "title": "Mom's Touch targets 50 stores in Kazakhstan in Central Asia push",
+      "url": "https://www.koreaherald.com/article/10914729",
+      "date": "Oct. 26, 2026",
+      "dateKo": "2026. 10. 26.",
+      "isoDate": "2026-10-26",
+      "image": "https://wimg.heraldcorp.com/news/cms/2026/10/26/news-p.v1.20261026.a12a86d76c0d43e684ce55e924207d25_P1.jpg"
+    },
     {
       "id": "10913827",
       "title": "AIA Life Korea draws 7,000 to K-pop concert in Goyang",
@@ -72,15 +90,6 @@
       "dateKo": "2026. 10. 20.",
       "isoDate": "2026-10-20",
       "image": "https://wimg.heraldcorp.com/news/cms/2026/10/20/news-p.v1.20261020.2aebaac504fc47e98272e7eaad3b9a1a_P1.jpg"
-    },
-    {
-      "id": "10907198",
-      "title": "Coway brings sleep-tracking technology to BEREX mattresses",
-      "url": "https://www.koreaherald.com/article/10907198",
-      "date": "Oct. 19, 2026",
-      "dateKo": "2026. 10. 19.",
-      "isoDate": "2026-10-19",
-      "image": "https://wimg.heraldcorp.com/news/cms/2026/10/19/news-p.v1.20261019.57c8b0ab5be1452dbdb11cdb3e7c5ee9_P1.jpg"
     },
     {
       "id": "10907184",
