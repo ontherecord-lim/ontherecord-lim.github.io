@@ -1,6 +1,33 @@
 {
-  "generatedAt": "2026-10-26T13:45:23+09:00",
+  "generatedAt": "2026-10-26T22:00:12+09:00",
   "articles": [
+    {
+      "id": "10915073",
+      "title": "Deutsch Motors' profit rises 25% on strong BYD sales",
+      "url": "https://www.koreaherald.com/article/10915073",
+      "date": "Oct. 26, 2026",
+      "dateKo": "2026. 10. 26.",
+      "isoDate": "2026-10-26",
+      "image": "https://wimg.heraldcorp.com/news/cms/2026/10/26/news-p.v1.20261026.563951646f1e4ed5bbcbbe65f4d83ccf_P1.png"
+    },
+    {
+      "id": "10914993",
+      "title": "Hyundai Glovis partners with Shopee to boost K-beauty exports",
+      "url": "https://www.koreaherald.com/article/10914993",
+      "date": "Oct. 26, 2026",
+      "dateKo": "2026. 10. 26.",
+      "isoDate": "2026-10-26",
+      "image": "https://wimg.heraldcorp.com/news/cms/2026/10/26/news-p.v1.20261026.0784fa50db234e37a89407b6981bd034_P1.jpg"
+    },
+    {
+      "id": "10914992",
+      "title": "Samsung SDI wins 1 GWh US energy storage deal",
+      "url": "https://www.koreaherald.com/article/10914992",
+      "date": "Oct. 26, 2026",
+      "dateKo": "2026. 10. 26.",
+      "isoDate": "2026-10-26",
+      "image": "https://wimg.heraldcorp.com/news/cms/2026/10/26/news-p.v1.20261026.875ef973be2346a1aa5f278491fa9bc2_P1.png"
+    },
     {
       "id": "10914731",
       "title": "From translation to hazard detection, Daewoo E&C puts AI to work",
@@ -65,15 +92,6 @@
       "image": "https://wimg.heraldcorp.com/news/cms/2026/10/21/news-p.v1.20261021.ba0998e5617a44aeb519f26275d36f77_P1.jpg"
     },
     {
-      "id": "10909017",
-      "title": "Lee Moon Won Bio secures patent for hair-loss care platform",
-      "url": "https://www.koreaherald.com/article/10909017",
-      "date": "Oct. 20, 2026",
-      "dateKo": "2026. 10. 20.",
-      "isoDate": "2026-10-20",
-      "image": "https://wimg.heraldcorp.com/news/cms/2026/10/20/news-p.v1.20261020.10f07d76e6194320ab7df5ea75d814eb_P1.png"
-    },
-    {
       "id": "10908635",
       "title": "Samsung-backed Element showcases next-gen DNA sequencing tech in Seoul",
       "url": "https://www.koreaherald.com/article/10908635",
@@ -81,24 +99,6 @@
       "dateKo": "2026. 10. 20.",
       "isoDate": "2026-10-20",
       "image": "https://wimg.heraldcorp.com/news/cms/2026/10/20/news-p.v1.20260311.6951ff2f4c834208893bb8d396bcc052_P1.jpg"
-    },
-    {
-      "id": "10908631",
-      "title": "Samsung Bioepis secures 10-year biosimilar supply deal in Brazil",
-      "url": "https://www.koreaherald.com/article/10908631",
-      "date": "Oct. 20, 2026",
-      "dateKo": "2026. 10. 20.",
-      "isoDate": "2026-10-20",
-      "image": "https://wimg.heraldcorp.com/news/cms/2026/10/20/news-p.v1.20261020.2aebaac504fc47e98272e7eaad3b9a1a_P1.jpg"
-    },
-    {
-      "id": "10907184",
-      "title": "Cosmax deepens US push with K-beauty creator awards",
-      "url": "https://www.koreaherald.com/article/10907184",
-      "date": "Oct. 19, 2026",
-      "dateKo": "2026. 10. 19.",
-      "isoDate": "2026-10-19",
-      "image": "https://wimg.heraldcorp.com/news/cms/2026/10/19/news-p.v1.20261019.d0cdd03195924d0a94e68b39807e44a1_P1.jpg"
     },
     {
       "id": "10898516",
