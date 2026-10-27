@@ -1,6 +1,51 @@
 {
-  "generatedAt": "2026-10-27T14:02:35+09:00",
+  "generatedAt": "2026-10-27T17:14:33+09:00",
   "articles": [
+    {
+      "id": "10916425",
+      "title": "AmCham stresses workforce training, risk management in AI transition",
+      "url": "https://www.koreaherald.com/article/10916425",
+      "date": "Oct. 27, 2026",
+      "dateKo": "2026. 10. 27.",
+      "isoDate": "2026-10-27",
+      "image": "https://wimg.heraldcorp.com/news/cms/2026/10/27/news-p.v1.20261027.9817bb7ff49f42b3a62259155d669547_P1.jpg"
+    },
+    {
+      "id": "10916423",
+      "title": "Daiso breaks ground on W600b logistics hub in Yangju",
+      "url": "https://www.koreaherald.com/article/10916423",
+      "date": "Oct. 27, 2026",
+      "dateKo": "2026. 10. 27.",
+      "isoDate": "2026-10-27",
+      "image": "https://wimg.heraldcorp.com/news/cms/2026/10/27/news-p.v1.20261027.ef8289a7351742cf8daab4b6cc182887_P1.jpg"
+    },
+    {
+      "id": "10916350",
+      "title": "Taihan Cable's European orders top W500b with German deal",
+      "url": "https://www.koreaherald.com/article/10916350",
+      "date": "Oct. 27, 2026",
+      "dateKo": "2026. 10. 27.",
+      "isoDate": "2026-10-27",
+      "image": "https://wimg.heraldcorp.com/news/cms/2026/10/27/news-p.v1.20261027.cb221e11ff0048a99c87e47cf8ad621f_P1.jpg"
+    },
+    {
+      "id": "10916301",
+      "title": "Stella Artois unveils ‘invisible’ billboard campaign in Seoul",
+      "url": "https://www.koreaherald.com/article/10916301",
+      "date": "Oct. 27, 2026",
+      "dateKo": "2026. 10. 27.",
+      "isoDate": "2026-10-27",
+      "image": "https://wimg.heraldcorp.com/news/cms/2026/10/27/news-p.v1.20261027.fe1dc9b135e345d18df20041dd225f73_P1.jpg"
+    },
+    {
+      "id": "10916296",
+      "title": "LG Energy Solution eyes 2 GWh ESS supply deal with Israel's Energix",
+      "url": "https://www.koreaherald.com/article/10916296",
+      "date": "Oct. 27, 2026",
+      "dateKo": "2026. 10. 27.",
+      "isoDate": "2026-10-27",
+      "image": "https://wimg.heraldcorp.com/news/cms/2026/10/27/news-p.v1.20261027.dec24f8df0e7444197c5151425354214_P1.jpg"
+    },
     {
       "id": "10915073",
       "title": "Deutsch Motors' profit rises 25% on strong BYD sales",
@@ -45,15 +90,6 @@
       "dateKo": "2026. 10. 26.",
       "isoDate": "2026-10-26",
       "image": "https://wimg.heraldcorp.com/news/cms/2026/10/26/news-p.v1.20261026.a12a86d76c0d43e684ce55e924207d25_P1.jpg"
-    },
-    {
-      "id": "10913827",
-      "title": "AIA Life Korea draws 7,000 to K-pop concert in Goyang",
-      "url": "https://www.koreaherald.com/article/10913827",
-      "date": "Oct. 25, 2026",
-      "dateKo": "2026. 10. 25.",
-      "isoDate": "2026-10-25",
-      "image": "https://wimg.heraldcorp.com/news/cms/2026/10/25/news-p.v1.20261025.eda8ed05348b4caea80b9e67311001ee_P1.jpg"
     },
     {
       "id": "10913792",
@@ -126,42 +162,6 @@
       "dateKo": "2026. 10. 5.",
       "isoDate": "2026-10-05",
       "image": "https://wimg.heraldcorp.com/news/cms/2026/10/05/news-p.v1.20261005.1dcc857e8ef847e59b8aa40bf53a3bd8_P1.jpg"
-    },
-    {
-      "id": "10893178",
-      "title": "Hyundai Group chief reappointed honorary governor of North Chungcheong Province",
-      "url": "https://www.koreaherald.com/article/10893178",
-      "date": "Oct. 5, 2026",
-      "dateKo": "2026. 10. 5.",
-      "isoDate": "2026-10-05",
-      "image": "https://wimg.heraldcorp.com/news/cms/2026/10/05/news-p.v1.20261005.f173d8b3dce842c18485e522227f53c6_P1.jpg"
-    },
-    {
-      "id": "10889415",
-      "title": "IPARK Hyundai Development expands AI-powered residential services",
-      "url": "https://www.koreaherald.com/article/10889415",
-      "date": "Sept. 30, 2026",
-      "dateKo": "2026. 9. 30.",
-      "isoDate": "2026-09-30",
-      "image": "https://wimg.heraldcorp.com/news/cms/2026/10/01/news-p.v1.20260930.23ea9fa2e2784e04865f5a9bbee08e67_P1.jpg"
-    },
-    {
-      "id": "10869373",
-      "title": "US Navy chief visits Hanwha Philly Shipyard amid $150b shipbuilding push",
-      "url": "https://www.koreaherald.com/article/10869373",
-      "date": "Sept. 10, 2026",
-      "dateKo": "2026. 9. 10.",
-      "isoDate": "2026-09-10",
-      "image": "https://wimg.heraldcorp.com/news/cms/2026/09/10/news-p.v1.20260910.26ebb6103f6842518feffa103598b3ac_P1.jpg"
-    },
-    {
-      "id": "10854339",
-      "title": "Krafton unveils five titles, outlines global franchise strategy at Gamescom 2026",
-      "url": "https://www.koreaherald.com/article/10854339",
-      "date": "Aug. 27, 2026",
-      "dateKo": "2026. 8. 27.",
-      "isoDate": "2026-08-27",
-      "image": "https://wimg.heraldcorp.com/news/cms/2026/08/27/news-p.v1.20260827.0990d856d2ca40418d3d6989520602c4_P1.jpg"
     }
   ]
 }
