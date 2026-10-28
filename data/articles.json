@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-10-28T21:52:43+09:00",
+  "generatedAt": "2026-10-29T07:34:06+09:00",
   "articles": [
     {
       "id": "10917449",
@@ -119,15 +119,6 @@
       "image": "https://wimg.heraldcorp.com/news/cms/2026/10/21/news-p.v1.20261021.950a2eed9c0a488bb0721768dd0ada9b_P1.jpg"
     },
     {
-      "id": "10910098",
-      "title": "LG Chem eyes 2029 trials for personalized cancer vaccine",
-      "url": "https://www.koreaherald.com/article/10910098",
-      "date": "Oct. 21, 2026",
-      "dateKo": "2026. 10. 21.",
-      "isoDate": "2026-10-21",
-      "image": "https://wimg.heraldcorp.com/news/cms/2026/10/21/news-p.v1.20261021.b03f79d56e7e4102aa1db131216c4a71_P1.jpeg"
-    },
-    {
       "id": "10898516",
       "title": "Starbucks regains coffee chain lead five months after 'Tank Day' controversy",
       "url": "https://www.koreaherald.com/article/10898516",
@@ -162,6 +153,15 @@
       "dateKo": "2026. 10. 5.",
       "isoDate": "2026-10-05",
       "image": "https://wimg.heraldcorp.com/news/cms/2026/10/05/news-p.v1.20261005.f173d8b3dce842c18485e522227f53c6_P1.jpg"
+    },
+    {
+      "id": "10889415",
+      "title": "IPARK Hyundai Development expands AI-powered residential services",
+      "url": "https://www.koreaherald.com/article/10889415",
+      "date": "Sept. 30, 2026",
+      "dateKo": "2026. 9. 30.",
+      "isoDate": "2026-09-30",
+      "image": "https://wimg.heraldcorp.com/news/cms/2026/10/01/news-p.v1.20260930.23ea9fa2e2784e04865f5a9bbee08e67_P1.jpg"
     }
   ]
 }
