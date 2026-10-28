@@ -1,6 +1,24 @@
 {
-  "generatedAt": "2026-10-28T07:12:36+09:00",
+  "generatedAt": "2026-10-28T14:40:42+09:00",
   "articles": [
+    {
+      "id": "10917449",
+      "title": "Kumho Tire sweeps four major global design awards",
+      "url": "https://www.koreaherald.com/article/10917449",
+      "date": "Oct. 28, 2026",
+      "dateKo": "2026. 10. 28.",
+      "isoDate": "2026-10-28",
+      "image": "https://wimg.heraldcorp.com/news/cms/2026/10/28/news-p.v1.20261028.aafd1fd1bc5f4c279320477698004cbe_P1.jpg"
+    },
+    {
+      "id": "10917377",
+      "title": "HD Construction Equipment opens W116.8b engine plant targeting AI data centers",
+      "url": "https://www.koreaherald.com/article/10917377",
+      "date": "Oct. 28, 2026",
+      "dateKo": "2026. 10. 28.",
+      "isoDate": "2026-10-28",
+      "image": "https://wimg.heraldcorp.com/news/cms/2026/10/28/news-p.v1.20261028.b59fe736bf8d44e68b91360407b06313_P1.jpg"
+    },
     {
       "id": "10916425",
       "title": "AmCham stresses workforce training, risk management in AI transition",
@@ -74,15 +92,6 @@
       "image": "https://wimg.heraldcorp.com/news/cms/2026/10/26/news-p.v1.20261026.875ef973be2346a1aa5f278491fa9bc2_P1.png"
     },
     {
-      "id": "10914731",
-      "title": "From translation to hazard detection, Daewoo E&C puts AI to work",
-      "url": "https://www.koreaherald.com/article/10914731",
-      "date": "Oct. 26, 2026",
-      "dateKo": "2026. 10. 26.",
-      "isoDate": "2026-10-26",
-      "image": "https://wimg.heraldcorp.com/news/cms/2026/10/26/news-p.v1.20261026.75fe16329fc14f718278cdd1d163d747_P1.jpg"
-    },
-    {
       "id": "10914729",
       "title": "Mom's Touch targets 50 stores in Kazakhstan in Central Asia push",
       "url": "https://www.koreaherald.com/article/10914729",
@@ -117,15 +126,6 @@
       "dateKo": "2026. 10. 21.",
       "isoDate": "2026-10-21",
       "image": "https://wimg.heraldcorp.com/news/cms/2026/10/21/news-p.v1.20261021.b03f79d56e7e4102aa1db131216c4a71_P1.jpeg"
-    },
-    {
-      "id": "10909824",
-      "title": "TheBorn Korea's Texas BBQ outlet sees 70% sales growth since opening",
-      "url": "https://www.koreaherald.com/article/10909824",
-      "date": "Oct. 21, 2026",
-      "dateKo": "2026. 10. 21.",
-      "isoDate": "2026-10-21",
-      "image": "https://wimg.heraldcorp.com/news/cms/2026/10/21/news-p.v1.20261021.ba0998e5617a44aeb519f26275d36f77_P1.jpg"
     },
     {
       "id": "10898516",
