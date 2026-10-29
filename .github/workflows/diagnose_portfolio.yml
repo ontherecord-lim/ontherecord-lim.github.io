@@ -1,0 +1,48 @@
+name: Diagnose live portfolio loading
+on:
+  push:
+    paths:
+      - '.github/workflows/diagnose_portfolio.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: pip install playwright requests
+      - run: python -m playwright install chromium
+      - name: Check published files and browser errors
+        run: |
+          python - <<'PY'
+          import requests
+          from playwright.sync_api import sync_playwright
+          for u in ('https://ontherecord-lim.github.io/', 'https://ontherecord-lim.github.io/script.js', 'https://ontherecord-lim.github.io/data/articles.json','https://ontherecord-lim.github.io/ko/'):
+              try:
+                  r=requests.get(u,timeout=15)
+                  print('HTTP_CHECK',r.status_code,len(r.content),r.headers.get('Content-Type'),u,'BODY_START',repr(r.text[:100]),flush=True)
+              except Exception as e: print('HTTP_FAIL',u,repr(e),flush=True)
+          with sync_playwright() as p:
+              b=p.chromium.launch(headless=True)
+              for u in ('https://ontherecord-lim.github.io/','https://ontherecord-lim.github.io/ko/','https://ontherecord-lim.github.io/archive/'):
+                  page=b.new_page()
+                  page.on('console',lambda msg:print('CONSOLE',msg.type,msg.text[:250],flush=True))
+                  page.on('pageerror',lambda err:print('PAGE_ERROR',str(err)[:450],flush=True))
+                  page.on('requestfailed',lambda request:print('REQUEST_FAILED',request.url,str(request.failure)[:250],flush=True))
+                  try:
+                      response=page.goto(u,wait_until='domcontentloaded',timeout=30000)
+                      page.wait_for_timeout(8000)
+                      print('BROWSER',u,'http',response.status if response else None,'title',page.title(),flush=True)
+                      for sel in ('#articleGrid','#featuredGrid','#marketStage','#weatherSeoul','#list','#currentDate'):
+                          n=page.locator(sel)
+                          if n.count():
+                              print('NODE',sel,repr(n.first.inner_text()[:250]),flush=True)
+                  except Exception as e:print('BROWSER_FAIL',u,repr(e),flush=True)
+                  page.close()
+              b.close()
+          PY
