@@ -13,11 +13,11 @@ const subset=matches.slice((page-1)*perPage,page*perPage);
 list.innerHTML=subset.length?subset.map(a=>{
 const title=ko&&a.titleKo?a.titleKo:a.title;
 const url=/^https:\/\/www\.koreaherald\.com\/article\/\d+(?:[/?#].*)?$/.test(a.url||'')?a.url:'#';
-const im=a.image&&/^https?:\/\//.test(a.image)?a.image:base+'assets/placeholder.svg';
+const im=/^https:\/\//i.test(a.image||'')?a.image:/^assets\/[a-zA-Z0-9_./-]+$/.test(a.image||'')?base+a.image:base+'assets/placeholder.svg';
 const date=ko&&a.dateKo?a.dateKo:(a.date||'');
 return '<article class="item"><a href="'+esc(url)+'" target="_blank" rel="noopener noreferrer"><img class="image" loading="lazy" alt="" referrerpolicy="no-referrer" src="'+esc(im)+'"></a><div><h3 class="title"><a href="'+esc(url)+'" target="_blank" rel="noopener noreferrer">'+esc(title)+'</a></h3><time class="date"'+(a.isoDate?' datetime="'+esc(a.isoDate)+'"':'')+'>'+esc(date)+'</time></div></article>';
 }).join(''):'<p class="lede">'+t.none+'</p>';
-list.querySelectorAll('img').forEach(img=>img.addEventListener('error',()=>{if(img.dataset.fallback)return;img.dataset.fallback='1';img.src=base+'assets/placeholder.svg';img.removeAttribute('referrerpolicy')},{once:true}));
+list.querySelectorAll('img').forEach(img=>{const fallback=()=>{if(img.dataset.fallback)return;img.dataset.fallback='1';img.src=base+'assets/placeholder.svg';img.removeAttribute('referrerpolicy')};img.addEventListener('error',fallback,{once:true});if(img.complete&&!img.naturalWidth)fallback()});
 prev.disabled=page<=1;next.disabled=page>=pages;pageText.textContent=t.page+' '+page+' / '+pages;
 }
 search.placeholder=t.search;

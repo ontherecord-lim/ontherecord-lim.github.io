@@ -190,7 +190,8 @@ def main() -> None:
         old = existing.get(aid, {})
         for field in ("image", "isoDate", "date", "dateKo"):
             if item.get(field) in ("", "Latest", "최신", None) and old.get(field):
-                item[field] = old[field]
+                if field != "image" or not old[field].startswith("assets/article-images/"):
+                    item[field] = old[field]
         existing[aid] = {**old, **item}
     articles = sorted(existing.values(), key=lambda item: int(item["id"]), reverse=True)
     payload = {

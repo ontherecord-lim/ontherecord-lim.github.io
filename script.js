@@ -53,7 +53,7 @@
       const renderArticleCards = (items) => items.map((article) => {
         const title = isKo && article.titleKo ? article.titleKo : article.title;
         const date = isKo && article.dateKo ? article.dateKo : (article.date || '');
-        const image = article.image || placeholderImage;
+        const image = /^https:\/\//i.test(article.image || '')\n          ? article.image\n          : /^assets\/[a-zA-Z0-9_./-]+$/.test(article.image || '')\n            ? `${basePrefix}${article.image}`\n            : placeholderImage;
         const linkLabel = isKo ? '영문 기사 보기 ↗' : 'Read full story ↗';
         const alt = `${title}`;
 
@@ -91,12 +91,14 @@
       }
 
       document.querySelectorAll('.article-grid img').forEach((img) => {
-        img.addEventListener('error', () => {
+        const showFallback = () => {
           if (img.dataset.fallbackApplied) return;
           img.dataset.fallbackApplied = 'true';
           img.src = placeholderImage;
           img.removeAttribute('referrerpolicy');
-        }, { once: true });
+        };
+        img.addEventListener('error', showFallback, { once: true });
+        if (img.complete && !img.naturalWidth) showFallback();
       });
 
       const tickerItems = articles.slice(0, 12).map((article) => {
