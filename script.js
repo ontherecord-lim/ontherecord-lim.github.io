@@ -63,6 +63,7 @@
               <img src="${escapeHtml(image)}" alt="${escapeHtml(alt)}" loading="lazy" referrerpolicy="no-referrer">
             </a>
             <h3><a href="${escapeHtml(article.url)}" target="_blank" rel="noopener noreferrer">${escapeHtml(title)}</a></h3>
+            ${article.portfolioNote ? `<p class="portfolio-note">${escapeHtml(article.portfolioNote)}</p>` : ''}
             <div class="story-footer">
               <time${article.isoDate ? ` datetime="${escapeHtml(article.isoDate)}"` : ''}>${escapeHtml(date)}</time>
               <a href="${escapeHtml(article.url)}" target="_blank" rel="noopener noreferrer">${linkLabel}</a>
@@ -78,7 +79,10 @@
           if (!featuredResponse.ok) throw new Error('Featured feed unavailable');
           const selected = await featuredResponse.json();
           const byId = new Map(articles.map((item) => [String(item.id), item]));
-          const picks = (selected.articles || []).map((record) => byId.get(String(record.id))).filter(Boolean);
+          const picks = (selected.articles || []).map((record) => {
+            const article = byId.get(String(record.id));
+            return article ? { ...article, portfolioNote: isKo ? record.noteKo : record.note } : null;
+          }).filter(Boolean);
           featuredGrid.innerHTML = picks.length ? renderArticleCards(picks) : '<p class="loading-state">Featured stories unavailable.</p>';
         } catch (featuredError) {
           console.warn('Featured stories unavailable:', featuredError);

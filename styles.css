@@ -445,3 +445,6 @@ html[lang="ko"] .site-footer { letter-spacing: .02em; text-transform: none; }
 .portfolio-subheading p, .portfolio-subheading a { margin:0; font-size:12px; color:#686868; line-height:1.5; }
 .portfolio-subheading a:hover { color:#111; }
 #featuredGrid { margin-bottom:54px; }
+
+/* Descriptions accompany independently reviewed featured entries only. */
+#featuredGrid .portfolio-note { margin: 7px 0 15px; font-size: 12px; color: #626262; line-height: 1.55; }

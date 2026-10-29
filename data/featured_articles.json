@@ -1,57 +1,31 @@
 {
   "updatedAt": "2026-10-29",
-  "status": "Editorial shortlist — provisional; author review recommended",
-  "note": "Curated from article headlines and available article metadata, not verified as original/exclusive/field reporting.",
+  "status": "Four final selections from author-supplied print PDFs; editorial notes based on the published text",
+  "note": "No claim of independent interviews or exclusivity is made without further verification.",
   "articles": [
     {
-      "id": "10898516",
-      "theme": "Data reporting",
-      "why": "Monthly card-spending figures, industry rankings and a controversy's aftermath."
-    },
-    {
       "id": "10863945",
-      "theme": "Labor and governance",
-      "why": "An industrial-relations dispute involving one of Korea's largest companies."
+      "theme": "Labor & corporate governance",
+      "note": "A dispute over pay differences between Samsung divisions, including union demands and management's response.",
+      "noteKo": "삼성전자 사업부 간 보상 격차를 둘러싼 노조의 요구와 사측 입장을 함께 다룬 기사."
     },
     {
       "id": "10870604",
-      "theme": "Investment policy",
-      "why": "Government-business dialogue concerning Korea's investment climate."
-    },
-    {
-      "id": "10916425",
-      "theme": "Workforce and AI",
-      "why": "How businesses approach employee training and risk management during AI adoption."
-    },
-    {
-      "id": "10914731",
-      "theme": "Applied technology",
-      "why": "AI deployment in construction safety, translation and site operations."
-    },
-    {
-      "id": "10917377",
-      "theme": "Energy and industry",
-      "why": "Engine manufacturing investment linked to data-center power demand."
+      "theme": "Policy & international investment",
+      "note": "Regulatory reform, foreign investment and Korea-US economic cooperation discussed at a Seoul policy meeting.",
+      "noteKo": "정부와 외국계 기업 관계자가 논의한 규제개선, 외국인 투자 및 한미 경제협력을 정리한 기사."
     },
     {
       "id": "10908635",
-      "theme": "Life sciences",
-      "why": "Sequencing and multiomics technologies in the biotechnology sector."
+      "theme": "Biotechnology & industry",
+      "note": "Genomic sequencing and multiomics systems, alongside Samsung Electronics' investment in Element Biosciences.",
+      "noteKo": "유전체 분석·멀티오믹스 기술과 삼성전자의 바이오 기업 투자 동향을 소개한 기사."
     },
     {
       "id": "10914992",
-      "theme": "Energy supply chains",
-      "why": "A US energy-storage contract illustrating Korea's overseas battery business."
-    },
-    {
-      "id": "10887624",
-      "theme": "Sustainable finance",
-      "why": "Korea-Japan cooperation in climate and digital finance."
-    },
-    {
-      "id": "10916350",
-      "theme": "European infrastructure",
-      "why": "A German high-voltage transmission contract and overseas expansion."
+      "theme": "Energy & supply chains",
+      "note": "Samsung SDI's US energy-storage supply agreement, battery technology and domestic US production plans.",
+      "noteKo": "삼성SDI의 미국 에너지저장장치 공급 계약과 배터리 기술 및 현지 생산 계획을 다룬 기사."
     }
   ]
 }
