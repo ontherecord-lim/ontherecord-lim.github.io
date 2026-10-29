@@ -5,7 +5,7 @@
 - Verifies the article belongs to Lim Ye-jin.
 - Pulls title, publication date and lead image metadata.
 - Preserves manually localized Korean titles already stored in data/articles.json.
-- Keeps the newest 18 verified stories.
+- Retains all saved stories across each refresh.
 """
 from __future__ import annotations
 
@@ -21,7 +21,7 @@ from bs4 import BeautifulSoup
 ROOT = Path(__file__).resolve().parents[1]
 DATA_FILE = ROOT / "data" / "articles.json"
 REPORTER_URL = "https://www.koreaherald.com/reporter/yejinlim"
-MAX_ARTICLES = 18
+MAX_NEW_ARTICLES_PER_RUN = 18
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (compatible; OnTheRecordPortfolio/2.0; +https://ontherecord-lim.github.io/)"
 }
@@ -47,12 +47,14 @@ def meta(soup: BeautifulSoup, *keys: str) -> str:
 
 def load_existing() -> dict[str, dict]:
     if not DATA_FILE.exists():
-        return {}
+        raise RuntimeError("Archive file missing: refusing to overwrite it")
     try:
         data = json.loads(DATA_FILE.read_text(encoding="utf-8"))
-    except Exception:
-        return {}
-    return {str(item.get("id")): item for item in data.get("articles", []) if item.get("id")}
+    except (OSError, json.JSONDecodeError) as exc:
+        raise RuntimeError("Archive unreadable: refusing to overwrite it") from exc
+    if not isinstance(data.get("articles"), list):
+        raise RuntimeError("Archive has an invalid article list")
+    return {str(item.get("id")): item for item in data["articles"] if item.get("id")}
 
 
 def discover_links(session: requests.Session) -> list[str]:
@@ -176,16 +178,24 @@ def main() -> None:
         article = fetch_article(session, url, existing)
         if article:
             articles.append(article)
-        if len(articles) >= MAX_ARTICLES:
+        if len(articles) >= MAX_NEW_ARTICLES_PER_RUN:
             break
 
     if not articles:
         raise SystemExit("No verified Lim Ye-jin articles found; existing feed left untouched.")
 
-    articles.sort(key=lambda item: int(item["id"]), reverse=True)
+    # Merge verified recent articles with the permanent historical archive.
+    for item in articles:
+        aid = str(item["id"])
+        old = existing.get(aid, {})
+        for field in ("image", "isoDate", "date", "dateKo"):
+            if item.get(field) in ("", "Latest", "최신", None) and old.get(field):
+                item[field] = old[field]
+        existing[aid] = {**old, **item}
+    articles = sorted(existing.values(), key=lambda item: int(item["id"]), reverse=True)
     payload = {
         "generatedAt": datetime.now(KST).isoformat(timespec="seconds"),
-        "articles": articles[:MAX_ARTICLES],
+        "articles": articles,
     }
     DATA_FILE.parent.mkdir(parents=True, exist_ok=True)
     DATA_FILE.write_text(json.dumps(payload, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")

@@ -48,7 +48,7 @@
         : [];
       if (!articles.length) throw new Error('No articles found');
 
-      grid.innerHTML = articles.map((article) => {
+      grid.innerHTML = articles.slice(0, 12).map((article) => {
         const title = isKo && article.titleKo ? article.titleKo : article.title;
         const date = isKo && article.dateKo ? article.dateKo : (article.date || '');
         const image = article.image || placeholderImage;
