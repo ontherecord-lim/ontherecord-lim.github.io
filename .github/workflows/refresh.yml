@@ -28,6 +28,9 @@ jobs:
       - name: Restore historical articles from Git history
         run: python tools/restore_article_history.py
 
+      - name: Restore any missing image links
+        run: python tools/repair_article_images.py
+
       - name: Refresh article data
         run: python tools/update_articles.py
 

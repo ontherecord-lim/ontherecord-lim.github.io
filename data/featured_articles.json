@@ -1,31 +1,31 @@
 {
   "updatedAt": "2026-10-29",
-  "status": "Four final selections from author-supplied print PDFs; editorial notes based on the published text",
-  "note": "No claim of independent interviews or exclusivity is made without further verification.",
+  "status": "Four stories selected by the author from published reporting",
+  "note": "Article descriptions summarize published coverage; no claim of exclusive reporting or personal interviews.",
   "articles": [
     {
-      "id": "10863945",
-      "theme": "Labor & corporate governance",
-      "note": "A dispute over pay differences between Samsung divisions, including union demands and management's response.",
-      "noteKo": "삼성전자 사업부 간 보상 격차를 둘러싼 노조의 요구와 사측 입장을 함께 다룬 기사."
+      "id": "10869373",
+      "theme": "Shipbuilding and Korea-US cooperation",
+      "note": "A US Navy leadership visit to Hanwha's Philadelphia shipyard and the bilateral shipbuilding initiative.",
+      "noteKo": "미 해군 고위 관계자의 한화 필리조선소 방문과 한미 조선업 협력 계획을 다룬 기사."
+    },
+    {
+      "id": "10867554",
+      "theme": "Logistics and food supply",
+      "note": "LX Pantos's air-freight shipments of 11.2 million eggs amid Korea's supply disruptions.",
+      "noteKo": "국내 계란 수급 불안에 대응한 LX판토스의 항공 운송을 다룬 기사."
     },
     {
       "id": "10870604",
-      "theme": "Policy & international investment",
-      "note": "Regulatory reform, foreign investment and Korea-US economic cooperation discussed at a Seoul policy meeting.",
-      "noteKo": "정부와 외국계 기업 관계자가 논의한 규제개선, 외국인 투자 및 한미 경제협력을 정리한 기사."
+      "theme": "Foreign investment policy",
+      "note": "Regulatory reform and Korea-US economic cooperation discussed by the prime minister and AmCham.",
+      "noteKo": "국무총리와 주한미국상공회의소가 논의한 규제개선 및 한미 경제협력을 정리한 기사."
     },
     {
-      "id": "10908635",
-      "theme": "Biotechnology & industry",
-      "note": "Genomic sequencing and multiomics systems, alongside Samsung Electronics' investment in Element Biosciences.",
-      "noteKo": "유전체 분석·멀티오믹스 기술과 삼성전자의 바이오 기업 투자 동향을 소개한 기사."
-    },
-    {
-      "id": "10914992",
-      "theme": "Energy & supply chains",
-      "note": "Samsung SDI's US energy-storage supply agreement, battery technology and domestic US production plans.",
-      "noteKo": "삼성SDI의 미국 에너지저장장치 공급 계약과 배터리 기술 및 현지 생산 계획을 다룬 기사."
+      "id": "10875607",
+      "theme": "Development finance and diplomacy",
+      "note": "Korea Eximbank's discussions on projects and financing with Uzbekistan.",
+      "noteKo": "한국수출입은행과 우즈베키스탄의 경제협력 및 개발금융 논의를 다룬 기사."
     }
   ]
 }
