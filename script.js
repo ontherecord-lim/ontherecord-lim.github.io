@@ -53,7 +53,11 @@
       const renderArticleCards = (items) => items.map((article) => {
         const title = isKo && article.titleKo ? article.titleKo : article.title;
         const date = isKo && article.dateKo ? article.dateKo : (article.date || '');
-        const image = /^https:\/\//i.test(article.image || '')\n          ? article.image\n          : /^assets\/[a-zA-Z0-9_./-]+$/.test(article.image || '')\n            ? `${basePrefix}${article.image}`\n            : placeholderImage;
+        const image = /^https:\/\//i.test(article.image || '')
+          ? article.image
+          : /^assets\/[a-zA-Z0-9_./-]+$/.test(article.image || '')
+            ? `${basePrefix}${article.image}`
+            : placeholderImage;
         const linkLabel = isKo ? '영문 기사 보기 ↗' : 'Read full story ↗';
         const alt = `${title}`;
 
