@@ -5,6 +5,7 @@
   const isKo = lang === 'ko';
   const basePrefix = isKo ? '../' : '';
   const articleDataUrl = `${basePrefix}data/articles.json`;
+  const featuredDataUrl = `${basePrefix}data/featured_articles.json`;
   const placeholderImage = `${basePrefix}assets/placeholder.svg`;
 
   const $ = (selector, root = document) => root.querySelector(selector);
@@ -36,6 +37,7 @@
 
   async function loadArticles() {
     const grid = $('#articleGrid');
+    const featuredGrid = $('#featuredGrid');
     const ticker = $('#tickerTrack');
     if (!grid || !ticker) return;
 
@@ -48,7 +50,7 @@
         : [];
       if (!articles.length) throw new Error('No articles found');
 
-      grid.innerHTML = articles.slice(0, 12).map((article) => {
+      const renderArticleCards = (items) => items.map((article) => {
         const title = isKo && article.titleKo ? article.titleKo : article.title;
         const date = isKo && article.dateKo ? article.dateKo : (article.date || '');
         const image = article.image || placeholderImage;
@@ -69,7 +71,22 @@
         `;
       }).join('');
 
-      grid.querySelectorAll('img').forEach((img) => {
+      grid.innerHTML = renderArticleCards(articles.slice(0, 12));
+      if (featuredGrid) {
+        try {
+          const featuredResponse = await fetch(`${featuredDataUrl}?v=${Date.now()}`, { cache: 'no-store' });
+          if (!featuredResponse.ok) throw new Error('Featured feed unavailable');
+          const selected = await featuredResponse.json();
+          const byId = new Map(articles.map((item) => [String(item.id), item]));
+          const picks = (selected.articles || []).map((record) => byId.get(String(record.id))).filter(Boolean);
+          featuredGrid.innerHTML = picks.length ? renderArticleCards(picks) : '<p class="loading-state">Featured stories unavailable.</p>';
+        } catch (featuredError) {
+          console.warn('Featured stories unavailable:', featuredError);
+          featuredGrid.innerHTML = `<p class="loading-state">${isKo ? '선정 기사 목록을 불러오지 못했습니다.' : 'Featured stories are temporarily unavailable.'}</p>`;
+        }
+      }
+
+      document.querySelectorAll('.article-grid img').forEach((img) => {
         img.addEventListener('error', () => {
           if (img.dataset.fallbackApplied) return;
           img.dataset.fallbackApplied = 'true';

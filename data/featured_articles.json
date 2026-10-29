@@ -1,0 +1,57 @@
+{
+  "updatedAt": "2026-10-29",
+  "status": "Editorial shortlist — provisional; author review recommended",
+  "note": "Curated from article headlines and available article metadata, not verified as original/exclusive/field reporting.",
+  "articles": [
+    {
+      "id": "10898516",
+      "theme": "Data reporting",
+      "why": "Monthly card-spending figures, industry rankings and a controversy's aftermath."
+    },
+    {
+      "id": "10863945",
+      "theme": "Labor and governance",
+      "why": "An industrial-relations dispute involving one of Korea's largest companies."
+    },
+    {
+      "id": "10870604",
+      "theme": "Investment policy",
+      "why": "Government-business dialogue concerning Korea's investment climate."
+    },
+    {
+      "id": "10916425",
+      "theme": "Workforce and AI",
+      "why": "How businesses approach employee training and risk management during AI adoption."
+    },
+    {
+      "id": "10914731",
+      "theme": "Applied technology",
+      "why": "AI deployment in construction safety, translation and site operations."
+    },
+    {
+      "id": "10917377",
+      "theme": "Energy and industry",
+      "why": "Engine manufacturing investment linked to data-center power demand."
+    },
+    {
+      "id": "10908635",
+      "theme": "Life sciences",
+      "why": "Sequencing and multiomics technologies in the biotechnology sector."
+    },
+    {
+      "id": "10914992",
+      "theme": "Energy supply chains",
+      "why": "A US energy-storage contract illustrating Korea's overseas battery business."
+    },
+    {
+      "id": "10887624",
+      "theme": "Sustainable finance",
+      "why": "Korea-Japan cooperation in climate and digital finance."
+    },
+    {
+      "id": "10916350",
+      "theme": "European infrastructure",
+      "why": "A German high-voltage transmission contract and overseas expansion."
+    }
+  ]
+}
