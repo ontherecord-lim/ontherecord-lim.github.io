@@ -1,6 +1,24 @@
 {
-  "generatedAt": "2026-11-01T12:57:39+09:00",
+  "generatedAt": "2026-11-01T15:01:29+09:00",
   "articles": [
+    {
+      "id": "10921723",
+      "title": "HD Hyundai Robotics cuts troubleshooting time 63% with Palantir AI",
+      "url": "https://www.koreaherald.com/article/10921723",
+      "date": "Nov. 1, 2026",
+      "dateKo": "2026. 11. 1.",
+      "isoDate": "2026-11-01",
+      "image": "https://wimg.heraldcorp.com/news/cms/2026/11/01/news-p.v1.20261101.ddfca99cdda7497fb6bb436eaef58b42_P1.png"
+    },
+    {
+      "id": "10921716",
+      "title": "APR doubles Q3 revenue as US, European sales soar",
+      "url": "https://www.koreaherald.com/article/10921716",
+      "date": "Nov. 1, 2026",
+      "dateKo": "2026. 11. 1.",
+      "isoDate": "2026-11-01",
+      "image": "https://wimg.heraldcorp.com/news/cms/2026/11/01/news-p.v1.20261101.f16133d8bc394788880119b2c4540343_P1.jpg"
+    },
     {
       "id": "10921611",
       "title": "SK hynix hosts first Partners Day in Japan to strengthen chip supply chain",
