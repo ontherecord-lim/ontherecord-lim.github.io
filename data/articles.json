@@ -1,6 +1,24 @@
 {
-  "generatedAt": "2026-11-01T06:32:03+09:00",
+  "generatedAt": "2026-11-01T12:57:39+09:00",
   "articles": [
+    {
+      "id": "10921611",
+      "title": "SK hynix hosts first Partners Day in Japan to strengthen chip supply chain",
+      "url": "https://www.koreaherald.com/article/10921611",
+      "date": "Nov. 1, 2026",
+      "dateKo": "2026. 11. 1.",
+      "isoDate": "2026-11-01",
+      "image": "https://wimg.heraldcorp.com/news/cms/2026/11/01/news-p.v1.20261101.608dc92d61c8454ca91438c3ee01b073_P1.jpg"
+    },
+    {
+      "id": "10921588",
+      "title": "Hana Financial joins Autism Race to promote inclusion",
+      "url": "https://www.koreaherald.com/article/10921588",
+      "date": "Nov. 1, 2026",
+      "dateKo": "2026. 11. 1.",
+      "isoDate": "2026-11-01",
+      "image": "https://wimg.heraldcorp.com/news/cms/2026/11/01/news-p.v1.20261101.494a018160e340f48bcfc7a21d16c5ac_P1.jpg"
+    },
     {
       "id": "10919569",
       "title": "Boditech Med partners with Brazil's Biosys for local diagnostics production",
