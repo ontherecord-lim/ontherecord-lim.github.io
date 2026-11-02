@@ -1,6 +1,33 @@
 {
-  "generatedAt": "2026-11-02T07:00:25+09:00",
+  "generatedAt": "2026-11-02T14:59:33+09:00",
   "articles": [
+    {
+      "id": "10922885",
+      "title": "KMI expands beyond health screenings with new vision",
+      "url": "https://www.koreaherald.com/article/10922885",
+      "date": "Nov. 2, 2026",
+      "dateKo": "2026. 11. 2.",
+      "isoDate": "2026-11-02",
+      "image": "https://wimg.heraldcorp.com/news/cms/2026/11/02/news-p.v1.20261102.7d472a5d033042b593ac502f0deb7c36_P1.jpg"
+    },
+    {
+      "id": "10922826",
+      "title": "Lotte's Hanoi mall hits W1tr sales milestone",
+      "url": "https://www.koreaherald.com/article/10922826",
+      "date": "Nov. 2, 2026",
+      "dateKo": "2026. 11. 2.",
+      "isoDate": "2026-11-02",
+      "image": "https://wimg.heraldcorp.com/news/cms/2026/11/02/news-p.v1.20261102.80848eafa3704a2f9ecba496e2cd2fa7_P1.jpg"
+    },
+    {
+      "id": "10922825",
+      "title": "Tous les Jours taps US bakery network to boost Korean grape exports",
+      "url": "https://www.koreaherald.com/article/10922825",
+      "date": "Nov. 2, 2026",
+      "dateKo": "2026. 11. 2.",
+      "isoDate": "2026-11-02",
+      "image": "https://wimg.heraldcorp.com/news/cms/2026/11/02/news-p.v1.20261102.6cbda74581244b36835a67eb687533c0_P1.jpg"
+    },
     {
       "id": "10921723",
       "title": "HD Hyundai Robotics cuts troubleshooting time 63% with Palantir AI",
