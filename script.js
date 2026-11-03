@@ -71,6 +71,7 @@
             <div class="story-footer">
               <time${article.isoDate ? ` datetime="${escapeHtml(article.isoDate)}"` : ''}>${escapeHtml(date)}</time>
               <a href="${escapeHtml(article.url)}" target="_blank" rel="noopener noreferrer">${linkLabel}</a>
+              ${article.archiveUrl ? `<a href="${basePrefix}${escapeHtml(article.archiveUrl)}">${isKo ? '보존본 보기 ↗' : 'Saved copy ↗'}</a>` : ''}
             </div>
           </article>
         `;
