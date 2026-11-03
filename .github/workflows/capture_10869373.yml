@@ -60,5 +60,15 @@ jobs:
             echo "Screenshot already committed."
           else
             git commit -m "Preserve original Hanwha shipyard story with Korea Herald masthead and reporter byline"
-            git push
+            for attempt in 1 2 3 4 5; do
+              git pull --rebase origin main
+              if git push origin HEAD:main; then
+                break
+              fi
+              if [ "$attempt" -eq 5 ]; then
+                echo "Failed to push screenshot after 5 rebases." >&2
+                exit 1
+              fi
+              sleep 2
+            done
           fi
