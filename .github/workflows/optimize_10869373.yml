@@ -31,7 +31,7 @@ jobs:
           # Keep the publisher's masthead, article headline, Lim Ye-jin byline,
           # published photo, and main column through the reporter contact.
           # Exclude the unrelated right rail and lower-page recommendations.
-          crop=im.crop((0, 0, min(700, im.width), min(3250, im.height)))
+          crop=im.crop((0, 0, min(560, im.width), min(3020, im.height)))
           focused=src.with_name('10869373_article.webp')
           crop.save(focused, format='WEBP', quality=89, method=6)
           print('Focused capture:', focused, crop.size, focused.stat().st_size)
