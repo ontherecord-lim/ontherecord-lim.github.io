@@ -1,0 +1,64 @@
+name: Preserve original Hanwha shipyard article page
+on:
+  push:
+    paths:
+      - '.github/workflows/capture_10869373.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install Playwright
+        run: |
+          python -m pip install playwright
+          python -m playwright install --with-deps chromium
+      - name: Preserve published article, with masthead and reporter byline
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from playwright.sync_api import sync_playwright
+          output = Path("assets/article-captures/10869373.png")
+          output.parent.mkdir(parents=True, exist_ok=True)
+          with sync_playwright() as p:
+              browser = p.chromium.launch(headless=True)
+              page = browser.new_page(viewport={"width": 740, "height": 1200},
+                                      device_scale_factor=1)
+              page.goto("https://www.koreaherald.com/article/10869373",
+                        wait_until="domcontentloaded", timeout=60000)
+              page.wait_for_timeout(4000)
+              body = page.locator("body").inner_text(timeout=15000)
+              title = "US Navy chief visits Hanwha Philly Shipyard amid $150b shipbuilding push"
+              if title not in body:
+                  raise SystemExit("Article headline missing; will not save wrong page.")
+              if "Lim Ye-jin" not in body:
+                  raise SystemExit("Reporter byline missing; will not save incomplete page.")
+              if "Acting US Secretary of the Navy Hung Cao visited" not in body:
+                  raise SystemExit("Published article body missing.")
+              page.evaluate("""() => {
+                document.querySelectorAll('[class*="floating"],[class*="back-to-top"],[id*="interstitial"]').forEach(el => { el.style.display='none'; });
+              }""")
+              page.screenshot(path=str(output), full_page=True, animations="disabled")
+              print("Verified original headline, Lim Ye-jin byline, article body and screenshot saved:", output)
+              browser.close()
+          PY
+      - name: Commit self-hosted full-article screenshot
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/article-captures/10869373.png
+          if git diff --cached --quiet; then
+            echo "Screenshot already committed."
+          else
+            git commit -m "Preserve original Hanwha shipyard story with Korea Herald masthead and reporter byline"
+            git push
+          fi
