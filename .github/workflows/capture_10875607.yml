@@ -1,0 +1,69 @@
+name: Save Korea Eximbank article screenshot
+on:
+  push:
+    paths:
+      - '.github/workflows/capture_10875607.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  capture:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install browser tools
+        run: |
+          python -m pip install playwright
+          python -m playwright install --with-deps chromium
+      - name: Capture original published article
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          from playwright.sync_api import sync_playwright
+
+          output = Path("assets/article-captures/10875607.png")
+          output.parent.mkdir(parents=True, exist_ok=True)
+          urls = [
+              "https://www.koreaherald.com/article/print/10875607",
+              "https://www.koreaherald.com/article/10875607",
+          ]
+          with sync_playwright() as p:
+              browser = p.chromium.launch(headless=True)
+              page = browser.new_page(
+                  viewport={"width": 700, "height": 1260},
+                  device_scale_factor=1,
+              )
+              for url in urls:
+                  try:
+                      response = page.goto(url, wait_until="domcontentloaded", timeout=45000)
+                      if response is None or response.status >= 400:
+                          continue
+                      body = page.locator("body").inner_text(timeout=15000)
+                      if "Korea Eximbank seeks deeper economic ties with Uzbekistan" not in body:
+                          continue
+                      page.wait_for_timeout(1500)
+                      page.screenshot(path=str(output), full_page=True, animations="disabled")
+                      print(f"Captured {url} to {output}")
+                      break
+                  except Exception as exc:
+                      print(f"Could not capture {url}: {exc}")
+              browser.close()
+          if not output.exists():
+              raise SystemExit("Could not verify and capture the published article.")
+          PY
+      - name: Store permanent screenshot in this repository
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add assets/article-captures/10875607.png
+          if git diff --cached --quiet; then
+            echo "Screenshot already current."
+          else
+            git commit -m "Preserve Korea Eximbank article screenshot"
+            git push
+          fi
