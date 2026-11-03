@@ -28,12 +28,19 @@ jobs:
           out=src.with_suffix('.webp')
           im.save(out, format='WEBP', quality=86, method=6)
           print('Optimized image:', out, out.stat().st_size)
+          # Keep the publisher's masthead, article headline, Lim Ye-jin byline,
+          # published photo, and main column through the reporter contact.
+          # Exclude the unrelated right rail and lower-page recommendations.
+          crop=im.crop((0, 0, min(700, im.width), min(3250, im.height)))
+          focused=src.with_name('10869373_article.webp')
+          crop.save(focused, format='WEBP', quality=89, method=6)
+          print('Focused capture:', focused, crop.size, focused.stat().st_size)
           PY
       - name: Commit optimized capture
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add assets/article-captures/10869373.webp
+          git add assets/article-captures/10869373.webp assets/article-captures/10869373_article.webp
           if ! git diff --cached --quiet; then
             git commit -m "Add optimized verified Hanwha article screenshot"
             for attempt in 1 2 3 4; do
