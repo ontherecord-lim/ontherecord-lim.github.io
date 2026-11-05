@@ -1,6 +1,33 @@
 {
-  "generatedAt": "2026-11-05T04:44:05+09:00",
+  "generatedAt": "2026-11-05T15:44:20+09:00",
   "articles": [
+    {
+      "id": "10927155",
+      "title": "K-water promotes Korean water tech at Asia Water Council",
+      "url": "https://www.koreaherald.com/article/10927155",
+      "date": "Nov. 5, 2026",
+      "dateKo": "2026. 11. 5.",
+      "isoDate": "2026-11-05",
+      "image": "https://wimg.heraldcorp.com/news/cms/2026/11/05/news-p.v1.20261105.a218cd0febc34326be0f6679e7f629e4_P1.jpg"
+    },
+    {
+      "id": "10926896",
+      "title": "GI Innovation begins prostate cancer trial with J&J drug",
+      "url": "https://www.koreaherald.com/article/10926896",
+      "date": "Nov. 5, 2026",
+      "dateKo": "2026. 11. 5.",
+      "isoDate": "2026-11-05",
+      "image": "https://wimg.heraldcorp.com/news/cms/2026/11/05/news-p.v1.20261105.19462cde83854333b48ff1460db3143a_P1.jpg"
+    },
+    {
+      "id": "10926863",
+      "title": "Hoban overtakes Walter Cho as Hanjin KAL's top shareholder",
+      "url": "https://www.koreaherald.com/article/10926863",
+      "date": "Nov. 5, 2026",
+      "dateKo": "2026. 11. 5.",
+      "isoDate": "2026-11-05",
+      "image": "https://wimg.heraldcorp.com/news/cms/2026/11/05/news-p.v1.20260105.d959ce2f60de48508025290f1158fa72_P1.jpg"
+    },
     {
       "id": "10923990",
       "title": "Hyundai mulls W100b stake in Posco Future M's Vietnam plant",
