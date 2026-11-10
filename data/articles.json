@@ -1,6 +1,33 @@
 {
-  "generatedAt": "2026-11-10T07:20:15+09:00",
+  "generatedAt": "2026-11-10T16:15:47+09:00",
   "articles": [
+    {
+      "id": "10932083",
+      "title": "Korean whisky maker Ki One wins top US spirits award again",
+      "url": "https://www.koreaherald.com/article/10932083",
+      "date": "Nov. 10, 2026",
+      "dateKo": "2026. 11. 10.",
+      "isoDate": "2026-11-10",
+      "image": "https://wimg.heraldcorp.com/news/cms/2026/11/10/news-p.v1.20261110.201954716cc445a495150d7bbd8a06c0_P1.jpg"
+    },
+    {
+      "id": "10932062",
+      "title": "Ceragem wins 9 CES awards for AI wellness innovations",
+      "url": "https://www.koreaherald.com/article/10932062",
+      "date": "Nov. 10, 2026",
+      "dateKo": "2026. 11. 10.",
+      "isoDate": "2026-11-10",
+      "image": "https://wimg.heraldcorp.com/news/cms/2026/11/10/news-p.v1.20261110.2a4777ceb3a54c3580aeb15a02c7efef_P1.jpg"
+    },
+    {
+      "id": "10932025",
+      "title": "LG Energy Solution's AI cuts battery testing time to 10 minutes",
+      "url": "https://www.koreaherald.com/article/10932025",
+      "date": "Nov. 10, 2026",
+      "dateKo": "2026. 11. 10.",
+      "isoDate": "2026-11-10",
+      "image": "https://wimg.heraldcorp.com/news/cms/2026/11/10/news-p.v1.20261110.2f9728c2beec4ba49b389047f0cf53b7_P1.jpg"
+    },
     {
       "id": "10930658",
       "title": "KT&G launches Flex in Kazakhstan, expanding global tobacco business",
