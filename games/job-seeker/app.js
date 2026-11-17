@@ -6,6 +6,8 @@
   const saveKey = "job-seeker-rpg-save";
   const soundKey = "job-seeker-rpg-sound";
   const musicKey = "job-seeker-rpg-music";
+  const roomThemeKey = "job-seeker-rpg-room-theme";
+  const roomMenus = { actions: "오늘의 행동", jobs: "채용 공고", life: "내 일상", journal: "취준 일지" };
   const weekdays = ["월", "화", "수", "목", "금", "토", "일"];
   const byId = (id) => document.getElementById(id);
   const dayText = (day) => String(day).padStart(2, "0");
@@ -14,6 +16,16 @@
 
   const form = byId("character-form");
   const dialog = byId("dialog");
+  const roomMenu = byId("room-menu");
+  const roomPanels = roomMenu.querySelectorAll("[data-panel]");
+  const roomView = byId("room-view");
+  const roomCanvas = byId("room");
+  const setupCanvas = byId("setup-room");
+  const portraitCanvas = byId("portrait");
+  const roomPoints = byId("room-points");
+  const returnHome = byId("return-home");
+  const roomReward = byId("room-reward");
+  const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
   const options = byId("dialog-options");
   const closeButton = byId("dialog-close");
   const soundButton = byId("sound-button");
@@ -32,7 +44,16 @@
   let audioEnabled = readLocal(soundKey) === "on";
   let musicEnabled = readLocal(musicKey) !== "off";
   let musicActivated = false;
-  let sceneFrame = 0;
+  let roomTheme = readLocal(roomThemeKey);
+  if (!Object.hasOwn(art.themes, roomTheme)) roomTheme = "mint";
+  let roomPosition = art.positionFor(state?.lastAction);
+  let travel = null;
+  let facing = 1;
+  let outside = false;
+  let roaming = false;
+  let roomMessage = "";
+  let lastPaint = 0;
+  let rewardTimer;
   let audioContext;
   let overlay = null;
   let chosenWorkplace = null;
@@ -109,7 +130,7 @@
     label.append(pixelIcon(stat.icon), node("span", "", stat.label));
     const value = node("strong");
     const number = node("div", "stat-value");
-    number.append(value, node("small", "", "/100"));
+    number.append(value, node("span", "sr-only", "/100"));
     const meter = node("div", "meter");
     meter.setAttribute("aria-hidden", "true");
     const fill = node("span");
@@ -135,10 +156,7 @@
     }
     if (action.skill) effects.append(node("span", "effect good", game.skills[action.skill] + " +" + action.gain));
     button.append(name, description, effects);
-    button.addEventListener("click", () => {
-      if (action.id === "shift") openOverlay("work");
-      else dispatch({ type: "act", id: action.id });
-    });
+    button.addEventListener("click", () => performRoomAction(action));
     byId("action-grid").append(button);
     return { action, button, description };
   });
@@ -194,6 +212,7 @@
     if (!view) return;
     actionGroup = view.action.group;
     drawStatsAndActions();
+    openRoomMenu("actions");
     if (!view.button.disabled) view.button.focus({ preventScroll: true });
     view.button.scrollIntoView({ block: "nearest" });
   }
@@ -257,9 +276,143 @@
     syncMusic();
   }
 
-  function drawCreation() {
-    const profile = { gender: form.elements.gender.value || "female" };
-    art.drawRoom(byId("setup-room"), { day: 1, slots: 2, profile }, sceneFrame);
+  function openRoomMenu(panel) {
+    if (!state || dialog.open) return;
+    byId("room-menu-title").textContent = roomMenus[panel];
+    for (const section of roomPanels) section.hidden = section.dataset.panel !== panel;
+    if (!roomMenu.open) roomMenu.showModal();
+    roomMenu.scrollTop = 0;
+  }
+
+  function closeRoomMenu() {
+    if (roomMenu.open) roomMenu.close();
+  }
+
+  function paintScene(time = performance.now()) {
+    const frame = motion.matches ? 0 : time;
+    if (!state) {
+      const profile = { gender: form.elements.gender.value || "female" };
+      art.drawRoom(setupCanvas, { day: 1, slots: 2, profile }, { time: frame, theme: roomTheme });
+      return;
+    }
+    art.drawRoom(roomCanvas, state, {
+      time: frame, position: roomPosition, moving: Boolean(travel), facing, theme: roomTheme, outside, roaming,
+    });
+    art.drawPortrait(portraitCanvas, state.profile, frame);
+  }
+
+  function frameRoom(time) {
+    if (travel) {
+      const { from, to, started, duration, arrive } = travel;
+      const progress = Math.min(1, (time - started) / duration);
+      roomPosition = { x: from.x + (to.x - from.x) * progress, y: from.y + (to.y - from.y) * progress };
+      if (progress === 1 || motion.matches) {
+        roomPosition = to;
+        travel = null;
+        arrive?.();
+      }
+    }
+    if (!document.hidden && !motion.matches && time - lastPaint > 32) {
+      paintScene(time);
+      lastPaint = time;
+    }
+    window.requestAnimationFrame(frameRoom);
+  }
+
+  function moveCharacter(to, arrive) {
+    const dx = to.x - roomPosition.x;
+    const dy = to.y - roomPosition.y;
+    if (Math.abs(dx - dy) > .05) facing = dx > dy ? 1 : -1;
+    const distance = Math.hypot(dx, dy);
+    if (motion.matches || distance < .15) {
+      roomPosition = to;
+      arrive?.();
+      paintScene();
+      return;
+    }
+    travel = {
+      from: roomPosition, to, started: performance.now(),
+      duration: Math.min(650, Math.max(180, distance * 93)), arrive,
+    };
+  }
+
+  function hideRoomReward() {
+    window.clearTimeout(rewardTimer);
+    roomReward.hidden = true;
+  }
+
+  function showRoomReward(prior, id) {
+    const deltas = [...game.stats.map(({ key }) => key), "balance"].flatMap((key) => {
+      const difference = state.stats[key] - prior.stats[key];
+      return difference ? [effectText(key, difference)] : [];
+    });
+    const [x, y] = outside ? [300, 246] : (art.targets[id] ?? art.targets.desk).rect;
+    hideRoomReward();
+    roomReward.style.left = x / art.dimensions.width * 100 + "%";
+    roomReward.style.top = (y - 38) / art.dimensions.height * 100 + "%";
+    roomReward.textContent = deltas.join(" · ") || "행동 1회 사용";
+    roomReward.hidden = false;
+    rewardTimer = window.setTimeout(hideRoomReward, 1800);
+  }
+
+  function enterRoom() {
+    hideRoomReward();
+    outside = false;
+    roaming = true;
+    roomPosition = art.positionFor("walk");
+    drawScene();
+  }
+
+  function performRoomAction(action) {
+    if (!state || travel) return;
+    if (action.id === "shift") {
+      openOverlay("work");
+      return;
+    }
+    const reason = game.activityRestriction(state, action);
+    if (reason) {
+      roomMessage = reason;
+      drawScene();
+      byId("notice").textContent = reason;
+      return;
+    }
+    closeRoomMenu();
+    // Start audio on the click, before walking animation delays the action.
+    activateMusic();
+    if (outside) enterRoom();
+    roomMessage = "";
+    moveCharacter(art.positionFor(action.id), () => dispatch({ type: "act", id: action.id }));
+  }
+
+  function onFurniture(id) {
+    if (!state || travel) return;
+    const action = game.actions.find((item) => item.id === id);
+    if (action) {
+      performRoomAction(action);
+      return;
+    }
+    roaming = true;
+    moveCharacter(art.targets[id].position, () => {
+      if (id === "desk") openRoomMenu("actions");
+      else openOverlay("decorate");
+    });
+  }
+
+  for (const [id, target] of Object.entries(art.targets)) {
+    const button = node("button", "room-hotspot");
+    button.type = "button";
+    button.dataset.furniture = id;
+    button.title = target.intent;
+    button.setAttribute("aria-label", target.label + " · " + target.intent);
+    const [x, y, width, height] = target.rect;
+    button.style.setProperty("--left", x / art.dimensions.width * 100 + "%");
+    button.style.setProperty("--top", y / art.dimensions.height * 100 + "%");
+    button.style.setProperty("--width", width / art.dimensions.width * 100 + "%");
+    button.style.setProperty("--height", height / art.dimensions.height * 100 + "%");
+    button.style.setProperty("--spot", target.color);
+    button.append(node("span", "", target.label));
+    button.addEventListener("click", () => onFurniture(id));
+    roomPoints.append(button);
   }
 
   function drawScene() {
@@ -269,13 +422,16 @@
     const job = game.getJob(state.selectedJob);
 
     const lastAction = game.actions.find(({ id }) => id === state.lastAction);
-    byId("scene-location").textContent = state.lastAction === "walk" ? "동네 공원" :
-      state.lastAction === "meal" ? "우리 집 · 식탁" : "우리 집 · 내 방";
+    byId("scene-location").textContent = outside ? "동네 공원" : "우리 집 · 내 방";
+    byId("room-guide").hidden = outside;
+    roomView.dataset.outside = String(outside);
+    roomPoints.hidden = outside;
+    returnHome.hidden = !outside;
     byId("weekday").textContent = Math.ceil(day / 7) + "주차 " + weekdays[(day - 1) % 7] + "요일";
     byId("day-number").textContent = dayText(day);
     byId("day-track").setAttribute("aria-valuenow", String(day));
-    const signature = [profile.nickname, game.genderLabels[profile.gender], profile.age + "세", "캥거루족"];
-    byId("player-profile").textContent = signature.filter(Boolean).join(" · ");
+    byId("player-profile").textContent = profile.nickname || "취준생";
+    byId("profile-parts").textContent = [game.genderLabels[profile.gender], profile.age + "세"].join(" · ");
     const major = game.majors[profile.major];
     byId("player-major").textContent = major ?? "";
     byId("player-major").hidden = !major;
@@ -309,7 +465,8 @@
       title.textContent = day >= 17 ? "마감이 다가온다." : "오늘은 뭘 해볼까?";
       description.textContent = slots ? "남은 시간과 생활비를 보며 다음 행동을 골라요." : "오늘 할 일을 마쳤다. 일지를 덮고 내일을 준비하자.";
     }
-    art.drawRoom(byId("room"), state, sceneFrame);
+    if (roomMessage) description.textContent = roomMessage;
+    paintScene();
   }
 
   function drawStatsAndActions() {
@@ -321,7 +478,9 @@
       if (key === "sibling") title.textContent = game.sibling(state.profile).title;
       value.textContent = state.relationships[key];
     }
-    byId("balance").textContent = state.stats.balance.toLocaleString("ko-KR");
+    const balance = state.stats.balance.toLocaleString("ko-KR");
+    byId("balance").textContent = balance;
+    byId("hud-balance").textContent = balance;
     byId("slots-text").textContent = state.slots + "회 남음";
     byId("slot-status").querySelectorAll("i").forEach((dot, index) => dot.classList.toggle("available", index < state.slots));
 
@@ -580,6 +739,23 @@
           disabled: Boolean(reason), run: () => dispatch({ type: "channel" }) }];
       }
       choices.push({ title: "닫기", style: "secondary-button", run: closeOverlay });
+    } else if (mode === "decorate") {
+      title = "방 꾸미기";
+      body = "벽지와 러그를 골라요.";
+      icon = "star";
+      tone = "violet";
+      choices = Object.entries(art.themes).map(([key, theme]) => ({
+        title: theme.label,
+        hint: key === roomTheme ? "현재 사용 중" : "",
+        swatch: theme.left,
+        run: () => {
+          roomTheme = key;
+          storeLocal(roomThemeKey, key);
+          closeOverlay();
+          paintScene();
+          byId("notice").textContent = theme.label + " 테마로 방을 꾸몄어요.";
+        },
+      }));
     } else if (mode === "major") {
       title = "전공 선택";
       body = "전공을 고르면 관련 직무의 서류 통과 확률과 면접 점수에 가산점이 반영돼요.";
@@ -662,7 +838,7 @@
     } else {
       title = "게임 안내";
       body = [
-        "부모님과 함께 사는 집에서 시작해 21일 안에 첫 합격에 도전해요.",
+        "부모님 집에서 21일 안에 첫 합격에 도전해요. 바닥을 누르면 캐릭터가 움직이고, 침대·책상·식탁·현관·옷장을 눌러 행동할 수 있어요.",
         "하루에 행동을 두 번 할 수 있어요. 하루를 마치면 체력이 8 회복되고 생활비가 4만원 나가요.",
         "가상 공고 " + game.jobs.length + "개에 지원할 수 있어요. 공고마다 우대 전공, 마감일과 추천 실습이 달라요.",
         "직접 관련 전공과 인접 전공은 서류와 면접에 가산점을 받습니다. 공고에서 내 전공에 적용되는 점수를 확인할 수 있어요.",
@@ -690,11 +866,16 @@
       const button = node("button", choice.style || "dialog-option", choice.title);
       button.type = "button";
       button.disabled = Boolean(choice.disabled);
+      if (choice.swatch) {
+        button.classList.add("theme-option");
+        button.style.setProperty("--swatch", choice.swatch);
+      }
       if (choice.hint) button.append(node("small", "", choice.hint));
       button.addEventListener("click", choice.run);
       return button;
     }));
     if (inputLabel) options.prepend(inputLabel);
+    closeRoomMenu();
     if (!dialog.open) dialog.showModal();
     (inputLabel?.lastElementChild ?? options.querySelector("button:not(:disabled)"))?.focus();
   }
@@ -703,7 +884,6 @@
     byId("setup").hidden = Boolean(state);
     byId("play").hidden = !state;
     byId("storage-status").hidden = !state;
-    byId("jump-jobs").hidden = !state;
 
     if (state) {
       drawScene();
@@ -712,7 +892,7 @@
       drawPersonal();
       drawJournal();
     } else {
-      drawCreation();
+      paintScene();
     }
     drawDialog();
   }
@@ -723,13 +903,30 @@
     state = game.update(state, command);
     if (prior === state) return;
 
-    if (["act", "end", "shift"].includes(command.type)) sceneFrame = 0;
-    if (command.type === "shift") overlay = null;
+    roomMessage = "";
+    if (command.type === "act") {
+      roomPosition = art.positionFor(command.id);
+      outside = command.id === "walk";
+      roaming = false;
+    } else if (command.type === "end") {
+      hideRoomReward();
+      travel = null;
+      roomPosition = art.positionFor();
+      facing = 1;
+      outside = false;
+      roaming = false;
+    } else if (command.type === "shift") {
+      if (state.lastAction === "shift") roomPosition = art.positionFor("shift");
+      outside = false;
+      roaming = false;
+      overlay = null;
+    }
     if ((!prior.outcome && state.outcome) || (command.type === "family" && prior.familyMoment === "offer")) overlay = "outcome";
     if (!prior.lottery && state.lottery) overlay = "lottery";
     activateMusic();
     persist();
     render();
+    if (command.type === "act") showRoomReward(prior, command.id);
     if (command.type !== "job") {
       playTone(state.outcome?.type === "offer" ? "offer" : command.type === "end" ? "next" : "tap");
       const status = state.history.length > prior.history.length ? state.history[0].text + " " : "";
@@ -738,6 +935,7 @@
   }
 
   function openOverlay(mode) {
+    if (travel) return;
     overlay = mode;
     drawDialog();
   }
@@ -748,7 +946,14 @@
   }
 
   function resetGame() {
+    hideRoomReward();
     state = null;
+    travel = null;
+    roomPosition = art.positionFor();
+    facing = 1;
+    roaming = false;
+    outside = false;
+    roomMessage = "";
     musicActivated = false;
     syncMusic();
     journalExpanded = false;
@@ -765,7 +970,7 @@
     form.querySelector("input").focus();
   }
 
-  form.addEventListener("change", drawCreation);
+  form.addEventListener("change", () => paintScene());
   byId("nickname").addEventListener("input", (event) => event.target.setCustomValidity(""));
   form.addEventListener("submit", (event) => {
     event.preventDefault();
@@ -807,6 +1012,30 @@
     activateMusic();
   });
   document.addEventListener("visibilitychange", syncMusic);
+  roomCanvas.addEventListener("click", (event) => {
+    if (!state || outside || travel) return;
+    const rect = roomCanvas.getBoundingClientRect();
+    const x = (event.clientX - rect.left) * art.dimensions.width / rect.width;
+    const y = (event.clientY - rect.top) * art.dimensions.height / rect.height;
+    const position = art.floorPoint(x, y);
+    if (!position) return;
+    roaming = true;
+    moveCharacter(position);
+  });
+  returnHome.addEventListener("click", () => {
+    roomMessage = "";
+    enterRoom();
+    roomPoints.querySelector('[data-furniture="walk"]').focus({ preventScroll: true });
+  });
+  for (const button of byId("game-dock").querySelectorAll("[data-dock]")) {
+    button.addEventListener("click", () => {
+      if (!state || travel) return;
+      const name = button.dataset.dock;
+      if (name === "work" || name === "decorate") openOverlay(name);
+      else openRoomMenu(name);
+    });
+  }
+  byId("room-menu-close").addEventListener("click", closeRoomMenu);
   nextDay.addEventListener("click", () => dispatch({ type: "end" }));
   jobButton.addEventListener("click", () => {
     if (state.outcome) openOverlay("outcome");
@@ -835,11 +1064,6 @@
   drawMusicControl();
   if (state) persist();
   render();
-  const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
-  window.setInterval(() => {
-    if (document.hidden || motion.matches) return;
-    sceneFrame = (sceneFrame + 1) % 120;
-    if (state) art.drawRoom(byId("room"), state, sceneFrame);
-    else drawCreation();
-  }, 440);
+  motion.addEventListener("change", () => paintScene());
+  window.requestAnimationFrame(frameRoom);
 })();
