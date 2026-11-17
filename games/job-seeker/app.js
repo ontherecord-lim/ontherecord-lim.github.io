@@ -348,9 +348,9 @@
   }
 
   function positionSpeech(time) {
-    const anchor = speaker === "family" ? art.familyPosition : actorPosition(time);
+    const anchor = art.parents[speaker] ?? actorPosition(time);
     const left = anchor.x / art.dimensions.width * 100;
-    const pose = speaker === "family" ? "family" : anchor === art.sleepPosition ? "asleep" : state.profile.gender;
+    const pose = speaker !== "player" ? speaker : anchor === art.sleepPosition ? "asleep" : state.profile.gender;
     roomSpeech.dataset.align = left > 75 ? "end" : left < 24 ? "start" : "center";
     roomSpeech.style.left = left + "%";
     roomSpeech.style.top = (anchor.y - art.figureSizes[pose] - 11) / art.dimensions.height * 100 + "%";
@@ -371,8 +371,14 @@
     speechTimer = window.setTimeout(hideSpeech, 4100);
   }
 
-  function familyGreeting() {
+  function familyGreeting(parent = "family") {
     const name = state.profile.nickname;
+    if (parent === "father") {
+      if (state.outcome?.type === "offer") return "합격했구나. 고생 많았다!";
+      if (state.stats.energy < 35) return "잠깐 나와서 바람이라도 쐬자.";
+      if (state.lastAction === "walk") return "동네 한 바퀴 돌고 왔어?";
+      return name ? name + ", 오늘은 뭐 준비해?" : "오늘은 뭐 준비해?";
+    }
     if (state.outcome?.type === "offer") return name ? name + ", 합격 축하해!" : "합격 축하해!";
     if (state.stats.energy < 35) return "피곤하지? 조금 쉬었다 해.";
     if (state.lastAction === "meal") return "더 먹을래? 밥 남겨 뒀어.";
@@ -446,10 +452,10 @@
     roaming = true;
     moveCharacter(art.targets[id].position, () => {
       if (id === "desk") openRoomMenu("actions");
-      else if (id === "family") {
-        const greeting = familyGreeting();
-        say(greeting, "family");
-        byId("notice").textContent = "엄마. " + greeting;
+      else if (Object.hasOwn(art.parents, id)) {
+        const greeting = familyGreeting(id);
+        say(greeting, id);
+        byId("notice").textContent = art.targets[id].label + ". " + greeting;
       } else openOverlay("decorate");
     });
   }
@@ -891,7 +897,7 @@
     } else {
       title = "게임 안내";
       body = [
-        "부모님 집에서 21일 안에 첫 합격에 도전해요. 바닥을 누르면 캐릭터가 움직이고, 가구를 누르면 바로 행동하고, 엄마를 누르면 말을 걸 수 있어요.",
+        "부모님 집에서 21일 안에 첫 합격에 도전해요. 바닥을 누르면 캐릭터가 움직이고, 가구를 누르면 바로 행동하고, 엄마와 아빠에게 말을 걸 수 있어요.",
         "같은 날에도 여러 행동을 할 수 있어요. 하루를 마치면 체력이 8 회복되고 생활비가 4만원 나가요.",
         "가상 공고 " + game.jobs.length + "개에 지원할 수 있어요. 공고마다 우대 전공, 마감일과 추천 실습이 달라요.",
         "직접 관련 전공과 인접 전공은 서류와 면접에 가산점을 받습니다. 공고에서 내 전공에 적용되는 점수를 확인할 수 있어요.",

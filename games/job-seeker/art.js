@@ -36,7 +36,10 @@
 
   const dimensions = { width: 768, height: 512 };
   const spawn = { x: 352, y: 385 };
-  const familyPosition = { x: 568, y: 384 };
+  const parents = {
+    family: { x: 568, y: 384 },
+    father: { x: 267, y: 398 },
+  };
   const sleepPosition = { x: 145, y: 210 };
   const targets = {
     rest: { position: { x: 241, y: 291 }, rect: [157, 216, 153, 136], label: "침대", intent: "낮잠 자기", color: "#fdc1b7" },
@@ -45,6 +48,7 @@
     walk: { position: { x: 703, y: 289 }, rect: [699, 164, 76, 145], label: "현관", intent: "동네 산책", color: "#b3e6eb" },
     meal: { position: { x: 485, y: 275 }, rect: [560, 218, 151, 86], label: "식탁", intent: "집밥 먹기", color: "#ffdf89" },
     family: { position: { x: 518, y: 386 }, rect: [568, 353, 64, 76], label: "엄마", intent: "말 걸기", color: "#e3f2a2" },
+    father: { position: { x: 315, y: 398 }, rect: [267, 365, 61, 78], label: "아빠", intent: "말 걸기", color: "#bbdde9" },
   };
 
   const themes = {
@@ -53,7 +57,7 @@
     lavender: { label: "라벤더 사탕", swatch: "#cab3ed", wall: [237, 213, 242], rug: [179, 150, 220] },
   };
 
-  const figureSizes = { male: 66, female: 66, family: 71, asleep: 30 };
+  const figureSizes = { male: 66, female: 66, family: 71, father: 73, asleep: 30 };
   const atlasFrames = {
     male: [[262, 78, 469, 478], [263, 552, 470, 963]],
     female: [[654, 104, 866, 479], [652, 580, 867, 961]],
@@ -63,7 +67,8 @@
   const home = loadImage("assets/sunlit-home.webp");
   const park = loadImage("assets/neighborhood-park.webp");
   const cast = loadImage("assets/characters.webp");
-  const ready = Promise.allSettled([home.decode(), park.decode(), cast.decode()]);
+  const father = loadImage("assets/father.webp");
+  const ready = Promise.allSettled([home, park, cast, father].map((image) => image.decode()));
   const sceneCache = new Map();
 
   function loadImage(src) {
@@ -136,9 +141,10 @@
   }
 
   function drawFigure(context, variant, point, { time = 0, facing = 1, moving = false, action } = {}) {
-    if (!isLoaded(cast)) return;
+    const image = variant === "father" ? father : cast;
+    if (!isLoaded(image)) return;
     const stride = moving ? Math.floor(time / 112) % 4 : 0;
-    const frame = frameFor(variant, stride % 2);
+    const frame = variant === "father" ? { x: 0, y: 0, w: image.naturalWidth, h: image.naturalHeight } : frameFor(variant, stride % 2);
     const height = figureSizes[variant] ?? figureSizes.female;
     const width = Math.round(height * frame.w / frame.h);
     const { x, y } = point;
@@ -150,7 +156,7 @@
     context.fill();
     context.translate(Math.round(x), Math.round(y) - (stride % 2));
     context.scale(facing, 1);
-    context.drawImage(cast, frame.x, frame.y, frame.w, frame.h, -Math.floor(width / 2), -height, width, height);
+    context.drawImage(image, frame.x, frame.y, frame.w, frame.h, -Math.floor(width / 2), -height, width, height);
     if (action === "meal") {
       context.fillStyle = "#8d716b";
       context.fillRect(1, -25, 15, 2);
@@ -207,18 +213,11 @@
 
     context.drawImage(furnishedRoom(visual.theme), 0, 0);
     const action = moving || visual.roaming ? "" : state.lastAction;
-    const drawPlayer = () => drawFigure(context, state.profile.gender, position, { time, moving, facing, action });
-    const drawFamily = () => drawFigure(context, "family", familyPosition);
-    if (action === "rest") {
-      drawRest(context, state.profile, time);
-      drawFamily();
-    } else if (position.y <= familyPosition.y) {
-      drawPlayer();
-      drawFamily();
-    } else {
-      drawFamily();
-      drawPlayer();
-    }
+    const actors = Object.entries(parents).map(([variant, point]) => ({ variant, point }));
+    if (action === "rest") drawRest(context, state.profile, time);
+    else actors.push({ variant: state.profile.gender, point: position, options: { time, moving, facing, action } });
+    actors.sort((a, b) => a.point.y - b.point.y);
+    for (const { variant, point, options } of actors) drawFigure(context, variant, point, options);
   }
 
   function drawPortrait(canvas, profile) {
@@ -235,6 +234,6 @@
 
   root.JobArt = {
     drawIcon, drawRoom, drawPortrait, dimensions, targets, themes, spawn, floorPoint, positionFor,
-    familyPosition, sleepPosition, figureSizes, parkPosition, ready,
+    parents, sleepPosition, figureSizes, parkPosition, ready,
   };
 })(globalThis);
