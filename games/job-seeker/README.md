@@ -28,7 +28,9 @@
 | `story.js` | 가족·친구·일상 사건, 대사와 선택 |
 | `game.js` | 상태 관리, 채용과 생활비 규칙, 결말 |
 | `app.js` | 게임 화면과 브라우저 저장 |
-| `art.js` | 도트 스프라이트와 픽셀 맵 렌더링 |
+| `art.js` | 픽셀 맵, 걷는 캐릭터, 방 꾸미기 렌더링 |
+| `assets/sunlit-home.webp`, `assets/neighborhood-park.webp` | 집과 동네 공원 배경 |
+| `assets/characters.webp` | 주인공과 엄마의 도트 캐릭터 |
 | `bgm.mp3` | 게임용 오리지널 칩튠 ‘지원서를 여는 밤’ |
 | `scripts/compose-bgm.py` | 배경음악 음원 생성 |
 

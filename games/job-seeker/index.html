@@ -3,15 +3,17 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#e4ecd4">
+  <meta name="theme-color" content="#e9f3cb">
   <meta name="description" content="21일 동안 생활비와 컨디션을 관리하며 첫 합격에 도전하는 취업 시뮬레이션.">
   <title>취준생 키우기</title>
-  <link rel="stylesheet" href="style.css?v=6">
+  <link rel="preload" as="image" href="assets/sunlit-home.webp">
+  <link rel="preload" as="image" href="assets/characters.webp">
+  <link rel="stylesheet" href="style.css?v=7">
   <script defer src="catalog.js?v=4"></script>
   <script defer src="story.js?v=4"></script>
   <script defer src="game.js?v=5"></script>
-  <script defer src="art.js?v=6"></script>
-  <script defer src="app.js?v=6"></script>
+  <script defer src="art.js?v=7"></script>
+  <script defer src="app.js?v=7"></script>
 </head>
 <body>
   <header class="top-bar">
@@ -38,9 +40,9 @@
   <main class="frame" id="main" tabindex="-1">
     <section class="setup" id="setup" aria-labelledby="setup-title">
       <div class="setup-story">
-        <div class="scene-bar"><span class="scene-square" aria-hidden="true"></span> 우리 집 · 내 방</div>
+        <div class="scene-bar"><span class="scene-square" aria-hidden="true"></span> 우리 집</div>
         <div class="setup-room-view">
-          <canvas id="setup-room" width="300" height="200" aria-hidden="true"></canvas>
+          <canvas id="setup-room" width="768" height="512" aria-hidden="true"></canvas>
           <p class="speech-bubble setup-bubble" aria-hidden="true">오늘은 뭐부터 하지?</p>
         </div>
         <div class="setup-copy">
@@ -80,11 +82,11 @@
           <div class="room-world">
             <div class="scene-bar">
               <span class="scene-square" aria-hidden="true"></span>
-              <span id="scene-location">우리 집 · 내 방</span>
-              <span class="room-guide" id="room-guide">바닥이나 가구를 눌러보세요</span>
+              <span id="scene-location">우리 집</span>
+              <span class="room-guide" id="room-guide">바닥은 이동 · 가구와 사람은 클릭</span>
             </div>
             <div class="room-view" id="room-view">
-              <canvas id="room" width="300" height="200" aria-hidden="true"></canvas>
+              <canvas id="room" width="768" height="512" aria-hidden="true"></canvas>
               <p class="speech-bubble" id="room-speech" aria-hidden="true" hidden></p>
               <div class="room-reward" id="room-reward" aria-hidden="true" hidden></div>
               <div class="room-points" id="room-points" role="group" aria-label="방의 가구"></div>
@@ -105,7 +107,7 @@
 
           <aside class="game-hud" aria-label="내 상태">
             <div class="hud-profile">
-              <div class="portrait"><canvas id="portrait" width="40" height="38" aria-hidden="true"></canvas></div>
+              <div class="portrait"><canvas id="portrait" width="60" height="60" aria-hidden="true"></canvas></div>
               <div class="profile-text">
                 <p id="player-profile"></p>
                 <p class="profile-parts" id="profile-parts"></p>

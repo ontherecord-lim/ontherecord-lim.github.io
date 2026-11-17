@@ -301,7 +301,7 @@
     art.drawRoom(roomCanvas, state, {
       time: frame, position: roomPosition, moving: Boolean(travel), facing, theme: roomTheme, outside, roaming,
     });
-    art.drawPortrait(portraitCanvas, state.profile, frame);
+    art.drawPortrait(portraitCanvas, state.profile);
     if (speaker) positionSpeech(frame);
   }
 
@@ -337,21 +337,23 @@
     }
     travel = {
       from: roomPosition, to, started: performance.now(),
-      duration: Math.min(820, Math.max(170, distance * 4.8)), arrive,
+      duration: Math.min(975, Math.max(165, distance * 2.5)), arrive,
     };
   }
 
   function actorPosition(time) {
     if (outside) return art.parkPosition(time);
-    if (state.lastAction === "rest" && !roaming && !travel) return { x: 41, y: 112 };
+    if (state.lastAction === "rest" && !roaming && !travel) return art.sleepPosition;
     return roomPosition;
   }
 
   function positionSpeech(time) {
     const anchor = speaker === "family" ? art.familyPosition : actorPosition(time);
-    roomSpeech.dataset.align = anchor.x > 220 ? "end" : anchor.x < 72 ? "start" : "center";
-    roomSpeech.style.left = anchor.x / art.dimensions.width * 100 + "%";
-    roomSpeech.style.top = (anchor.y - (speaker === "family" ? 40 : 38)) / art.dimensions.height * 100 + "%";
+    const left = anchor.x / art.dimensions.width * 100;
+    const pose = speaker === "family" ? "family" : anchor === art.sleepPosition ? "asleep" : state.profile.gender;
+    roomSpeech.dataset.align = left > 75 ? "end" : left < 24 ? "start" : "center";
+    roomSpeech.style.left = left + "%";
+    roomSpeech.style.top = (anchor.y - art.figureSizes[pose] - 11) / art.dimensions.height * 100 + "%";
   }
 
   function hideSpeech() {
@@ -395,8 +397,9 @@
     const at = actorPosition(motion.matches ? 0 : performance.now());
     const resting = id === "rest";
     hideRoomReward();
-    roomReward.style.left = Math.max(82, Math.min(218, at.x)) / art.dimensions.width * 100 + "%";
-    roomReward.style.top = (at.y + (resting ? 31 : 17)) / art.dimensions.height * 100 + "%";
+    const left = at.x / art.dimensions.width * 100;
+    roomReward.style.left = Math.max(21, Math.min(79, left)) + "%";
+    roomReward.style.top = (at.y + (resting ? 78 : 25)) / art.dimensions.height * 100 + "%";
     if (!deltas.length) return;
     roomReward.textContent = deltas.join(" · ");
     roomReward.hidden = false;
@@ -475,7 +478,7 @@
     const job = game.getJob(state.selectedJob);
 
     const lastAction = game.actions.find(({ id }) => id === state.lastAction);
-    byId("scene-location").textContent = outside ? "동네 공원" : "우리 집 · 내 방";
+    byId("scene-location").textContent = outside ? "동네 공원" : "우리 집";
     byId("room-guide").hidden = outside;
     roomView.dataset.outside = String(outside);
     roomPoints.hidden = outside;
@@ -797,7 +800,7 @@
       choices = Object.entries(art.themes).map(([key, theme]) => ({
         title: theme.label,
         hint: key === roomTheme ? "현재 사용 중" : "",
-        swatch: theme.left,
+        swatch: theme.swatch,
         run: () => {
           roomTheme = key;
           storeLocal(roomThemeKey, key);
@@ -1122,6 +1125,7 @@
   drawMusicControl();
   if (state) persist();
   render();
+  art.ready.then(() => paintScene());
   motion.addEventListener("change", () => paintScene());
   window.requestAnimationFrame(frameRoom);
 })();
