@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ded8f2">
+  <meta name="description" content="21일 동안 생활비와 컨디션을 관리하며 첫 합격에 도전하는 취업 시뮬레이션.">
+  <title>취준생 키우기</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="game.js"></script>
+  <script defer src="art.js"></script>
+  <script defer src="app.js"></script>
+</head>
+<body>
+  <header class="top-bar">
+    <div class="frame top-inner">
+      <a class="brand" href="#main">
+        <span class="brand-icon"><canvas data-icon="case" width="16" height="16" aria-hidden="true"></canvas></span>
+        <span>취준생 키우기</span>
+      </a>
+      <div class="top-controls">
+        <span class="save-status" id="storage-status" hidden><i></i><span>자동 저장</span></span>
+        <a class="top-button mobile-jump" id="jump-jobs" href="#jobs" hidden>공고</a>
+        <button class="top-button music-button" id="music-button" type="button" aria-label="배경음악" aria-pressed="true" title="배경음악 끄기">
+          <canvas data-icon="music" width="16" height="16" aria-hidden="true"></canvas>
+        </button>
+        <button class="top-button sound-button" id="sound-button" type="button" aria-label="게임 효과음" aria-pressed="false" title="게임 효과음">
+          <canvas data-icon="muted" width="16" height="16" aria-hidden="true"></canvas>
+        </button>
+        <button class="top-button help-button" id="help-button" type="button" aria-label="게임 안내">
+          <span class="help-mark" aria-hidden="true">?</span><span>게임 안내</span>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="frame" id="main" tabindex="-1">
+    <section class="setup" id="setup" aria-labelledby="setup-title">
+      <div class="setup-story">
+        <canvas id="setup-room" width="360" height="164" aria-hidden="true"></canvas>
+        <div class="setup-copy">
+          <span class="day-badge"><span class="day-square"></span> 캥거루족</span>
+          <h1 id="setup-title">첫 합격을 향해</h1>
+          <p>부모님과 함께 사는 집에서 시작해요.<br>21일 동안 생활비와 컨디션을 챙기며 취업에 도전하세요.</p>
+        </div>
+      </div>
+      <form class="setup-form" id="character-form">
+        <h2>캐릭터 만들기</h2>
+        <fieldset>
+          <legend>성별</legend>
+          <div class="profile-options">
+            <label><input type="radio" name="gender" value="male" required><span>남성</span></label>
+            <label><input type="radio" name="gender" value="female"><span>여성</span></label>
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>나이</legend>
+          <div class="profile-options">
+            <label><input type="radio" name="age" value="25" required><span>25세</span></label>
+            <label><input type="radio" name="age" value="26"><span>26세</span></label>
+            <label><input type="radio" name="age" value="27"><span>27세</span></label>
+          </div>
+        </fieldset>
+        <button class="primary-button start-button" type="submit">게임 시작 <span aria-hidden="true">→</span></button>
+      </form>
+    </section>
+
+    <div id="play" hidden>
+    <section class="scene-window" aria-labelledby="scene-title">
+      <div class="scene-bar">
+        <span class="scene-square" aria-hidden="true"></span>
+        <span id="scene-location">우리 집 · 내 방</span>
+      </div>
+      <div class="hero">
+      <div class="hero-art"><canvas id="room" width="360" height="164" aria-hidden="true"></canvas></div>
+      <div class="hero-copy">
+        <div class="day-line">
+          <span class="day-badge"><span class="day-square"></span> DAY <strong id="day-number">01</strong><span class="day-total">/ 21</span></span>
+          <span class="player-profile" id="player-profile"></span>
+        </div>
+        <p id="weekday" class="weekday"></p>
+        <h1 id="scene-title">오늘부터 취준생.</h1>
+        <p id="scene-description">21일 안에 첫 합격에 도전하세요.</p>
+        <div class="day-track" id="day-track" role="progressbar" aria-label="진행 일수" aria-valuemin="1" aria-valuemax="21" aria-valuenow="1"></div>
+      </div>
+      </div>
+    </section>
+
+    <div class="game-layout">
+      <section class="status-panel" aria-labelledby="status-title">
+        <div class="section-heading"><h2 id="status-title">내 상태</h2></div>
+        <div class="stat-grid" id="stat-grid"></div>
+      </section>
+
+      <section class="actions-panel" aria-labelledby="actions-title">
+        <div class="section-heading">
+          <h2 id="actions-title">오늘의 행동</h2>
+          <div class="slot-status" id="slot-status">
+            <span class="slot-dots" aria-hidden="true"><i></i><i></i></span>
+            <span id="slots-text">2회 남음</span>
+          </div>
+        </div>
+        <div class="action-grid" id="action-grid"></div>
+        <div class="day-footer">
+          <p id="day-hint">하루에 두 번 행동할 수 있어요.</p>
+          <button class="next-button" id="next-day" type="button">하루 마치기 <span aria-hidden="true">→</span></button>
+        </div>
+      </section>
+
+      <section class="journal-panel" aria-labelledby="journal-title">
+        <div class="section-heading"><h2 id="journal-title">취준 일지</h2></div>
+        <div class="journal">
+          <ol id="journal-list"></ol>
+          <button class="text-button journal-more" id="journal-more" type="button" aria-expanded="false" hidden>전체 일지 보기</button>
+        </div>
+      </section>
+
+      <div class="rail" id="jobs">
+        <section aria-labelledby="jobs-title">
+          <div class="section-heading"><h2 id="jobs-title">채용 공고</h2></div>
+          <div class="job-board">
+            <div class="job-tabs" id="job-tabs" role="group" aria-label="지원 직무"></div>
+            <div class="job-body">
+              <div class="job-heading">
+                <span class="tile-icon job-icon" id="job-icon"><canvas width="16" height="16" aria-hidden="true"></canvas></span>
+                <div>
+                  <p id="job-company" class="job-company">지역 방송국</p>
+                  <h3 id="job-title">방송기자</h3>
+                </div>
+              </div>
+              <p id="job-description" class="job-description">현장을 취재하고 카메라 앞에서 직접 전한다.</p>
+              <ol class="stages" aria-label="채용 단계">
+                <li id="stage-review"><span></span>서류</li>
+                <li id="stage-interview"><span></span>면접</li>
+                <li id="stage-offer"><span></span>합격</li>
+              </ol>
+              <div class="job-info"><span id="job-info-label">서류 통과 확률</span><strong id="job-info-value">—</strong></div>
+              <button class="primary-button job-button" id="job-button" type="button">지원하기 <span aria-hidden="true">→</span></button>
+              <p class="job-hint" id="job-hint">스펙 35부터 지원할 수 있어요.</p>
+            </div>
+          </div>
+        </section>
+        <section aria-labelledby="wallet-title" class="wallet">
+          <div class="wallet-icon tile-icon" data-tone="gold"><canvas data-icon="wallet" width="16" height="16" aria-hidden="true"></canvas></div>
+          <div class="wallet-copy">
+            <h2 id="wallet-title">생활비</h2>
+            <p><strong id="balance">62</strong><span>만원</span></p>
+          </div>
+          <span class="wallet-note">하루 −4만원</span>
+        </section>
+      </div>
+    </div>
+    </div>
+    <div id="notice" class="sr-only" role="status" aria-live="polite"></div>
+    <noscript><p class="no-script">플레이하려면 브라우저 설정에서 자바스크립트를 켜주세요.</p></noscript>
+  </main>
+
+  <audio id="music-track" src="bgm.mp3" preload="none" loop hidden></audio>
+  <dialog id="dialog" aria-labelledby="dialog-title">
+    <div class="dialog-top">
+      <span class="tile-icon dialog-icon"><canvas width="16" height="16" aria-hidden="true"></canvas></span>
+      <button class="top-button dialog-close" id="dialog-close" type="button" aria-label="닫기">×</button>
+    </div>
+    <p class="dialog-meta" id="dialog-meta" hidden></p>
+    <h2 id="dialog-title"></h2>
+    <p class="dialog-body" id="dialog-body"></p>
+    <div class="dialog-options" id="dialog-options"></div>
+  </dialog>
+</body>
+</html>
