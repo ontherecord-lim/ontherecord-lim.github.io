@@ -25,6 +25,7 @@
   const roomPoints = byId("room-points");
   const returnHome = byId("return-home");
   const roomReward = byId("room-reward");
+  const roomSpeech = byId("room-speech");
   const motion = window.matchMedia("(prefers-reduced-motion: reduce)");
   const options = byId("dialog-options");
   const closeButton = byId("dialog-close");
@@ -54,6 +55,8 @@
   let roomMessage = "";
   let lastPaint = 0;
   let rewardTimer;
+  let speechTimer;
+  let speaker = "";
   let audioContext;
   let overlay = null;
   let chosenWorkplace = null;
@@ -292,13 +295,14 @@
     const frame = motion.matches ? 0 : time;
     if (!state) {
       const profile = { gender: form.elements.gender.value || "female" };
-      art.drawRoom(setupCanvas, { day: 1, slots: 2, profile }, { time: frame, theme: roomTheme });
+      art.drawRoom(setupCanvas, { day: 1, profile }, { time: frame, theme: roomTheme });
       return;
     }
     art.drawRoom(roomCanvas, state, {
       time: frame, position: roomPosition, moving: Boolean(travel), facing, theme: roomTheme, outside, roaming,
     });
     art.drawPortrait(portraitCanvas, state.profile, frame);
+    if (speaker) positionSpeech(frame);
   }
 
   function frameRoom(time) {
@@ -322,9 +326,10 @@
   function moveCharacter(to, arrive) {
     const dx = to.x - roomPosition.x;
     const dy = to.y - roomPosition.y;
-    if (Math.abs(dx - dy) > .05) facing = dx > dy ? 1 : -1;
+    if (Math.abs(dx) > 1) facing = dx >= 0 ? 1 : -1;
+    hideSpeech();
     const distance = Math.hypot(dx, dy);
-    if (motion.matches || distance < .15) {
+    if (motion.matches || distance < 2) {
       roomPosition = to;
       arrive?.();
       paintScene();
@@ -332,9 +337,50 @@
     }
     travel = {
       from: roomPosition, to, started: performance.now(),
-      duration: Math.min(650, Math.max(180, distance * 93)), arrive,
+      duration: Math.min(820, Math.max(170, distance * 4.8)), arrive,
     };
   }
+
+  function actorPosition(time) {
+    if (outside) return art.parkPosition(time);
+    if (state.lastAction === "rest" && !roaming && !travel) return { x: 41, y: 112 };
+    return roomPosition;
+  }
+
+  function positionSpeech(time) {
+    const anchor = speaker === "family" ? art.familyPosition : actorPosition(time);
+    roomSpeech.dataset.align = anchor.x > 220 ? "end" : anchor.x < 72 ? "start" : "center";
+    roomSpeech.style.left = anchor.x / art.dimensions.width * 100 + "%";
+    roomSpeech.style.top = (anchor.y - (speaker === "family" ? 40 : 38)) / art.dimensions.height * 100 + "%";
+  }
+
+  function hideSpeech() {
+    window.clearTimeout(speechTimer);
+    speaker = "";
+    roomSpeech.hidden = true;
+  }
+
+  function say(text, source = "player") {
+    hideSpeech();
+    roomSpeech.textContent = text;
+    speaker = source;
+    positionSpeech(motion.matches ? 0 : performance.now());
+    roomSpeech.hidden = false;
+    speechTimer = window.setTimeout(hideSpeech, 4100);
+  }
+
+  function familyGreeting() {
+    const name = state.profile.nickname;
+    if (state.outcome?.type === "offer") return name ? name + ", 합격 축하해!" : "합격 축하해!";
+    if (state.stats.energy < 35) return "피곤하지? 조금 쉬었다 해.";
+    if (state.lastAction === "meal") return "더 먹을래? 밥 남겨 뒀어.";
+    return name ? name + ", 밥 먹었어?" : "밥 먹었어?";
+  }
+
+  const actionSpeech = {
+    rest: "잠깐 눈 좀 붙일게요…", meal: "잘 먹겠습니다!", walk: "바람 쐬니까 좀 낫다.",
+    letter: "한 문장씩 써보자.", practice: "안녕하세요. 저는…", fandom: "딱 한 편만 더!", upload: "영상 올렸다!",
+  };
 
   function hideRoomReward() {
     window.clearTimeout(rewardTimer);
@@ -346,16 +392,19 @@
       const difference = state.stats[key] - prior.stats[key];
       return difference ? [effectText(key, difference)] : [];
     });
-    const [x, y] = outside ? [300, 246] : (art.targets[id] ?? art.targets.desk).rect;
+    const at = actorPosition(motion.matches ? 0 : performance.now());
+    const resting = id === "rest";
     hideRoomReward();
-    roomReward.style.left = x / art.dimensions.width * 100 + "%";
-    roomReward.style.top = (y - 38) / art.dimensions.height * 100 + "%";
-    roomReward.textContent = deltas.join(" · ") || "행동 1회 사용";
+    roomReward.style.left = Math.max(82, Math.min(218, at.x)) / art.dimensions.width * 100 + "%";
+    roomReward.style.top = (at.y + (resting ? 31 : 17)) / art.dimensions.height * 100 + "%";
+    if (!deltas.length) return;
+    roomReward.textContent = deltas.join(" · ");
     roomReward.hidden = false;
     rewardTimer = window.setTimeout(hideRoomReward, 1800);
   }
 
   function enterRoom() {
+    hideSpeech();
     hideRoomReward();
     outside = false;
     roaming = true;
@@ -394,7 +443,11 @@
     roaming = true;
     moveCharacter(art.targets[id].position, () => {
       if (id === "desk") openRoomMenu("actions");
-      else openOverlay("decorate");
+      else if (id === "family") {
+        const greeting = familyGreeting();
+        say(greeting, "family");
+        byId("notice").textContent = "엄마. " + greeting;
+      } else openOverlay("decorate");
     });
   }
 
@@ -416,7 +469,7 @@
   }
 
   function drawScene() {
-    const { day, profile, slots, outcome, application } = state;
+    const { day, profile, outcome, application } = state;
     const title = byId("scene-title");
     const description = byId("scene-description");
     const job = game.getJob(state.selectedJob);
@@ -463,7 +516,7 @@
       description.textContent = game.openings[profile.age] + " " + game.sibling(profile).title + "은 회사에 갔다.";
     } else {
       title.textContent = day >= 17 ? "마감이 다가온다." : "오늘은 뭘 해볼까?";
-      description.textContent = slots ? "남은 시간과 생활비를 보며 다음 행동을 골라요." : "오늘 할 일을 마쳤다. 일지를 덮고 내일을 준비하자.";
+      description.textContent = "컨디션과 생활비를 보며 할 일을 골라요.";
     }
     if (roomMessage) description.textContent = roomMessage;
     paintScene();
@@ -481,8 +534,6 @@
     const balance = state.stats.balance.toLocaleString("ko-KR");
     byId("balance").textContent = balance;
     byId("hud-balance").textContent = balance;
-    byId("slots-text").textContent = state.slots + "회 남음";
-    byId("slot-status").querySelectorAll("i").forEach((dot, index) => dot.classList.toggle("available", index < state.slots));
 
     for (const { key, button } of actionFilters) button.setAttribute("aria-pressed", String(key === actionGroup));
     for (const { action, button, description } of actionViews) {
@@ -497,10 +548,10 @@
     }
 
     nextDay.disabled = Boolean(state.encounter || state.assessment || state.familyMoment || state.outcome);
-    nextDay.dataset.ready = String(state.slots === 0 && !state.outcome);
     nextDay.firstChild.nodeValue = state.day === game.LAST_DAY ? "마지막 날 마치기 " : "하루 마치기 ";
     byId("day-hint").textContent = state.outcome ? "도전이 끝났어요." :
-      state.slots ? "행동을 남겨두고 하루를 마칠 수도 있어요." : "오늘의 행동을 모두 사용했어요.";
+      state.day === game.LAST_DAY ? "오늘을 마치면 도전 기록을 볼 수 있어요." :
+        "다음 날 아침에 체력 +8 · 생활비 −" + game.DAILY_COST + "만원";
   }
 
   function drawPostings() {
@@ -580,7 +631,7 @@
       label = "면접 합격 기준";
       value = job.interviewTarget + "점";
       const reason = game.interviewRestriction(state);
-      hint = reason || application.deadline + "일차까지 · 행동 1회 · 체력 −10";
+      hint = reason || application.deadline + "일차까지 · 체력 −10";
       enabled = !reason;
     } else if (application) {
       buttonText = "서류 심사 중";
@@ -594,7 +645,7 @@
       label = expired ? "접수 상태" : "서류 통과 확률";
       value = expired ? "마감" : game.reviewChance(state, job) + "%";
       const reason = game.applyRestriction(state, job);
-      hint = expired ? job.deadline + "일차에 접수가 끝났어요." : reason || "행동 1회 · 체력 −7 · 다음 날 서류 발표";
+      hint = expired ? job.deadline + "일차에 접수가 끝났어요." : reason || "체력 −7 · 다음 날 서류 발표";
       enabled = !reason && !expired;
     }
     byId("job-info-label").textContent = label;
@@ -653,7 +704,6 @@
         for (const [key, value] of Object.entries(choice.trust ?? {})) {
           hints.push(game.relations[key] + " 관계 " + (value > 0 ? "+" + value : "−" + Math.abs(value)));
         }
-        if (choice.slots) hints.push("오늘 행동 −" + choice.slots + "회");
         if (choice.lottery) hints.push("게임 당첨 확률 " + game.lotto.winChance + "% · " + game.lotto.small + "만원 또는 " + game.lotto.larger + "만원");
         const reason = game.eventRestriction(state, choice);
         return { title: choice.title, hint: reason || hints.join(" · "), disabled: Boolean(reason),
@@ -661,7 +711,7 @@
       });
     } else if (mode === "work") {
       title = "오늘 어느 알바에 갈까?";
-      body = "근무 선택에 행동 1회를 써요. 일한 날 바로 생활비가 들어와요.";
+      body = "일한 날 바로 생활비가 들어와요.";
       icon = "case";
       tone = "gold";
       choices = Object.entries(game.workplaces).map(([id, place]) => {
@@ -735,7 +785,7 @@
         } }];
       } else {
         const reason = game.actionRestriction(state, { energy: -8 });
-        choices = [{ title: "게임 속 유튜브 채널 열기", hint: reason || "행동 1회 · 체력 −8",
+        choices = [{ title: "게임 속 유튜브 채널 열기", hint: reason || "체력 −8",
           disabled: Boolean(reason), run: () => dispatch({ type: "channel" }) }];
       }
       choices.push({ title: "닫기", style: "secondary-button", run: closeOverlay });
@@ -838,8 +888,8 @@
     } else {
       title = "게임 안내";
       body = [
-        "부모님 집에서 21일 안에 첫 합격에 도전해요. 바닥을 누르면 캐릭터가 움직이고, 침대·책상·식탁·현관·옷장을 눌러 행동할 수 있어요.",
-        "하루에 행동을 두 번 할 수 있어요. 하루를 마치면 체력이 8 회복되고 생활비가 4만원 나가요.",
+        "부모님 집에서 21일 안에 첫 합격에 도전해요. 바닥을 누르면 캐릭터가 움직이고, 가구를 누르면 바로 행동하고, 엄마를 누르면 말을 걸 수 있어요.",
+        "같은 날에도 여러 행동을 할 수 있어요. 하루를 마치면 체력이 8 회복되고 생활비가 4만원 나가요.",
         "가상 공고 " + game.jobs.length + "개에 지원할 수 있어요. 공고마다 우대 전공, 마감일과 추천 실습이 달라요.",
         "직접 관련 전공과 인접 전공은 서류와 면접에 가산점을 받습니다. 공고에서 내 전공에 적용되는 점수를 확인할 수 있어요.",
         "지원하면 다음 날 서류 결과가 나와요. 관련 실습은 서류와 면접에 보탬이 되고, 면접 점수에는 답변도 반영돼요.",
@@ -909,6 +959,7 @@
       outside = command.id === "walk";
       roaming = false;
     } else if (command.type === "end") {
+      hideSpeech();
       hideRoomReward();
       travel = null;
       roomPosition = art.positionFor();
@@ -926,11 +977,16 @@
     activateMusic();
     persist();
     render();
-    if (command.type === "act") showRoomReward(prior, command.id);
+    if (command.type === "act") {
+      showRoomReward(prior, command.id);
+      const line = actionSpeech[command.id];
+      if (line) say(line);
+    }
+    if (command.type === "family" && !state.outcome) say("오늘 하루 고생했어.", "family");
     if (command.type !== "job") {
       playTone(state.outcome?.type === "offer" ? "offer" : command.type === "end" ? "next" : "tap");
       const status = state.history.length > prior.history.length ? state.history[0].text + " " : "";
-      byId("notice").textContent = status + state.day + "일차. 행동 " + state.slots + "회 남음.";
+      byId("notice").textContent = status + state.day + "일차.";
     }
   }
 
@@ -946,6 +1002,7 @@
   }
 
   function resetGame() {
+    hideSpeech();
     hideRoomReward();
     state = null;
     travel = null;
@@ -991,6 +1048,7 @@
     render();
     activateMusic();
     playTone("next");
+    say(familyGreeting(), "family");
     byId("main").focus({ preventScroll: true });
   });
   byId("help-button").addEventListener("click", () => openOverlay("help"));
