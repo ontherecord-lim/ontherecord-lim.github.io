@@ -1,6 +1,8 @@
 (function (root) {
   "use strict";
 
+  const catalog = typeof module !== "undefined" && module.exports ? require("./catalog.js") : root.JobCatalog;
+  const story = typeof module !== "undefined" && module.exports ? require("./story.js") : root.JobStory;
   const LAST_DAY = 21;
   const ACTIONS_PER_DAY = 2;
   const DAILY_COST = 4;
@@ -24,7 +26,7 @@
     { key: "interview", label: "면접력", icon: "chat", color: "violet" },
   ];
 
-  const actions = [
+  const originalActions = [
     {
       id: "letter", title: "자소서 쓰기", icon: "pen", color: "cyan",
       about: "경험을 지원 직무에 맞춰 정리한다.",
@@ -45,9 +47,9 @@
     },
     {
       id: "shift", title: "알바 가기", icon: "case", color: "gold",
-      about: "하루치 근무로 생활비를 번다.",
-      effects: { balance: 26, energy: -22, morale: -5 },
-      entry: "퇴근하고 급여가 들어왔다. 생활비에 여유가 생겼다.",
+      about: "집 앞 카페와 외곽 물류센터 중 오늘 갈 곳을 고른다.",
+      effects: {},
+      entry: "오늘 근무 기록과 일당을 일지에 적었다.",
     },
     {
       id: "rest", title: "낮잠 자기", icon: "moon", color: "teal",
@@ -75,7 +77,7 @@
     },
   ];
 
-  const jobs = [
+  const originalJobs = [
     {
       id: "broadcast", title: "방송기자", company: "지역 방송국",
       description: "현장을 취재하고 카메라 앞에서 직접 전한다.",
@@ -150,48 +152,42 @@
     },
   ];
 
-  const events = [
-    {
-      day: 2, title: "저녁 식탁에서",
-      bodies: {
-        25: "부모님이 저장해 둔 공고 중 어디가 가장 끌리냐고 묻는다. 말로 해보니 이유가 정리될 것 같다.",
-        26: "밥을 먹다 어머니가 옛날에 만든 포트폴리오 이야기를 꺼낸다. 그때 해본 일을 지금의 지원 동기로 연결해볼 만하다.",
-        27: "지난 공고 이야기가 나오자 아버지가 이번에는 어떤 곳에 가고 싶냐고 묻는다.",
-      },
-      choices: [
-        { title: "어떤 일을 하고 싶은지 이야기한다", effects: { interview: 5, morale: 4 }, entry: "얘기하다 보니 이 일에서 해보고 싶은 장면이 하나 떠올랐다." },
-        { title: "설거지를 돕고 저녁을 쉬어간다", effects: { energy: 10, morale: 5 }, entry: "같이 설거지를 끝내고 편하게 저녁을 보냈다." },
-      ],
-    },
-    {
-      day: 4, title: "선배에게 온 메시지", body: "선배가 포트폴리오를 한번 봐주겠다고 한다. 퇴근 후 잠깐 만날 수 있다.",
-      choices: [
-        { title: "포트폴리오를 들고 간다", effects: { resume: 9, energy: -9, balance: -2 }, entry: "선배가 결과보다 내가 어떤 결정을 내렸는지가 궁금하다고 했다." },
-        { title: "오늘은 일찍 들어간다", effects: { energy: 12, morale: 6 }, entry: "메시지에 고맙다고 답하고 집에 일찍 들어갔다." },
-      ],
-    },
-    {
-      day: 8, title: "합격 소식이 들려왔다", body: "스터디 친구가 합격했다. 축하해주고 싶은 마음과 내 차례는 언제 올까 싶은 마음이 동시에 든다.",
-      choices: [
-        { title: "축하하고 면접 후기를 묻는다", effects: { interview: 9, morale: -4 }, entry: "친구가 가장 많이 받은 꼬리 질문을 보내줬다." },
-        { title: "축하 인사를 보내고 동네를 한 바퀴 걷는다", effects: { morale: 13, energy: 7 }, entry: "한 바퀴 돌고 들어오니 마음이 조금 가라앉았다." },
-      ],
-    },
-    {
-      day: 12, title: "주말 대타 제안", body: "알바 매니저에게 연락이 왔다. 급하게 대타를 구하고 있다고 한다.",
-      choices: [
-        { title: "대타를 맡는다", effects: { balance: 18, energy: -14 }, entry: "빈 시간에 근무하고 생활비를 보탰다." },
-        { title: "예정대로 면접을 연습한다", effects: { interview: 7, energy: -5 }, entry: "지원 동기를 말한 뒤 이어질 질문 세 가지를 적었다." },
-      ],
-    },
-    {
-      day: 17, title: "마감 전 마지막 피드백", body: "스터디원이 서로의 지원서 첫 문장을 바꿔 읽자고 한다. 마지막으로 손볼 시간이 조금 남았다.",
-      choices: [
-        { title: "첫 문장을 다시 쓴다", effects: { resume: 8, morale: 3 }, entry: "하고 싶은 일과 이미 해본 일을 한 문장에 연결했다." },
-        { title: "지원서 대신 면접 답변을 같이 점검한다", effects: { interview: 9, morale: 3 }, entry: "막연했던 강점 하나를 경험으로 설명할 수 있게 됐다." },
-      ],
-    },
+  const lifeIds = new Set(["shift", "rest", "meal", "walk"]);
+  const actions = [
+    ...originalActions.map((action) => ({ ...action, group: lifeIds.has(action.id) ? "life" : "basics" })),
+    ...catalog.coreActions,
+    ...catalog.practiceActions,
+    ...catalog.lifeActions,
   ];
+  const jobs = [
+    ...originalJobs.map((job) => ({ ...job, ...catalog.originalPostings[job.id] })),
+    ...catalog.jobs,
+  ].map((job) => {
+    const { label, resumeTarget, interviewTarget } = catalog.employment[job.kind];
+    return { resumeTarget, interviewTarget, ...job, employment: label };
+  });
+  const { events, getEvent, getFamilyMoment, relations, hobbies, sibling, lotto, money, workplaces } = story;
+
+  function normalizeNickname(value) {
+    if (typeof value !== "string") return "";
+    const name = value.replace(/\s+/g, " ").trim();
+    return name.length <= 16 && !/[\p{Cc}\p{Cf}]/u.test(name) ? name : "";
+  }
+
+  function lifeDefaults() {
+    return {
+      skills: Object.fromEntries(Object.keys(catalog.skills).map((key) => [key, 0])),
+      relationships: { family: 55, sibling: 55, friend: 64 },
+      counseling: false,
+      channel: null,
+      hobby: null,
+      lottery: null,
+      savings: null,
+      shares: null,
+      shifts: Object.fromEntries(Object.keys(workplaces).map((key) => [key, { worked: 0, extra: 0, warnings: 0 }])),
+      familyMoment: null,
+    };
+  }
 
   const clamp = (value, floor, ceiling) => Math.max(floor, Math.min(value, ceiling));
   const getJob = (id) => jobs.find((job) => job.id === id);
@@ -200,7 +196,8 @@
     if (!validProfile(profile)) throw new TypeError("성별과 나이를 선택해 주세요.");
     return {
       version: VERSION,
-      profile: { gender: profile.gender, age: profile.age },
+      profile: { gender: profile.gender, age: profile.age, nickname: normalizeNickname(profile.nickname) },
+      ...lifeDefaults(),
       seed,
       day: 1,
       slots: ACTIONS_PER_DAY,
@@ -213,7 +210,8 @@
       outcome: null,
       submitted: 0,
       interviews: 0,
-      history: [{ day: 1, kind: "info", text: openings[profile.age] }],
+      history: [{ day: 1, kind: "info", text: openings[profile.age] + " " +
+        sibling(profile).title + "은 이미 취업해서 오늘도 먼저 출근했다." }],
     };
   }
 
@@ -241,8 +239,30 @@
           !range(save.assessment.base, 0, 110) || !range(save.assessment.bonus, -30, 39))) return null;
       if (save.encounter !== null && (save.encounter !== save.day || !events.some((event) => event.day === save.encounter))) return null;
       if (save.lastAction != null && !actions.some(({ id }) => id === save.lastAction)) return null;
-      if (save.outcome && (save.outcome.type === "offer" ? !getJob(save.outcome.job) : save.outcome.type !== "time")) return null;
-      return save;
+      if (save.outcome && (save.outcome.type === "offer" ? !getJob(save.outcome.job) || !range(save.outcome.score, 0, 100) : save.outcome.type !== "time")) return null;
+
+      const resumed = { ...lifeDefaults(), ...save };
+      const nickname = normalizeNickname(save.profile.nickname);
+      if (save.profile.nickname && !nickname) return null;
+      resumed.profile = { ...save.profile, nickname };
+      if (!resumed.skills || !Object.keys(catalog.skills).every((key) => range(resumed.skills[key], 0, 100)) ||
+          !resumed.relationships || !Object.keys(relations).every((key) => range(resumed.relationships[key], 0, 100)) ||
+          typeof resumed.counseling !== "boolean") return null;
+      if (resumed.hobby !== null && !Object.hasOwn(hobbies, resumed.hobby)) return null;
+      if (resumed.channel && (!range(resumed.channel.videos, 0, 42) ||
+          !range(resumed.channel.views, 0, 99999) || !range(resumed.channel.followers, 0, 99999))) return null;
+      if (resumed.lottery && (resumed.day < 7 || ![0, lotto.small, lotto.larger].includes(resumed.lottery.payout))) return null;
+      if (resumed.savings && (resumed.savings.amount !== money.deposit ||
+          !range(resumed.savings.dueDay, resumed.day + 1, LAST_DAY))) return null;
+      if (resumed.shares && (!range(resumed.shares.value, 1, 99) || resumed.shares.cost !== money.purchase)) return null;
+      if (!resumed.shifts || !Object.keys(workplaces).every((key) => {
+        const shift = resumed.shifts[key];
+        return shift && range(shift.worked, 0, 42) && range(shift.extra, 0, shift.worked) && range(shift.warnings, 0, 2);
+      })) return null;
+      if (resumed.familyMoment !== null && !getFamilyMoment(resumed)) return null;
+      if (resumed.familyMoment === "offer" && resumed.outcome?.type !== "offer") return null;
+      if (resumed.encounter && !getEvent(resumed)) return null;
+      return resumed;
     } catch {
       return null;
     }
@@ -261,7 +281,7 @@
 
   function actionRestriction(state, effects) {
     if (state.outcome) return "플레이가 끝났어요.";
-    if (state.assessment || state.encounter) return "열린 선택을 먼저 마쳐주세요.";
+    if (state.assessment || state.encounter || state.familyMoment) return "열린 선택을 먼저 마쳐주세요.";
     if (!state.slots) return "오늘 행동을 모두 사용했어요.";
     if (state.stats.energy + (effects.energy ?? 0) < 0) return "체력이 부족해요.";
     if (state.stats.balance + (effects.balance ?? 0) < 0) return "생활비가 부족해요.";
@@ -271,9 +291,9 @@
   const applyEffectsCost = { energy: -7 };
   const interviewEffectsCost = { energy: -10 };
 
-  function applyRestriction(state) {
+  function applyRestriction(state, job = getJob(state.selectedJob)) {
     if (state.application) return "진행 중인 지원이 있어요.";
-    if (state.day >= LAST_DAY) return "서류 결과는 다음 날에 나와요.";
+    if (state.day > job.deadline) return job.deadline + "일차에 접수가 끝났어요.";
     if (state.stats.resume < 35) return "스펙 35부터 지원할 수 있어요.";
     return actionRestriction(state, applyEffectsCost);
   }
@@ -283,8 +303,18 @@
     return actionRestriction(state, interviewEffectsCost);
   }
 
+  function preparationBonus(state, job) {
+    return Math.min(18, Math.floor(state.skills[job.skill] / 4));
+  }
+
+  function referralBonus(state, job) {
+    return job.id === "scm" && state.shifts.warehouse.extra >= 2 && state.shifts.warehouse.warnings < 2 ? 12 : 0;
+  }
+
   function reviewChance(state, job) {
-    return clamp(Math.round(62 + (state.stats.resume - job.resumeTarget) * 2 + (state.stats.morale - 65) / 5), 5, 100);
+    const score = 62 + (state.stats.resume - job.resumeTarget) * 2 +
+      (state.stats.morale - 65) / 5 + preparationBonus(state, job) + referralBonus(state, job);
+    return clamp(Math.round(score), 5, 100);
   }
 
   function rollForApplication(seed, index) {
@@ -294,12 +324,36 @@
     return ((value ^ (value >>> 15)) >>> 0) % 100 + 1;
   }
 
+  function activityRestriction(state, action) {
+    if (action.id === "shift" && Object.keys(workplaces).every((id) => state.shifts[id].warnings >= 2)) return "오늘 갈 수 있는 알바가 없어요.";
+    if (action.requires === "channel" && !state.channel) return "채널을 먼저 개설하면 영상을 올릴 수 있어요.";
+    if (action.requires === "hobby" && !state.hobby) return "일상 이벤트에서 좋아하는 분야를 골라보세요.";
+    return actionRestriction(state, action.effects);
+  }
+
+  function openChannel(state) {
+    state.channel = { videos: 0, views: 0, followers: 0 };
+  }
+
   function act(state, action) {
-    if (!action || actionRestriction(state, action.effects)) return false;
+    if (!action || action.id === "shift" || activityRestriction(state, action)) return false;
     applyEffects(state, action.effects);
+    if (action.skill) state.skills[action.skill] = clamp(state.skills[action.skill] + action.gain, 0, 100);
     state.slots--;
     state.lastAction = action.id;
-    log(state, "action", action.title + " · " + action.entry);
+    let details = action.entry;
+    if (action.id === "upload") {
+      state.channel.videos++;
+      const roll = rollForApplication(state.seed ^ 0x11ba7e2, state.channel.videos);
+      const views = 16 + roll * 3 + state.skills.content + (state.hobby ? 12 : 0);
+      const followers = Math.max(1, Math.floor(views / 24));
+      state.channel.views += views;
+      state.channel.followers += followers;
+      details = state.channel.videos + "번째 영상에 조회 " + views + "회와 구독 " + followers + "명이 들어왔다.";
+    } else if (action.id === "fandom") {
+      details = hobbies[state.hobby] + " 덕질을 하며 잠깐 머리를 식혔다. " + action.entry;
+    }
+    log(state, "action", action.title + " · " + details);
     return true;
   }
 
@@ -323,7 +377,7 @@
     };
     state.slots--;
     applyEffects(state, applyEffectsCost);
-    log(state, "info", job.company + "에 " + job.title + " 지원서를 제출했다.");
+    log(state, "info", job.company + "에 " + job.title + (referralBonus(state, job) ? " 지원서를 센터 추천으로 제출했다." : " 지원서를 제출했다."));
     return true;
   }
 
@@ -335,7 +389,8 @@
     state.assessment = {
       step: 0,
       bonus: 0,
-      base: clamp(Math.round(state.stats.interview + (state.stats.morale - 60) / 5), 0, 110),
+      base: clamp(Math.round(state.stats.interview + (state.stats.morale - 60) / 5 +
+        Math.floor(preparationBonus(state, getJob(state.selectedJob)) / 2)), 0, 110),
     };
     return true;
   }
@@ -354,6 +409,7 @@
     const score = clamp(state.assessment.base + state.assessment.bonus, 0, 100);
     if (score >= job.interviewTarget) {
       state.outcome = { type: "offer", job: job.id, score };
+      state.familyMoment = "offer";
       log(state, "good", job.company + " " + job.title + " 최종 합격!");
     } else {
       applyEffects(state, { morale: -8, interview: 5 });
@@ -398,26 +454,182 @@
     state.slots = ACTIONS_PER_DAY;
     state.lastAction = null;
     if (shortfall) log(state, "warn", "생활비가 모자랐다. 신경 쓸 일이 늘어 멘탈이 8 줄었다.");
+    settleFinances(state);
     resolveApplication(state);
-    const event = events.find(({ day }) => day === state.day);
+    const event = getEvent(state, state.day);
     if (event) state.encounter = event.day;
     return true;
   }
 
+  function eventRestriction(state, choice) {
+    if (state.stats.balance + (choice.effects.balance ?? 0) < 0) return "생활비가 부족해요.";
+    if (state.stats.energy + (choice.effects.energy ?? 0) < 0) return "체력이 부족해요.";
+    if (state.slots < (choice.slots ?? 0)) return "오늘 남은 행동이 부족해요.";
+    return "";
+  }
+
   function chooseEvent(state, index) {
-    const event = events.find(({ day }) => day === state.encounter);
+    const event = getEvent(state);
     const choice = event?.choices[index];
-    if (!choice) return false;
-    if (state.stats.balance + (choice.effects.balance ?? 0) < 0 ||
-        state.stats.energy + (choice.effects.energy ?? 0) < 0) return false;
-    applyEffects(state, choice.effects);
-    log(state, "event", event.title + " · " + choice.entry);
+    if (!choice || eventRestriction(state, choice)) return false;
+
+    applyStoryChoice(state, event, choice);
     state.encounter = null;
     return true;
   }
 
+  function applyStoryChoice(state, event, choice) {
+    applyEffects(state, choice.effects);
+    state.slots -= choice.slots ?? 0;
+    for (const [key, amount] of Object.entries(choice.trust ?? {})) {
+      state.relationships[key] = clamp(state.relationships[key] + amount, 0, 100);
+    }
+    if (choice.channel) openChannel(state);
+    if (choice.counseling) state.counseling = true;
+    if (choice.hobby) state.hobby = choice.hobby;
+    log(state, "event", event.title + " · " + choice.entry);
+    if (choice.lottery) {
+      const roll = rollForApplication(state.seed ^ 0x10bb73d, state.day);
+      const payout = roll <= lotto.largerChance ? lotto.larger : roll <= lotto.winChance ? lotto.small : 0;
+      state.lottery = { payout };
+      applyEffects(state, { balance: payout });
+      log(state, payout ? "good" : "info", payout ? "로또에서 " + payout + "만원이 당첨됐다." : "이번 로또는 꽝이었다.");
+    }
+  }
+
+  function chooseFamilyMoment(state, index) {
+    const event = getFamilyMoment(state);
+    const choice = event?.choices[index];
+    if (!choice || eventRestriction(state, choice)) return false;
+    applyStoryChoice(state, event, choice);
+    state.familyMoment = null;
+    return true;
+  }
+
+  function shiftRestriction(state, id) {
+    const place = workplaces[id];
+    if (!place) return "알바 장소를 골라주세요.";
+    if (state.shifts[id].warnings >= 2) return "근무가 종료된 곳이에요.";
+    if (state.stats.balance < place.transit) return "교통비가 부족해요.";
+    return actionRestriction(state, { energy: -place.energy });
+  }
+
+  function takeShift(state, id, index) {
+    if (shiftRestriction(state, id)) return false;
+    const place = workplaces[id];
+    const decision = place.decisions[index];
+    if (!decision) return false;
+
+    const shifts = state.shifts[id];
+    state.slots--;
+    if (!decision.work) {
+      shifts.warnings++;
+      log(state, "warn", place.title + " · " + decision.entry +
+        (shifts.warnings === 2 ? " 경고가 두 번 쌓여 알바에서 잘렸다." : " 첫 경고를 받았다."));
+      return true;
+    }
+
+    const first = Object.values(state.shifts).every((record) => record.worked === 0);
+    const bonus = decision.extra ? place.bonus : 0;
+    const net = place.pay - place.transit + bonus;
+    shifts.worked++;
+    if (decision.extra) shifts.extra++;
+    applyEffects(state, { balance: net, energy: -place.energy });
+    state.lastAction = "shift";
+    if (id === "warehouse") {
+      state.skills.ops = clamp(state.skills.ops + (decision.extra ? 8 : 5), 0, 100);
+      if (shifts.extra === 2 && decision.extra) {
+        log(state, "good", "운영팀 추천을 받았다. 물류 SCM 공고에 지원할 때 서류 통과 확률이 12%p 올라간다.");
+      }
+    }
+    if (first) state.familyMoment = "first-shift";
+    const details = "교통비를 뺀 오늘 수입 " + net + "만원" + (bonus ? " · 보너스 " + bonus + "만원 포함" : "");
+    log(state, "action", "알바 가기 · " + place.title + " · " + details + ". " + decision.entry);
+    return true;
+  }
+
+  function settleFinances(state) {
+    if (state.savings?.dueDay === state.day) {
+      const result = state.savings.amount + money.interest;
+      applyEffects(state, { balance: result });
+      state.savings = null;
+      log(state, "good", "적금이 만기돼 이자 " + money.interest + "만원을 포함해 " + result + "만원이 들어왔다.");
+    }
+    if (state.shares) {
+      const roll = rollForApplication(state.seed ^ 0x5e40a1, state.day);
+      const change = roll <= 25 ? -2 : roll <= 45 ? -1 : roll <= 55 ? 0 : roll <= 85 ? 1 : 2;
+      const before = state.shares.value;
+      state.shares.value = clamp(before + change, 1, 99);
+      if (state.shares.value !== before) {
+        const difference = state.shares.value - before;
+        log(state, difference > 0 ? "good" : "info", "주식 평가액이 " + Math.abs(difference) +
+          "만원 " + (difference > 0 ? "올라 " : "내려 ") + state.shares.value + "만원이 됐다.");
+      }
+    }
+  }
+
+  function financeRestriction(state, operation) {
+    if (state.outcome) return "플레이가 끝났어요.";
+    if (state.encounter || state.assessment || state.familyMoment) return "열린 선택을 먼저 마쳐주세요.";
+    switch (operation) {
+      case "deposit":
+        if (state.savings) return "진행 중인 적금이 있어요.";
+        if (state.day + money.term > LAST_DAY) return "남은 기간 안에 만기되는 적금이 없어요.";
+        return state.stats.balance < money.deposit ? "생활비가 부족해요." : "";
+      case "withdraw": return state.savings ? "" : "적금이 없어요.";
+      case "buy": return state.shares ? "이미 보유한 주식이 있어요." :
+        state.stats.balance < money.purchase ? "생활비가 부족해요." : "";
+      case "sell": return state.shares ? "" : "보유한 주식이 없어요.";
+      default: return "선택을 확인해 주세요.";
+    }
+  }
+
+  function manageMoney(state, operation) {
+    if (financeRestriction(state, operation)) return false;
+    switch (operation) {
+      case "deposit":
+        state.savings = { amount: money.deposit, dueDay: state.day + money.term };
+        applyEffects(state, { balance: -money.deposit });
+        log(state, "info", "적금에 " + money.deposit + "만원을 넣었다. 만기는 " + state.savings.dueDay + "일차.");
+        break;
+      case "withdraw":
+        applyEffects(state, { balance: state.savings.amount });
+        state.savings = null;
+        log(state, "info", "적금을 중도 해지해 원금을 생활비로 돌렸다.");
+        break;
+      case "buy":
+        state.shares = { cost: money.purchase, value: money.purchase };
+        applyEffects(state, { balance: -money.purchase });
+        log(state, "info", "가상 주식을 " + money.purchase + "만원어치 샀다.");
+        break;
+      case "sell": {
+        const value = state.shares.value;
+        applyEffects(state, { balance: value });
+        state.shares = null;
+        log(state, "info", "가상 주식을 팔아 " + value + "만원을 생활비에 더했다.");
+        break;
+      }
+    }
+    return true;
+  }
+
+  function launchChannel(state) {
+    if (state.channel || actionRestriction(state, { energy: -8 })) return false;
+    openChannel(state);
+    applyEffects(state, { energy: -8 });
+    state.slots--;
+    log(state, "event", "내 유튜브 채널을 열었다. 생활·취미에서 첫 영상을 올릴 수 있다.");
+    return true;
+  }
+
   function update(previous, command) {
-    if (previous.outcome) return previous;
+    if (command.type === "nickname") {
+      const nickname = normalizeNickname(command.value);
+      return !nickname || nickname === previous.profile.nickname ? previous :
+        { ...previous, profile: { ...previous.profile, nickname } };
+    }
+    if (previous.familyMoment && command.type !== "family") return previous;
+    if (previous.outcome && command.type !== "family") return previous;
     if (previous.encounter && command.type !== "event") return previous;
     if (previous.assessment && command.type !== "answer") return previous;
     const state = structuredClone(previous);
@@ -429,6 +641,10 @@
       case "interview": changed = startInterview(state); break;
       case "answer": changed = answerInterview(state, command.index); break;
       case "event": changed = chooseEvent(state, command.index); break;
+      case "family": changed = chooseFamilyMoment(state, command.index); break;
+      case "shift": changed = takeShift(state, command.id, command.index); break;
+      case "money": changed = manageMoney(state, command.operation); break;
+      case "channel": changed = launchChannel(state); break;
       case "end": changed = endDay(state); break;
       default: return previous;
     }
@@ -437,7 +653,10 @@
 
   const api = {
     LAST_DAY, ACTIONS_PER_DAY, DAILY_COST, stats, actions, jobs, events, getJob, genderLabels, openings,
-    newGame, readSave, update, reviewChance, actionRestriction, applyRestriction, interviewRestriction,
+    sectors: catalog.sectors, skills: catalog.skills, actionGroups: catalog.actionGroups,
+    getEvent, getFamilyMoment, relations, hobbies, sibling, lotto, money, workplaces, normalizeNickname,
+    newGame, readSave, update, preparationBonus, referralBonus, reviewChance, actionRestriction, activityRestriction,
+    applyRestriction, interviewRestriction, eventRestriction, financeRestriction, shiftRestriction,
   };
 
   if (typeof module !== "undefined" && module.exports) module.exports = api;

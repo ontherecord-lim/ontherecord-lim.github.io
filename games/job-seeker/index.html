@@ -6,10 +6,12 @@
   <meta name="theme-color" content="#ded8f2">
   <meta name="description" content="21일 동안 생활비와 컨디션을 관리하며 첫 합격에 도전하는 취업 시뮬레이션.">
   <title>취준생 키우기</title>
-  <link rel="stylesheet" href="style.css">
-  <script defer src="game.js"></script>
+  <link rel="stylesheet" href="style.css?v=3">
+  <script defer src="catalog.js?v=3"></script>
+  <script defer src="story.js?v=3"></script>
+  <script defer src="game.js?v=3"></script>
   <script defer src="art.js"></script>
-  <script defer src="app.js"></script>
+  <script defer src="app.js?v=3"></script>
 </head>
 <body>
   <header class="top-bar">
@@ -46,6 +48,8 @@
       </div>
       <form class="setup-form" id="character-form">
         <h2>캐릭터 만들기</h2>
+        <label for="nickname" class="field-label">이름 또는 닉네임</label>
+        <input class="game-field create-name" id="nickname" type="text" name="nickname" maxlength="16" autocomplete="off" required>
         <fieldset>
           <legend>성별</legend>
           <div class="profile-options">
@@ -77,6 +81,7 @@
         <div class="day-line">
           <span class="day-badge"><span class="day-square"></span> DAY <strong id="day-number">01</strong><span class="day-total">/ 21</span></span>
           <span class="player-profile" id="player-profile"></span>
+          <button class="text-button rename-button" id="edit-nickname" type="button">이름 바꾸기</button>
         </div>
         <p id="weekday" class="weekday"></p>
         <h1 id="scene-title">오늘부터 취준생.</h1>
@@ -90,6 +95,7 @@
       <section class="status-panel" aria-labelledby="status-title">
         <div class="section-heading"><h2 id="status-title">내 상태</h2></div>
         <div class="stat-grid" id="stat-grid"></div>
+        <div class="relationship-list" id="relationships" role="group" aria-label="관계"></div>
       </section>
 
       <section class="actions-panel" aria-labelledby="actions-title">
@@ -100,6 +106,7 @@
             <span id="slots-text">2회 남음</span>
           </div>
         </div>
+        <div class="action-filters" id="action-filters" role="group" aria-label="행동 종류"></div>
         <div class="action-grid" id="action-grid"></div>
         <div class="day-footer">
           <p id="day-hint">하루에 두 번 행동할 수 있어요.</p>
@@ -119,7 +126,21 @@
         <section aria-labelledby="jobs-title">
           <div class="section-heading"><h2 id="jobs-title">채용 공고</h2></div>
           <div class="job-board">
-            <div class="job-tabs" id="job-tabs" role="group" aria-label="지원 직무"></div>
+            <div class="job-browse">
+              <div class="job-filters">
+                <label class="field-label" for="job-sector">직무 분야</label>
+                <select class="game-field" id="job-sector"></select>
+                <label class="field-label" for="job-search">직무 검색</label>
+                <input class="game-field" id="job-search" type="search" placeholder="예: 반도체, 회계" autocomplete="off">
+              </div>
+              <div class="results-line">
+                <span id="job-count" role="status"></span>
+                <label><input id="job-open-only" type="checkbox"> 접수 중만</label>
+              </div>
+              <div class="job-list" id="job-list" role="group" aria-label="가상 채용 공고 목록"></div>
+              <p class="empty-list" id="job-empty" hidden>이 조건에 맞는 공고가 없어요.</p>
+              <button class="text-button active-job" id="active-job" type="button" hidden></button>
+            </div>
             <div class="job-body">
               <div class="job-heading">
                 <span class="tile-icon job-icon" id="job-icon"><canvas width="16" height="16" aria-hidden="true"></canvas></span>
@@ -128,7 +149,13 @@
                   <h3 id="job-title">방송기자</h3>
                 </div>
               </div>
+              <p class="job-tags" id="job-tags"></p>
               <p id="job-description" class="job-description">현장을 취재하고 카메라 앞에서 직접 전한다.</p>
+              <div class="job-preparation">
+                <p><strong>준비할 것</strong> <span id="job-materials"></span></p>
+                <p><strong id="job-skill-name">관련 실습</strong> <span id="job-skill-score"></span></p>
+                <div class="recommended-actions" id="recommended-actions" role="group" aria-label="추천 준비 열기"></div>
+              </div>
               <ol class="stages" aria-label="채용 단계">
                 <li id="stage-review"><span></span>서류</li>
                 <li id="stage-interview"><span></span>면접</li>
@@ -147,6 +174,15 @@
             <p><strong id="balance">62</strong><span>만원</span></p>
           </div>
           <span class="wallet-note">하루 −4만원</span>
+          <p class="wallet-assets" id="wallet-assets" hidden></p>
+          <button class="secondary-button wallet-button" id="money-button" type="button">생활비 관리</button>
+        </section>
+        <section aria-labelledby="personal-title" class="personal-board">
+          <h2 id="personal-title">내 일상</h2>
+          <p id="sibling-status"></p>
+          <p id="hobby-status" hidden></p>
+          <p id="channel-status"></p>
+          <button class="secondary-button" id="channel-button" type="button">내 유튜브</button>
         </section>
       </div>
     </div>
