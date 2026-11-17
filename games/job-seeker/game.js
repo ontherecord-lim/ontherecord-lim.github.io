@@ -164,7 +164,7 @@
     ...catalog.jobs,
   ].map((job) => {
     const { label, resumeTarget, interviewTarget } = catalog.employment[job.kind];
-    return { resumeTarget, interviewTarget, ...job, employment: label };
+    return { resumeTarget, interviewTarget, ...job, employment: label, majors: catalog.majorPreferences[job.id] };
   });
   const { events, getEvent, getFamilyMoment, relations, hobbies, sibling, lotto, money, workplaces } = story;
 
@@ -172,6 +172,10 @@
     if (typeof value !== "string") return "";
     const name = value.replace(/\s+/g, " ").trim();
     return name.length <= 16 && !/[\p{Cc}\p{Cf}]/u.test(name) ? name : "";
+  }
+
+  function normalizeMajor(value) {
+    return typeof value === "string" && Object.hasOwn(catalog.majors, value) ? value : "";
   }
 
   function lifeDefaults() {
@@ -196,7 +200,12 @@
     if (!validProfile(profile)) throw new TypeError("성별과 나이를 선택해 주세요.");
     return {
       version: VERSION,
-      profile: { gender: profile.gender, age: profile.age, nickname: normalizeNickname(profile.nickname) },
+      profile: {
+        gender: profile.gender,
+        age: profile.age,
+        nickname: normalizeNickname(profile.nickname),
+        major: normalizeMajor(profile.major),
+      },
       ...lifeDefaults(),
       seed,
       day: 1,
@@ -244,7 +253,7 @@
       const resumed = { ...lifeDefaults(), ...save };
       const nickname = normalizeNickname(save.profile.nickname);
       if (save.profile.nickname && !nickname) return null;
-      resumed.profile = { ...save.profile, nickname };
+      resumed.profile = { ...save.profile, nickname, major: normalizeMajor(save.profile.major) };
       if (!resumed.skills || !Object.keys(catalog.skills).every((key) => range(resumed.skills[key], 0, 100)) ||
           !resumed.relationships || !Object.keys(relations).every((key) => range(resumed.relationships[key], 0, 100)) ||
           typeof resumed.counseling !== "boolean") return null;
@@ -311,9 +320,22 @@
     return job.id === "scm" && state.shifts.warehouse.extra >= 2 && state.shifts.warehouse.warnings < 2 ? 12 : 0;
   }
 
+  const majorBonuses = {
+    direct: { label: "직접 관련", screening: 12, interview: 6 },
+    adjacent: { label: "인접 전공", screening: 6, interview: 3 },
+    standard: { label: "일반 지원", screening: 0, interview: 0 },
+  };
+
+  function majorFit(profile, job) {
+    if (job.majors.direct.includes(profile.major)) return majorBonuses.direct;
+    if (job.majors.adjacent.includes(profile.major)) return majorBonuses.adjacent;
+    return majorBonuses.standard;
+  }
+
   function reviewChance(state, job) {
     const score = 62 + (state.stats.resume - job.resumeTarget) * 2 +
-      (state.stats.morale - 65) / 5 + preparationBonus(state, job) + referralBonus(state, job);
+      (state.stats.morale - 65) / 5 + preparationBonus(state, job) + referralBonus(state, job) +
+      majorFit(state.profile, job).screening;
     return clamp(Math.round(score), 5, 100);
   }
 
@@ -383,6 +405,7 @@
 
   function startInterview(state) {
     if (interviewRestriction(state)) return false;
+    const job = getJob(state.application.job);
     state.slots--;
     state.interviews++;
     applyEffects(state, interviewEffectsCost);
@@ -390,7 +413,7 @@
       step: 0,
       bonus: 0,
       base: clamp(Math.round(state.stats.interview + (state.stats.morale - 60) / 5 +
-        Math.floor(preparationBonus(state, getJob(state.selectedJob)) / 2)), 0, 110),
+        Math.floor(preparationBonus(state, job) / 2) + majorFit(state.profile, job).interview), 0, 110),
     };
     return true;
   }
@@ -628,6 +651,11 @@
       return !nickname || nickname === previous.profile.nickname ? previous :
         { ...previous, profile: { ...previous.profile, nickname } };
     }
+    if (command.type === "major") {
+      const major = normalizeMajor(command.value);
+      return !major || previous.profile.major ? previous :
+        { ...previous, profile: { ...previous.profile, major } };
+    }
     if (previous.familyMoment && command.type !== "family") return previous;
     if (previous.outcome && command.type !== "family") return previous;
     if (previous.encounter && command.type !== "event") return previous;
@@ -654,6 +682,7 @@
   const api = {
     LAST_DAY, ACTIONS_PER_DAY, DAILY_COST, stats, actions, jobs, events, getJob, genderLabels, openings,
     sectors: catalog.sectors, skills: catalog.skills, actionGroups: catalog.actionGroups,
+    majorGroups: catalog.majorGroups, majors: catalog.majors, majorFit,
     getEvent, getFamilyMoment, relations, hobbies, sibling, lotto, money, workplaces, normalizeNickname,
     newGame, readSave, update, preparationBonus, referralBonus, reviewChance, actionRestriction, activityRestriction,
     applyRestriction, interviewRestriction, eventRestriction, financeRestriction, shiftRestriction,

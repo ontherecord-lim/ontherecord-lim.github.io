@@ -24,6 +24,7 @@
   const jobSector = byId("job-sector");
   const jobSearch = byId("job-search");
   const jobOpenOnly = byId("job-open-only");
+  const jobMajorOnly = byId("job-major-only");
   const nextDay = byId("next-day");
   const journalMore = byId("journal-more");
 
@@ -67,6 +68,26 @@
     if (text !== undefined) element.textContent = text;
     return element;
   }
+
+  function populateMajorOptions(select) {
+    const placeholder = node("option", "", "전공을 선택해 주세요");
+    placeholder.value = "";
+    placeholder.disabled = true;
+    placeholder.selected = true;
+    select.append(placeholder);
+    for (const { label, options } of game.majorGroups) {
+      const group = node("optgroup");
+      group.label = label;
+      for (const [value, title] of Object.entries(options)) {
+        const option = node("option", "", title);
+        option.value = value;
+        group.append(option);
+      }
+      select.append(group);
+    }
+  }
+
+  populateMajorOptions(byId("major"));
 
   function pixelIcon(name) {
     const canvas = node("canvas");
@@ -156,8 +177,9 @@
     button.append(node("span", "", job.title), status);
     button.addEventListener("click", () => selectPosting(job.id));
     byId("job-list").append(button);
+    const majorNames = [...job.majors.direct, ...job.majors.adjacent].map((id) => game.majors[id]);
     const searchText = [job.title, job.company, job.location, game.sectors[job.sector], job.employment,
-      game.skills[job.skill], job.description, job.materials].join(" ").toLowerCase();
+      game.skills[job.skill], job.description, job.materials, ...majorNames].join(" ").toLowerCase();
     return { job, button, status, searchText };
   });
 
@@ -254,6 +276,10 @@
     byId("day-track").setAttribute("aria-valuenow", String(day));
     const signature = [profile.nickname, game.genderLabels[profile.gender], profile.age + "세", "캥거루족"];
     byId("player-profile").textContent = signature.filter(Boolean).join(" · ");
+    const major = game.majors[profile.major];
+    byId("player-major").textContent = major ?? "";
+    byId("player-major").hidden = !major;
+    byId("set-major").hidden = Boolean(major);
     dayTicks.forEach((tick, index) => {
       tick.className = index + 1 === day ? "current" : index + 1 < day ? "elapsed" : "";
     });
@@ -322,10 +348,15 @@
     const query = jobSearch.value.trim().toLowerCase().split(/\s+/).filter(Boolean);
     let shown = 0;
     let open = 0;
+    const hasPreferences = jobEntries.some(({ job }) => game.majorFit(state.profile, job).screening > 0);
+    byId("major-filter-label").hidden = !hasPreferences;
+    jobMajorOnly.disabled = !hasPreferences;
     for (const { job, button, status, searchText } of jobEntries) {
       const closed = state.day > job.deadline;
       const matchesSector = jobSector.value === "all" || jobSector.value === job.sector;
-      button.hidden = !matchesSector || (jobOpenOnly.checked && closed) || query.some((word) => !searchText.includes(word));
+      const missesMajor = hasPreferences && jobMajorOnly.checked && game.majorFit(state.profile, job).screening === 0;
+      button.hidden = !matchesSector || (jobOpenOnly.checked && closed) || missesMajor ||
+        query.some((word) => !searchText.includes(word));
       button.dataset.closed = String(closed);
       button.setAttribute("aria-pressed", String(job.id === browsingJob));
       status.textContent = (state.application?.job === job.id ? "진행 중" : closed ? "마감" : "DAY " + dayText(job.deadline) + "까지");
@@ -349,6 +380,11 @@
     byId("job-tags").textContent = job.employment + " · " + job.location + " · " + job.deadline + "일차 마감";
     byId("job-description").textContent = job.description;
     byId("job-materials").textContent = job.materials;
+    byId("job-favored-majors").textContent = job.majors.direct.map((id) => game.majors[id]).join(" · ");
+    const fit = game.majorFit(state.profile, job);
+    const match = !state.profile.major ? "전공을 고르면 확인할 수 있어요." :
+      fit.label + " · 서류 +" + fit.screening + "%p · 면접 +" + fit.interview + "점";
+    byId("job-major-match").textContent = match;
     byId("job-skill-name").textContent = game.skills[job.skill];
     const bonus = game.preparationBonus(state, job);
     const referral = game.referralBonus(state, job);
@@ -544,6 +580,21 @@
           disabled: Boolean(reason), run: () => dispatch({ type: "channel" }) }];
       }
       choices.push({ title: "닫기", style: "secondary-button", run: closeOverlay });
+    } else if (mode === "major") {
+      title = "전공 선택";
+      body = "전공을 고르면 관련 직무의 서류 통과 확률과 면접 점수에 가산점이 반영돼요.";
+      icon = "paper";
+      tone = "blue";
+      inputLabel = node("label", "dialog-field-label", "대학 전공");
+      const field = node("select", "game-field");
+      field.required = true;
+      populateMajorOptions(field);
+      inputLabel.append(field);
+      choices = [{ title: "전공 저장", style: "primary-button", run: () => {
+        if (!field.reportValidity()) return;
+        closeOverlay();
+        dispatch({ type: "major", value: field.value });
+      } }];
     } else if (mode === "nickname") {
       title = "이름 바꾸기";
       body = "게임 속 대화에서 불리고 싶은 이름을 골라요.";
@@ -613,7 +664,8 @@
       body = [
         "부모님과 함께 사는 집에서 시작해 21일 안에 첫 합격에 도전해요.",
         "하루에 행동을 두 번 할 수 있어요. 하루를 마치면 체력이 8 회복되고 생활비가 4만원 나가요.",
-        "가상 공고 " + game.jobs.length + "개 모두 전공을 고를 필요 없이 지원할 수 있어요. 공고마다 마감일과 추천 실습이 달라요.",
+        "가상 공고 " + game.jobs.length + "개에 지원할 수 있어요. 공고마다 우대 전공, 마감일과 추천 실습이 달라요.",
+        "직접 관련 전공과 인접 전공은 서류와 면접에 가산점을 받습니다. 공고에서 내 전공에 적용되는 점수를 확인할 수 있어요.",
         "지원하면 다음 날 서류 결과가 나와요. 관련 실습은 서류와 면접에 보탬이 되고, 면접 점수에는 답변도 반영돼요.",
         "가까운 카페와 먼 물류센터 중 알바 장소를 고를 수 있어요. 장소마다 교통비, 체력 소모와 보너스가 달라요.",
         "집밥이나 낮잠, 채널 개설, 가상 적금과 주식으로 일상을 관리하고, 가족과 친구의 이야기도 골라요. 상단 음표 버튼으로 음악을 조절할 수 있어요.",
@@ -707,6 +759,7 @@
     jobSector.value = "all";
     jobSearch.value = "";
     jobOpenOnly.checked = false;
+    jobMajorOnly.checked = false;
     persist();
     render();
     form.querySelector("input").focus();
@@ -723,7 +776,12 @@
       byId("nickname").reportValidity();
       return;
     }
-    state = game.newGame({ gender: values.get("gender"), age: Number(values.get("age")), nickname });
+    state = game.newGame({
+      gender: values.get("gender"),
+      age: Number(values.get("age")),
+      nickname,
+      major: values.get("major"),
+    });
     persist();
     render();
     activateMusic();
@@ -761,10 +819,12 @@
   jobSector.addEventListener("change", drawPostings);
   jobSearch.addEventListener("input", drawPostings);
   jobOpenOnly.addEventListener("change", drawPostings);
+  jobMajorOnly.addEventListener("change", drawPostings);
   byId("active-job").addEventListener("click", () => selectPosting(state.application.job));
   byId("money-button").addEventListener("click", () => openOverlay("money"));
   byId("channel-button").addEventListener("click", () => openOverlay("channel"));
   byId("edit-nickname").addEventListener("click", () => openOverlay("nickname"));
+  byId("set-major").addEventListener("click", () => openOverlay("major"));
   journalMore.addEventListener("click", () => {
     journalExpanded = !journalExpanded;
     drawJournal();

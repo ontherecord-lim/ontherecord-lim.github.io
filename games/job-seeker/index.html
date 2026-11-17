@@ -6,12 +6,12 @@
   <meta name="theme-color" content="#ded8f2">
   <meta name="description" content="21일 동안 생활비와 컨디션을 관리하며 첫 합격에 도전하는 취업 시뮬레이션.">
   <title>취준생 키우기</title>
-  <link rel="stylesheet" href="style.css?v=3">
-  <script defer src="catalog.js?v=3"></script>
+  <link rel="stylesheet" href="style.css?v=4">
+  <script defer src="catalog.js?v=4"></script>
   <script defer src="story.js?v=3"></script>
-  <script defer src="game.js?v=3"></script>
+  <script defer src="game.js?v=4"></script>
   <script defer src="art.js"></script>
-  <script defer src="app.js?v=3"></script>
+  <script defer src="app.js?v=4"></script>
 </head>
 <body>
   <header class="top-bar">
@@ -65,6 +65,9 @@
             <label><input type="radio" name="age" value="27"><span>27세</span></label>
           </div>
         </fieldset>
+        <label for="major" class="field-label">대학 전공</label>
+        <select class="game-field create-major" id="major" name="major" aria-describedby="major-help" required></select>
+        <p class="field-help" id="major-help">관련 전공이면 서류와 면접에서 가산점을 받아요.</p>
         <button class="primary-button start-button" type="submit">게임 시작 <span aria-hidden="true">→</span></button>
       </form>
     </section>
@@ -82,6 +85,10 @@
           <span class="day-badge"><span class="day-square"></span> DAY <strong id="day-number">01</strong><span class="day-total">/ 21</span></span>
           <span class="player-profile" id="player-profile"></span>
           <button class="text-button rename-button" id="edit-nickname" type="button">이름 바꾸기</button>
+        </div>
+        <div class="major-line">
+          <span id="player-major" hidden></span>
+          <button class="text-button rename-button" id="set-major" type="button" hidden>전공 선택</button>
         </div>
         <p id="weekday" class="weekday"></p>
         <h1 id="scene-title">오늘부터 취준생.</h1>
@@ -135,7 +142,10 @@
               </div>
               <div class="results-line">
                 <span id="job-count" role="status"></span>
-                <label><input id="job-open-only" type="checkbox"> 접수 중만</label>
+                <div class="job-filter-options">
+                  <label><input id="job-open-only" type="checkbox"> 접수 중만</label>
+                  <label id="major-filter-label" hidden><input id="job-major-only" type="checkbox"> 내 전공 우대만</label>
+                </div>
               </div>
               <div class="job-list" id="job-list" role="group" aria-label="가상 채용 공고 목록"></div>
               <p class="empty-list" id="job-empty" hidden>이 조건에 맞는 공고가 없어요.</p>
@@ -154,6 +164,8 @@
               <div class="job-preparation">
                 <p><strong>준비할 것</strong> <span id="job-materials"></span></p>
                 <p><strong id="job-skill-name">관련 실습</strong> <span id="job-skill-score"></span></p>
+                <p><strong>직접 우대 전공</strong> <span id="job-favored-majors"></span></p>
+                <p><strong>내 전공</strong> <span id="job-major-match"></span></p>
                 <div class="recommended-actions" id="recommended-actions" role="group" aria-label="추천 준비 열기"></div>
               </div>
               <ol class="stages" aria-label="채용 단계">

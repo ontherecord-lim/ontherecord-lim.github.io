@@ -525,7 +525,58 @@
     },
   ];
 
-  const api = { sectors, employment, skills, actionGroups, coreActions, practiceActions, lifeActions, originalPostings, jobs };
+  const majorGroups = [
+    { label: "인문·사회", options: {
+      languages: "어문·문학", media: "언론·미디어학", social: "정치외교·사회학",
+      psychology: "심리·교육학", public: "행정·법학",
+    } },
+    { label: "경영·경제", options: {
+      business: "경영학", economics: "경제·금융학", accounting: "회계·세무학", logistics: "무역·물류학",
+    } },
+    { label: "디자인·영상", options: { design: "시각·산업디자인", contents: "영상·콘텐츠학" } },
+    { label: "IT·자연과학", options: {
+      computer: "컴퓨터·소프트웨어학", statistics: "통계·데이터과학", biology: "생명과학·생명공학", food: "식품·영양학",
+    } },
+    { label: "공학·환경", options: {
+      electronics: "전기·전자공학", mechanical: "기계공학", industrial: "산업공학",
+      materials: "화학·재료공학", environment: "환경·안전공학",
+    } },
+    { label: "그 외", options: { other: "기타 전공", none: "대학 전공 없음" } },
+  ];
+  const majors = Object.fromEntries(majorGroups.flatMap(({ options }) => Object.entries(options)));
+
+  const majorPreferences = {
+    broadcast: { direct: ["media", "contents"], adjacent: ["social", "languages"] },
+    reporter: { direct: ["media", "economics", "social"], adjacent: ["languages", "business", "statistics"] },
+    producer: { direct: ["contents", "media"], adjacent: ["design", "business"] },
+    ux: { direct: ["design", "psychology"], adjacent: ["computer", "media", "statistics"] },
+    marketing: { direct: ["business", "media", "statistics"], adjacent: ["economics", "design", "contents"] },
+    md: { direct: ["business", "logistics"], adjacent: ["economics", "industrial", "design"] },
+    sales: { direct: ["business", "electronics", "mechanical"], adjacent: ["materials", "logistics", "industrial", "languages"] },
+    customer: { direct: ["business", "psychology"], adjacent: ["computer", "media", "statistics"] },
+    hr: { direct: ["business", "psychology"], adjacent: ["public", "social", "industrial"] },
+    accounting: { direct: ["accounting", "economics"], adjacent: ["business", "public", "statistics"] },
+    fintech: { direct: ["economics", "accounting", "computer"], adjacent: ["business", "statistics", "public"] },
+    "public-admin": { direct: ["public", "social"], adjacent: ["business", "economics", "languages", "statistics"] },
+    frontend: { direct: ["computer"], adjacent: ["design", "electronics"] },
+    backend: { direct: ["computer"], adjacent: ["electronics", "statistics", "industrial"] },
+    data: { direct: ["statistics", "economics", "computer"], adjacent: ["business", "industrial", "social"] },
+    "ai-ops": { direct: ["computer", "statistics"], adjacent: ["languages", "psychology", "industrial", "media"] },
+    cloud: { direct: ["computer", "electronics"], adjacent: ["industrial", "statistics"] },
+    semicon: { direct: ["electronics", "materials"], adjacent: ["mechanical", "industrial", "computer"] },
+    manufacturing: { direct: ["mechanical", "industrial", "electronics"], adjacent: ["materials", "computer"] },
+    quality: { direct: ["industrial", "mechanical", "materials"], adjacent: ["electronics", "statistics", "food"] },
+    pharma: { direct: ["biology", "materials"], adjacent: ["food", "industrial", "statistics"] },
+    food: { direct: ["food", "biology"], adjacent: ["materials", "industrial", "business"] },
+    environment: { direct: ["environment", "materials"], adjacent: ["mechanical", "electronics", "industrial"] },
+    scm: { direct: ["logistics", "industrial"], adjacent: ["business", "statistics", "computer", "economics"] },
+    trade: { direct: ["logistics", "languages"], adjacent: ["business", "economics", "public"] },
+  };
+
+  const api = {
+    sectors, employment, skills, actionGroups, coreActions, practiceActions, lifeActions, originalPostings, jobs,
+    majorGroups, majors, majorPreferences,
+  };
   if (typeof module !== "undefined" && module.exports) module.exports = api;
   else root.JobCatalog = api;
 })(globalThis);
