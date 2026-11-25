@@ -1,6 +1,24 @@
 {
-  "generatedAt": "2026-11-25T07:25:11+09:00",
+  "generatedAt": "2026-11-25T17:30:42+09:00",
   "articles": [
+    {
+      "id": "10949349",
+      "title": "AmCham hosts Korea-US AI talks with Apple, AWS and Qualcomm",
+      "url": "https://www.koreaherald.com/article/10949349",
+      "date": "Nov. 25, 2026",
+      "dateKo": "2026. 11. 25.",
+      "isoDate": "2026-11-25",
+      "image": "https://wimg.heraldcorp.com/news/cms/2026/11/25/news-p.v1.20261125.2c06206a6b694d76ad669e9c3484b746_P1.jpg"
+    },
+    {
+      "id": "10949309",
+      "title": "Woongjin Foods expands Vietnam footprint through largest coffee chain",
+      "url": "https://www.koreaherald.com/article/10949309",
+      "date": "Nov. 25, 2026",
+      "dateKo": "2026. 11. 25.",
+      "isoDate": "2026-11-25",
+      "image": "https://wimg.heraldcorp.com/news/cms/2026/11/25/news-p.v1.20261125.6f76271ec65f40108932f631385548ac_P1.jpg"
+    },
     {
       "id": "10947683",
       "title": "AREX launches prepaid transit card for cash-free travel",
